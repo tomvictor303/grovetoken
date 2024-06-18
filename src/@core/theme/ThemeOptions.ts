@@ -19,6 +19,7 @@ const themeOptions = (settings: Settings): ThemeOptions => {
     palette: palette(mode, themeColor),
     typography: {
       fontFamily: [
+        'Lexend',
         'Inter',
         'sans-serif',
         '-apple-system',

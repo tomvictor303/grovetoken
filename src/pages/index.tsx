@@ -1,17 +1,7 @@
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
 
-// ** Icons Imports
-import Poll from 'mdi-material-ui/Poll'
-import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
-import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
-import BriefcaseVariantOutline from 'mdi-material-ui/BriefcaseVariantOutline'
-
-// ** Custom Components Imports
-import CardStatisticsVerticalComponent from 'src/@core/components/card-statistics/card-stats-vertical'
-
-// ** Styled Component Import
-import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
+import { useTheme } from '@mui/material/styles';
 
 // ** LandingPage Components Imports
 import TopExperts from 'src/views/landing/TopExperts'
@@ -20,25 +10,35 @@ import TopExperts from 'src/views/landing/TopExperts'
 import LawyersCategory from 'src/views/landing/LawyersCategory'
 import DoctorsCategory from 'src/views/landing/DoctorsCategory'
 import ExerciseCategory from 'src/views/landing/ExerciseCategory'
+import { Stack, Typography } from '@mui/material'
 
 const LandingPage = () => {
+  const theme = useTheme();
+
   return (
-    <ApexChartWrapper>
-      <Grid container spacing={6}>
-        <Grid item xs={12}>
-          <TopExperts />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <LawyersCategory />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <DoctorsCategory />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <ExerciseCategory />
-        </Grid>
+    <Grid container spacing={6}>
+      <Grid item xs={12}>
+        <Stack 
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}
+        >
+          <Typography variant='h2' mb={14}>Create your Token on <span style={{ color: theme.palette.success.main }}>Ethereum</span></Typography>
+          <Typography variant='h5'>Easily deploy your Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.</Typography>
+          <Typography variant='h5'>No login. No setup. No coding required.</Typography>
+        </Stack>
       </Grid>
-    </ApexChartWrapper>
+      <Grid item xs={12} md={4}>
+        <LawyersCategory />
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <DoctorsCategory />
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <ExerciseCategory />
+      </Grid>
+    </Grid>
   )
 }
 
