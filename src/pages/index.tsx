@@ -24,7 +24,7 @@ const LandingPage = () => {
           alignItems="center"
           spacing={2}
         >
-          <Typography variant='h2' mb={14}>Create your Token on <span style={{ color: theme.palette.success.main }}>Ethereum</span></Typography>
+          <Typography variant='h2' mb={14} style={{color: theme.palette.customColors.semiwhite}}>Create your Token on <span style={{ color: theme.palette.success.main }}>Ethereum</span></Typography>
           <Typography variant='h5'>Easily deploy your Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.</Typography>
           <Typography variant='h5'>No login. No setup. No coding required.</Typography>
         </Stack>

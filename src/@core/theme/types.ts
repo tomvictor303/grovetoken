@@ -4,13 +4,15 @@ declare module '@mui/material/styles' {
       main: string
       tableHeaderBg: string
       primaryGradient: string
+      semiwhite: string
     }
   }
   interface PaletteOptions {
     customColors?: {
       main?: string
       tableHeaderBg?: string
-      primaryGradient?: string
+      primaryGradient?: string,
+      semiwhite?: string,
     }
   }
 }

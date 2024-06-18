@@ -28,11 +28,13 @@ const DefaultPalette = (mode: PaletteMode, themeColor: ThemeColor) => {
     customColors: {
       main: mainColor,
       primaryGradient: primaryGradient(),
-      tableHeaderBg: mode === 'light' ? '#F9FAFC' : '#3D3759'
+      tableHeaderBg: mode === 'light' ? '#F9FAFC' : '#3D3759',
+      // src\@core\theme\types.ts
+      semiwhite: '#FCFCFD',
     },
     common: {
       black: '#000',
-      white: '#FFF'
+      white: '#FFF',
     },
     mode: mode,
     primary: {
@@ -88,7 +90,7 @@ const DefaultPalette = (mode: PaletteMode, themeColor: ThemeColor) => {
       A700: '#303030'
     },
     text: {
-      primary: `rgba(${mainColor}, 0.87)`,
+      primary: mode === 'light' ? `rgba(${mainColor}, 0.87)`: '#B1B5C3', // Customized
       secondary: `rgba(${mainColor}, 0.68)`,
       disabled: `rgba(${mainColor}, 0.38)`
     },
