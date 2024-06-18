@@ -51,7 +51,7 @@ const DefaultPalette = (mode: PaletteMode, themeColor: ThemeColor) => {
     },
     success: {
       light: '#6AD01F',
-      main: '#56CA00',
+      main: '#209950', // customized
       dark: '#4CB200',
       contrastText: '#FFF'
     },
