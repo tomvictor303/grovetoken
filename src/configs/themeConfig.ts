@@ -18,7 +18,7 @@ type ThemeConfig = {
 const themeConfig: ThemeConfig = {
   // ** Layout Configs
   projectName: 'Grove' /* App Name */,
-  mode: 'light' /* light | dark */,
+  mode: 'dark' /* light | dark */,
   contentWidth: 'boxed' /* full | boxed */,
 
   // ** Routing Configs

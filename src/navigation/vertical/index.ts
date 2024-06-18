@@ -1,3 +1,5 @@
+// @2024-06-18, disabled this vertical menu
+
 // ** Icon imports
 import Login from 'mdi-material-ui/Login'
 import Table from 'mdi-material-ui/Table'

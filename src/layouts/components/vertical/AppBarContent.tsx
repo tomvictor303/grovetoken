@@ -33,7 +33,7 @@ interface Props {
 }
 
 const LogoImg = styled('img')({
-  height: 36,
+  height: 40,
 })
 
 const TopMenuItem = styled(Typography)({
@@ -75,7 +75,7 @@ const AppBarContent = (props: Props) => {
         </Box>
       </Box>
       <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}>
-        <ModeToggler settings={settings} saveSettings={saveSettings} />
+        {/* <ModeToggler settings={settings} saveSettings={saveSettings} /> */}
         {/* We would not show NotificationDropdown for a while. We will start from small. */}
         {/* <NotificationDropdown /> */}
         
