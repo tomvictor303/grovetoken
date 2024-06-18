@@ -3,3 +3,4 @@ npm install redux react-redux@7.2.6 @reduxjs/toolkit@1.9.7 next-redux-wrapper
 
 <h2>Color control</h2>
 src\@core\theme\palette
+src\@core\theme\typography
