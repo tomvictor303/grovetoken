@@ -24,7 +24,7 @@ const Typography = (theme: Theme) => {
       color: theme.palette.text.primary
     },
     h5: {
-      fontWeight: 500,
+      fontWeight: 400,
       letterSpacing: 0,
       color: theme.palette.text.primary
     },
