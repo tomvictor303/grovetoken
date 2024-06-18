@@ -70,10 +70,10 @@ const App = (props: ExtendedAppProps) => {
       <Web3Provider>
         <CacheProvider value={emotionCache}>
           <Head>
-            <title>{`${themeConfig.projectName} | Hire Consultants`}</title>
+            <title>{`${themeConfig.projectName} | ERC20 token launch`}</title>
             <meta
               name='description'
-              content={`${themeConfig.projectName} – Hire Consultants`}
+              content={`${themeConfig.projectName} – ERC20 token launch`}
             />
             <meta name='keywords' content='Material Design, MUI, Admin Template, React Admin Template' />
             <meta name='viewport' content='initial-scale=1, width=device-width' />

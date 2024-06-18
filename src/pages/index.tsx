@@ -17,13 +17,6 @@ import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 import TopExperts from 'src/views/landing/TopExperts'
 
 // ** Demo Components Imports
-import Table from 'src/views/demodashboard/Table'
-import Trophy from 'src/views/demodashboard/Trophy'
-import TotalEarning from 'src/views/demodashboard/TotalEarning'
-import StatisticsCard from 'src/views/demodashboard/StatisticsCard'
-import WeeklyOverview from 'src/views/demodashboard/WeeklyOverview'
-import DepositWithdraw from 'src/views/demodashboard/DepositWithdraw'
-import SalesByCountries from 'src/views/demodashboard/SalesByCountries'
 import LawyersCategory from 'src/views/landing/LawyersCategory'
 import DoctorsCategory from 'src/views/landing/DoctorsCategory'
 import ExerciseCategory from 'src/views/landing/ExerciseCategory'
