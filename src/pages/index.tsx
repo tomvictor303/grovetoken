@@ -19,11 +19,7 @@ const CustomCardHeader = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   gap: theme.spacing(3),
   marginBottom: theme.spacing(5),
-}));
-
-
-
-  
+}));  
 
 const LandingPage = () => {
   const theme = useTheme();
