@@ -10,7 +10,7 @@ import TopExperts from 'src/views/landing/TopExperts'
 import LawyersCategory from 'src/views/landing/LawyersCategory'
 import DoctorsCategory from 'src/views/landing/DoctorsCategory'
 import ExerciseCategory from 'src/views/landing/ExerciseCategory'
-import { Badge, Box, Button, Card, CardContent, CardHeader, Chip, FormControl, FormHelperText, MenuItem, Paper, Select, SelectChangeEvent, Stack, TextField, Tooltip, Typography } from '@mui/material'
+import { Badge, Box, Button, Card, CardContent, CardHeader, Checkbox, Chip, FormControl, FormHelperText, Link, MenuItem, Paper, Select, SelectChangeEvent, Stack, TextField, Tooltip, Typography } from '@mui/material'
 import { 
   MonitorShimmer as MonitorShimmerIcon,
   TruckOutline as TruckOutlineIcon,
@@ -227,6 +227,15 @@ const LandingPage = () => {
                 <FountainPenTipIcon className={'cardheader-icon'} />
                 <Typography className={'cardheader-title'} variant='h4'>Agreement</Typography>
               </CustomCardHeader>
+
+              <CustomFormControl fullWidth>
+                <Stack direction={'row'} alignItems={'flex-start'} spacing={1}>
+                  <Checkbox color="success" />
+                  <Typography>
+                    I have read, understood and agreed to the <Link className='cursorPoint' style={{ display: 'inline', color: theme.palette.success.main, textDecoration: 'underline'}}>Terms of Use</Link>.
+                  </Typography>
+                </Stack>
+              </CustomFormControl>
             </CustomCardContent>
           </CustomCard>
           {/** END Agreement_card */}
