@@ -10,7 +10,7 @@ import TopExperts from 'src/views/landing/TopExperts'
 import LawyersCategory from 'src/views/landing/LawyersCategory'
 import DoctorsCategory from 'src/views/landing/DoctorsCategory'
 import ExerciseCategory from 'src/views/landing/ExerciseCategory'
-import { Box, Card, CardContent, CardHeader, FormControl, FormHelperText, MenuItem, Paper, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, CardHeader, FormControl, FormHelperText, MenuItem, Paper, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material'
 import { 
   MonitorShimmer as MonitorShimmerIcon,
   TruckOutline as TruckOutlineIcon,
@@ -240,6 +240,12 @@ const LandingPage = () => {
             </CustomCardContent>
           </CustomCard>
           {/** END Transaction_card */}
+          
+          {/** BEGIN confirm_button */}
+          <Box>            
+            <Button variant="contained" fullWidth color="success">Confirm</Button>
+          </Box>
+          {/** END confirm_button */}
         </Stack>
       </Grid>
     </Grid>
