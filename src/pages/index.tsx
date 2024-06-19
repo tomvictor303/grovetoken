@@ -68,7 +68,7 @@ interface State {
   token_type: number
   token_name: string
   token_symbol: string
-  decimals: number
+  token_decimals: number
 }
 
 const LandingPage = () => {
@@ -79,7 +79,7 @@ const LandingPage = () => {
     token_type: 0,
     token_name: '',
     token_symbol: '',
-    decimals: 18,
+    token_decimals: 18,
   })
 
   const handleChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -133,10 +133,37 @@ const LandingPage = () => {
                 className={'control-element'}
                 value={values.token_name}
                 onChange={handleChange('token_name')}
-                placeholder="My new token name"
-                defaultValue="Hello World"           
+                placeholder="My new token name"           
               />
               <FormHelperText className={'control-help'}>The name of your token</FormHelperText>
+            </CustomFormControl>
+
+            <CustomFormControl fullWidth>
+              <Typography className={'control-title'} variant='caption'>TOKEN SYMBOL*</Typography>
+              <TextField 
+                className={'control-element'}
+                value={values.token_symbol}
+                onChange={handleChange('token_symbol')}
+                placeholder="TKN"           
+              />
+              <FormHelperText className={'control-help'}>Your token's symbol (e.g ETH)</FormHelperText>
+            </CustomFormControl>            
+
+            <CustomFormControl fullWidth>
+              <Typography className={'control-title'} variant='caption'>DECIMALS*</Typography>
+              <TextField 
+                className={'control-element'}
+                value={values.token_decimals}
+                onChange={handleChange('token_decimals')}
+                placeholder=""
+                type="number"
+                inputProps={{
+                  min: 1,
+                  max: 18,
+                  pattern: "\\d*",
+                }}
+              />
+              <FormHelperText className={'control-help'}>The number of decimal of your token (default 18)</FormHelperText>
             </CustomFormControl>
           </CustomCardContent>
         </CustomCard>
