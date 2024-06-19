@@ -26,3 +26,7 @@ code[class*='language-'] {
 .cursorPoint {
   cursor: pointer;
 }
+
+.extra-small-icon {
+  font-size: 1rem!important;
+}

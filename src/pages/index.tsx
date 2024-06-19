@@ -10,7 +10,7 @@ import TopExperts from 'src/views/landing/TopExperts'
 import LawyersCategory from 'src/views/landing/LawyersCategory'
 import DoctorsCategory from 'src/views/landing/DoctorsCategory'
 import ExerciseCategory from 'src/views/landing/ExerciseCategory'
-import { Box, Button, Card, CardContent, CardHeader, FormControl, FormHelperText, MenuItem, Paper, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material'
+import { Badge, Box, Button, Card, CardContent, CardHeader, Chip, FormControl, FormHelperText, MenuItem, Paper, Select, SelectChangeEvent, Stack, TextField, Tooltip, Typography } from '@mui/material'
 import { 
   MonitorShimmer as MonitorShimmerIcon,
   TruckOutline as TruckOutlineIcon,
@@ -18,6 +18,7 @@ import {
   Lan as LanIcon,
   FountainPenTip as FountainPenTipIcon,
   WindowShutterSettings as WindowShutterSettingsIcon,
+  InformationOutline as InformationOutlineIcon,
 } from 'mdi-material-ui'
 import { BorderRadius } from 'mdi-material-ui';
 import { ChangeEvent, useState } from 'react';
@@ -237,6 +238,30 @@ const LandingPage = () => {
                 <WindowShutterSettingsIcon className={'cardheader-icon'} />
                 <Typography className={'cardheader-title'} variant='h4'>Transaction</Typography>
               </CustomCardHeader>
+
+              <CustomFormControl fullWidth>
+                <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
+                  <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'} spacing={1}>
+                    <Typography>Commission Fee:</Typography>
+                    <Tooltip title="Commission Fee that you need to create token" className='cursorPoint'>
+                      <InformationOutlineIcon className='extra-small-icon' color='success' />
+                    </Tooltip>
+                  </Stack>
+                  <Chip label="0.55 ETH" color="success" variant="filled" />
+                </Stack>
+              </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
+                  <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'} spacing={1}>
+                    <Typography>Gas Fee:</Typography>
+                    <Tooltip title="Gas Fee will be consumed during network" className='cursorPoint'>
+                      <InformationOutlineIcon className='extra-small-icon' color='success' />
+                    </Tooltip>
+                  </Stack>
+                  <Chip label="Variable" color="primary" variant="filled" />
+                </Stack>
+              </CustomFormControl>
             </CustomCardContent>
           </CustomCard>
           {/** END Transaction_card */}
