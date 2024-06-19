@@ -77,6 +77,9 @@ interface State {
   token_name: string
   token_symbol: string
   token_decimals: number
+  supply_type: 'Fixed' | 'Capped' | 'Unlimited'
+  initial_supply: number
+  maximum_supply: number
 }
 
 const LandingPage = () => {
@@ -89,6 +92,9 @@ const LandingPage = () => {
     token_name: '',
     token_symbol: '',
     token_decimals: 18,
+    supply_type: 'Fixed',
+    initial_supply: 0,
+    maximum_supply: 10000000,
   })
 
   const handleChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -121,8 +127,6 @@ const LandingPage = () => {
                 <Typography className={'control-title'} variant='caption'>TOKEN TYPE*</Typography>
                 <Select 
                   className={'control-element'}
-                  // value={age}
-                  // onChange={handleChange}
                   value={values.token_type}
                   onChange={handleSelectChange('token_type')}
                   displayEmpty           
@@ -186,6 +190,24 @@ const LandingPage = () => {
                 <TruckOutlineIcon className={'cardheader-icon'} />
                 <Typography className={'cardheader-title'} variant='h4'>Supply</Typography>
               </CustomCardHeader>
+
+              <CustomFormControl fullWidth>
+                <Typography className={'control-title'} variant='caption'>SUPPLY TYPE*</Typography>
+                <Select 
+                  className={'control-element'}
+                  value={values.supply_type}
+                  onChange={handleSelectChange('supply_type')}
+                  displayEmpty           
+                >
+                  {/* <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem> */}
+                  <MenuItem value={'Fixed'}>Fixed</MenuItem>
+                  <MenuItem value={'Capped'}>Capped</MenuItem>
+                  <MenuItem value={'Unlimited'}>Unlimited</MenuItem>
+                </Select>
+                <FormHelperText className={'control-help'}>Fixed / Capped / Unlimited</FormHelperText>
+              </CustomFormControl>
             </CustomCardContent>
           </CustomCard>
           {/** END Supply_card */}
