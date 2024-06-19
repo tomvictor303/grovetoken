@@ -124,7 +124,7 @@ const LandingPage = () => {
     isRecoverable: false,
     isAntiWhale: false,
     isTax: false,
-    swap_router: '',
+    swap_router: 'uniswap_router_v2',
     access_type: 'Owner',
   })
 
@@ -388,7 +388,53 @@ const LandingPage = () => {
               {/** END Options_card_tax_part */}
 
               {/** BEGIN Options_card_final_part */}
-              <Box></Box>
+              <Box>
+                <CustomFormControl fullWidth>
+                  <Typography className={'control-title'} variant='caption'>ROUTER</Typography>
+                  <Select 
+                    className={'control-element'}
+                    value={values.swap_router}
+                    onChange={handleSelectChange('swap_router')}
+                    displayEmpty           
+                  >
+                    {/* <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem> */}
+                    <MenuItem value={'uniswap_router_v2'}>Uniswap Router V2</MenuItem>
+                    <MenuItem value={'pancakeswap_router_v2'}>Pancakeswap Router V2</MenuItem>
+                  </Select>
+                  <FormHelperText className={'control-help'}>Select the swap router to use</FormHelperText>
+                </CustomFormControl>
+
+                <CustomFormControl fullWidth>
+                  <Typography className={'control-title'} variant='caption'>ACCESS TYPE*</Typography>
+                  <Select 
+                    className={'control-element'}
+                    value={values.access_type}
+                    onChange={handleSelectChange('access_type')}
+                    displayEmpty           
+                  >
+                    {/* <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem> */}
+                    <MenuItem value={'Owner'}>Owner</MenuItem>
+                    <MenuItem value={'Admin'}>Admin</MenuItem>
+                  </Select>
+                  <FormHelperText className={'control-help'}>Who can administer your contract</FormHelperText>
+                </CustomFormControl>
+
+                <CustomFormControl fullWidth>
+                  <Typography variant='caption'>
+                    <span style={{color: theme.palette.success.main}}>Owner:</span> Your wallet address will be set as the owner of your token to perform administrative tasks (ie, mint new tokens).
+                  </Typography>
+                </CustomFormControl>
+
+                <CustomFormControl fullWidth>
+                  <Typography variant='caption'>
+                    <span style={{color: theme.palette.success.main}}>Roles:</span> All admin tasks (mint, burn, etc...) will be available to different users, based on their roles. By default, your wallet's address will be given all the roles.
+                  </Typography>
+                </CustomFormControl>
+              </Box>
               {/** END Options_card_final_part */}
             </CustomCardContent>
           </CustomCard>
