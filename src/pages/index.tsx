@@ -263,14 +263,14 @@ const LandingPage = () => {
       <Grid item xs={12} md={4}>
         <Stack spacing={block_spacing}>
           {/** BEGIN Network_card */}
-          <CustomCard>
+          {/* <CustomCard>
             <CustomCardContent>
               <CustomCardHeader>
                 <LanIcon className={'cardheader-icon'} />
                 <Typography className={'cardheader-title'} variant='h4'>Network</Typography>
               </CustomCardHeader>
             </CustomCardContent>
-          </CustomCard>
+          </CustomCard> */}
           {/** END Network_card */}
           
           {/** BEGIN Agreement_card */}
