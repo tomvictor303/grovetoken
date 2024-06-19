@@ -65,7 +65,7 @@ const CustomFormControl = styled(FormControl)(({ theme }) => ({
 })); 
 
 interface State {
-  token_type: string
+  token_type: number
   token_name: string
   token_symbol: string
   decimals: number
@@ -76,7 +76,7 @@ const LandingPage = () => {
 
   // ** States
   const [values, setValues] = useState<State>({
-    token_type: '',
+    token_type: 0,
     token_name: '',
     token_symbol: '',
     decimals: 18,
@@ -117,12 +117,12 @@ const LandingPage = () => {
                 onChange={handleSelectChange('token_type')}
                 displayEmpty           
               >
-                <MenuItem value="">
+                {/* <MenuItem value="">
                   <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Free</MenuItem>
-                <MenuItem value={20}>Basic</MenuItem>
-                <MenuItem value={30}>Custom</MenuItem>
+                </MenuItem> */}
+                <MenuItem value={0}>Free</MenuItem>
+                <MenuItem value={1}>Basic</MenuItem>
+                <MenuItem value={2}>Custom</MenuItem>
               </Select>
               <FormHelperText className={'control-help'}>Select the base configuration of your token (Free and Basic have limited configurations)</FormHelperText>
             </CustomFormControl>
