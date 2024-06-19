@@ -12,6 +12,16 @@ import DoctorsCategory from 'src/views/landing/DoctorsCategory'
 import ExerciseCategory from 'src/views/landing/ExerciseCategory'
 import { Box, Card, CardContent, CardHeader, FormControl, FormHelperText, MenuItem, Paper, Select, Stack, Typography } from '@mui/material'
 import MonitorShimmer from 'mdi-material-ui/MonitorShimmer'
+import { BorderRadius } from 'mdi-material-ui';
+
+const CustomCard = styled(Card)(({ theme }) => ({
+  // borderRadius: theme.shape.borderRadius * 2,
+}));
+
+const CustomCardContent = styled(CardContent)(({ theme }) => ({
+  marginLeft: theme.spacing(2),
+  marginRight: theme.spacing(2),
+}));
 
 const CustomCardHeader = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -19,7 +29,33 @@ const CustomCardHeader = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   gap: theme.spacing(3),
   marginBottom: theme.spacing(5),
-}));  
+
+  '& .cardheader-icon': {
+    color: theme.palette.success.main,
+  },
+  '& .cardheader-title': {
+    color: theme.palette.customColors.semiwhite,
+  },
+}));
+
+const CustomFormControl = styled(FormControl)(({ theme }) => ({
+  '& .control-title': {
+    color: theme.palette.secondary.main,
+    fontWeight: 700,
+    marginBottom: theme.spacing(2),
+  },
+  '& .control-element': {
+    marginBottom: theme.spacing(2),
+  },
+  '& .control-element .MuiInputBase-input': {
+    paddingTop: '12px',
+    paddingBottom: '12px',
+    borderWidth: '5px',
+  },
+  '& .control-help': {
+    margin: 0,
+  },
+})); 
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -35,19 +71,21 @@ const LandingPage = () => {
       </Grid>
       <Grid item xs={12} md={4}>
         {/** BEGIN Informations_card */}
-        <Card>
-          <CardContent>
+        <CustomCard>            
+          <CustomCardContent>
             <CustomCardHeader>
-              <MonitorShimmer fontSize={'large'} color={`success`}/>
-              <Typography variant='h4' color={`customColors.semiwhite`}>Informations</Typography>
+              <MonitorShimmer className={'cardheader-icon'} />
+              <Typography className={'cardheader-title'} variant='h4'>Informations</Typography>
             </CustomCardHeader>
-            <FormControl fullWidth>
-              <Select
+
+            <CustomFormControl fullWidth>
+              <Typography className={'control-title'} variant='caption'>TOKEN TYPE*</Typography>
+              <Select 
+                className={'control-element'}
                 // value={age}
                 // onChange={handleChange}
                 displayEmpty
-                inputProps={{ 'aria-label': 'Without label' }}
-                
+                inputProps={{ 'aria-label': 'Without label' }}               
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -56,10 +94,10 @@ const LandingPage = () => {
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
-              <FormHelperText>Without label</FormHelperText>
-            </FormControl>
-          </CardContent>
-        </Card>
+              <FormHelperText className={'control-help'}>Select the base configuration of your token (Free and Basic have limited configurations)</FormHelperText>
+            </CustomFormControl>
+          </CustomCardContent>
+        </CustomCard>
         {/** END Informations_card */}
       </Grid>
       <Grid item xs={12} md={4}>

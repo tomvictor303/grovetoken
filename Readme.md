@@ -6,3 +6,6 @@ src\@core\theme\palette
 
 <h2>Font control</h2>
 src\@core\theme\typography
+
+<h2>Element border radius</h2>
+theme.shape.borderRadius
