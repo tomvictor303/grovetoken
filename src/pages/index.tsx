@@ -49,6 +49,7 @@ const CustomFormControl = styled(FormControl)(({ theme }) => ({
     marginBottom: theme.spacing(2),
   },
   '& .control-element .MuiOutlinedInput-input': {
+    color: theme.palette.customColors.semiwhite, // style for inputed text
     paddingTop: '12px',
     paddingBottom: '12px',
     borderWidth: '5px',
