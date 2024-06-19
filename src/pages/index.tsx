@@ -10,9 +10,10 @@ import TopExperts from 'src/views/landing/TopExperts'
 import LawyersCategory from 'src/views/landing/LawyersCategory'
 import DoctorsCategory from 'src/views/landing/DoctorsCategory'
 import ExerciseCategory from 'src/views/landing/ExerciseCategory'
-import { Box, Card, CardContent, CardHeader, FormControl, FormHelperText, MenuItem, Paper, Select, Stack, TextField, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardHeader, FormControl, FormHelperText, MenuItem, Paper, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material'
 import MonitorShimmer from 'mdi-material-ui/MonitorShimmer'
 import { BorderRadius } from 'mdi-material-ui';
+import { ChangeEvent, useState } from 'react';
 
 const CustomCard = styled(Card)(({ theme }) => ({
   // borderRadius: theme.shape.borderRadius * 2,
@@ -63,8 +64,30 @@ const CustomFormControl = styled(FormControl)(({ theme }) => ({
   },
 })); 
 
+interface State {
+  token_type: string
+  token_name: string
+  token_symbol: string
+  decimals: number
+}
+
 const LandingPage = () => {
   const theme = useTheme();
+
+  // ** States
+  const [values, setValues] = useState<State>({
+    token_type: '',
+    token_name: '',
+    token_symbol: '',
+    decimals: 18,
+  })
+
+  const handleChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
+    setValues({ ...values, [prop]: event.target.value })
+  }
+  const handleSelectChange = (prop: keyof State) => (event: SelectChangeEvent<any>) => {
+    setValues({ ...values, [prop]: event.target.value })
+  }
 
   return (
     <Grid container spacing={6}>
@@ -90,14 +113,16 @@ const LandingPage = () => {
                 className={'control-element'}
                 // value={age}
                 // onChange={handleChange}
+                value={values.token_type}
+                onChange={handleSelectChange('token_type')}
                 displayEmpty           
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={10}>Free</MenuItem>
+                <MenuItem value={20}>Basic</MenuItem>
+                <MenuItem value={30}>Custom</MenuItem>
               </Select>
               <FormHelperText className={'control-help'}>Select the base configuration of your token (Free and Basic have limited configurations)</FormHelperText>
             </CustomFormControl>
@@ -106,8 +131,8 @@ const LandingPage = () => {
               <Typography className={'control-title'} variant='caption'>TOKEN NAME*</Typography>
               <TextField 
                 className={'control-element'}
-                // value={age}
-                // onChange={handleChange}
+                value={values.token_name}
+                onChange={handleChange('token_name')}
                 placeholder="My new token name"
                 defaultValue="Hello World"           
               />
