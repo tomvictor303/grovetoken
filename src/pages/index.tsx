@@ -208,6 +208,37 @@ const LandingPage = () => {
                 </Select>
                 <FormHelperText className={'control-help'}>Fixed / Capped / Unlimited</FormHelperText>
               </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Typography className={'control-title'} variant='caption'>INITIAL SUPPLY</Typography>
+                <TextField 
+                  className={'control-element'}
+                  value={values.initial_supply}
+                  onChange={handleChange('initial_supply')}
+                  placeholder=""
+                  type="number"
+                  inputProps={{
+                    min: 0,
+                    pattern: "\\d*",
+                  }}
+                />
+                <FormHelperText className={'control-help'}>The number of coins minted during the creation of the contract</FormHelperText>
+              </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Typography className={'control-title'} variant='caption'>MAXIMUM SUPPLY*</Typography>
+                <TextField 
+                  className={'control-element'}
+                  value={values.maximum_supply}
+                  onChange={handleChange('maximum_supply')}
+                  placeholder=""
+                  type="number"
+                  inputProps={{
+                    pattern: "\\d*",
+                  }}
+                />
+                <FormHelperText className={'control-help'}>The maximum number of coins you can mint from the contract</FormHelperText>
+              </CustomFormControl>
             </CustomCardContent>
           </CustomCard>
           {/** END Supply_card */}
