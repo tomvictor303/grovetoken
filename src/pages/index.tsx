@@ -10,7 +10,7 @@ import TopExperts from 'src/views/landing/TopExperts'
 import LawyersCategory from 'src/views/landing/LawyersCategory'
 import DoctorsCategory from 'src/views/landing/DoctorsCategory'
 import ExerciseCategory from 'src/views/landing/ExerciseCategory'
-import { Box, Card, CardContent, CardHeader, FormControl, FormHelperText, MenuItem, Paper, Select, Stack, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardHeader, FormControl, FormHelperText, MenuItem, Paper, Select, Stack, TextField, Typography } from '@mui/material'
 import MonitorShimmer from 'mdi-material-ui/MonitorShimmer'
 import { BorderRadius } from 'mdi-material-ui';
 
@@ -39,6 +39,7 @@ const CustomCardHeader = styled(Box)(({ theme }) => ({
 }));
 
 const CustomFormControl = styled(FormControl)(({ theme }) => ({
+  marginBottom: theme.spacing(7),
   '& .control-title': {
     color: theme.palette.secondary.main,
     fontWeight: 700,
@@ -51,6 +52,10 @@ const CustomFormControl = styled(FormControl)(({ theme }) => ({
     paddingTop: '12px',
     paddingBottom: '12px',
     borderWidth: '5px',
+  },
+  '& .control-element fieldset': {
+    borderWidth: '2px',
+    borderColor: '#777E90'
   },
   '& .control-help': {
     margin: 0,
@@ -84,8 +89,7 @@ const LandingPage = () => {
                 className={'control-element'}
                 // value={age}
                 // onChange={handleChange}
-                displayEmpty
-                inputProps={{ 'aria-label': 'Without label' }}               
+                displayEmpty           
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -95,6 +99,18 @@ const LandingPage = () => {
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
               <FormHelperText className={'control-help'}>Select the base configuration of your token (Free and Basic have limited configurations)</FormHelperText>
+            </CustomFormControl>
+
+            <CustomFormControl fullWidth>
+              <Typography className={'control-title'} variant='caption'>TOKEN NAME*</Typography>
+              <TextField 
+                className={'control-element'}
+                // value={age}
+                // onChange={handleChange}
+                placeholder="My new token name"
+                defaultValue="Hello World"           
+              />
+              <FormHelperText className={'control-help'}>The name of your token</FormHelperText>
             </CustomFormControl>
           </CustomCardContent>
         </CustomCard>
