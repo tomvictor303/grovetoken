@@ -86,7 +86,15 @@ interface State {
   initial_supply: number
   maximum_supply: number
   //////////////////////
-  isConfirmedERC20: boolean
+  isConformedERC20: boolean
+  isVerifiedOnEtherscan: boolean,
+  isNoCopyrightLink: boolean,
+  isMintable: boolean,
+  isBurnable: boolean,
+  isPausable: boolean,
+  isRecoverable: boolean,
+  isAntiWhale: boolean,
+  isTax: boolean,
 }
 
 const LandingPage = () => {
@@ -104,7 +112,15 @@ const LandingPage = () => {
     initial_supply: 0,
     maximum_supply: 10000000,
     //////////////////////
-    isConfirmedERC20: false,
+    isConformedERC20: false,
+    isVerifiedOnEtherscan: false,
+    isNoCopyrightLink: false,
+    isMintable: false,
+    isBurnable: false,
+    isPausable: false,
+    isRecoverable: false,
+    isAntiWhale: false,
+    isTax: false,
   })
 
   const handleChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -271,11 +287,91 @@ const LandingPage = () => {
               <CustomFormControl fullWidth>
                 <Stack className={'control-element'} direction={'row'} alignItems={'center'} spacing={3}>
                   <IOSSwitch 
-                    checked={values.isConfirmedERC20} onChange={handleCheckedChange('isConfirmedERC20')}
+                    checked={values.isConformedERC20} onChange={handleCheckedChange('isConformedERC20')}
                   />
-                  <Typography className={'control-switch-title'}>Confirms to ERC20 protocol</Typography>
+                  <Typography className={'control-switch-title'}>Conforms to ERC20 protocol</Typography>
                 </Stack>
                 <FormHelperText className={'control-help'}>Your token will const all the functionalities, and conforms to ERC20 protocol</FormHelperText>
+              </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Stack className={'control-element'} direction={'row'} alignItems={'center'} spacing={3}>
+                  <IOSSwitch 
+                    checked={values.isVerifiedOnEtherscan} onChange={handleCheckedChange('isVerifiedOnEtherscan')}
+                  />
+                  <Typography className={'control-switch-title'}>Verified on Etherscan</Typography>
+                </Stack>
+                <FormHelperText className={'control-help'}>Your token will const all the functionalities, and conforms to ERC20 protocol</FormHelperText>
+              </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Stack className={'control-element'} direction={'row'} alignItems={'center'} spacing={3}>
+                  <IOSSwitch 
+                    checked={values.isNoCopyrightLink} onChange={handleCheckedChange('isNoCopyrightLink')}
+                  />
+                  <Typography className={'control-switch-title'}>No copyright link</Typography>
+                </Stack>
+                <FormHelperText className={'control-help'}>A link pointing to this page will be added in the description of your contract (Free and Basic contracts only)</FormHelperText>
+              </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Stack className={'control-element'} direction={'row'} alignItems={'center'} spacing={3}>
+                  <IOSSwitch 
+                    checked={values.isMintable} onChange={handleCheckedChange('isMintable')}
+                  />
+                  <Typography className={'control-switch-title'}>Mintable</Typography>
+                </Stack>
+                <FormHelperText className={'control-help'}>Allow the creation of new tokens in the future</FormHelperText>
+              </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Stack className={'control-element'} direction={'row'} alignItems={'center'} spacing={3}>
+                  <IOSSwitch 
+                    checked={values.isBurnable} onChange={handleCheckedChange('isBurnable')}
+                  />
+                  <Typography className={'control-switch-title'}>Burnable</Typography>
+                </Stack>
+                <FormHelperText className={'control-help'}>Allow your tokens to be burned</FormHelperText>
+              </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Stack className={'control-element'} direction={'row'} alignItems={'center'} spacing={3}>
+                  <IOSSwitch 
+                    checked={values.isPausable} onChange={handleCheckedChange('isPausable')}
+                  />
+                  <Typography className={'control-switch-title'}>Pausable</Typography>
+                </Stack>
+                <FormHelperText className={'control-help'}>Allow your tokens to be paused</FormHelperText>
+              </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Stack className={'control-element'} direction={'row'} alignItems={'center'} spacing={3}>
+                  <IOSSwitch 
+                    checked={values.isRecoverable} onChange={handleCheckedChange('isRecoverable')}
+                  />
+                  <Typography className={'control-switch-title'}>Recoverable</Typography>
+                </Stack>
+                <FormHelperText className={'control-help'}>Allow to recover any ERC20 tokens sent to your contract</FormHelperText>
+              </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Stack className={'control-element'} direction={'row'} alignItems={'center'} spacing={3}>
+                  <IOSSwitch 
+                    checked={values.isAntiWhale} onChange={handleCheckedChange('isAntiWhale')}
+                  />
+                  <Typography className={'control-switch-title'}>Anti Whale</Typography>
+                </Stack>
+                <FormHelperText className={'control-help'}>Add a tax on transactions.</FormHelperText>
+              </CustomFormControl>
+
+              <CustomFormControl fullWidth>
+                <Stack className={'control-element'} direction={'row'} alignItems={'center'} spacing={3}>
+                  <IOSSwitch 
+                    checked={values.isTax} onChange={handleCheckedChange('isTax')}
+                  />
+                  <Typography className={'control-switch-title'}>Tax</Typography>
+                </Stack>
+                <FormHelperText className={'control-help'}>Add a tax on transactions.</FormHelperText>
               </CustomFormControl>
             </CustomCardContent>
           </CustomCard>
