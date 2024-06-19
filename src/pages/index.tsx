@@ -22,6 +22,7 @@ import {
 } from 'mdi-material-ui'
 import { BorderRadius } from 'mdi-material-ui';
 import { ChangeEvent, useState } from 'react';
+import IOSSwitch from 'src/views/custom/IOSSwitch';
 
 const CustomCard = styled(Card)(({ theme }) => ({
   // borderRadius: theme.shape.borderRadius * 2,
@@ -70,6 +71,9 @@ const CustomFormControl = styled(FormControl)(({ theme }) => ({
   '& .control-help': {
     margin: 0,
   },
+  '& .control-switch-title': {
+    color: theme.palette.customColors.semiwhite,
+  }
 })); 
 
 interface State {
@@ -77,9 +81,12 @@ interface State {
   token_name: string
   token_symbol: string
   token_decimals: number
+  //////////////////////
   supply_type: 'Fixed' | 'Capped' | 'Unlimited'
   initial_supply: number
   maximum_supply: number
+  //////////////////////
+  isConfirmedERC20: boolean
 }
 
 const LandingPage = () => {
@@ -92,9 +99,12 @@ const LandingPage = () => {
     token_name: '',
     token_symbol: '',
     token_decimals: 18,
+    //////////////////////
     supply_type: 'Fixed',
     initial_supply: 0,
     maximum_supply: 10000000,
+    //////////////////////
+    isConfirmedERC20: false,
   })
 
   const handleChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -103,6 +113,9 @@ const LandingPage = () => {
   const handleSelectChange = (prop: keyof State) => (event: SelectChangeEvent<any>) => {
     setValues({ ...values, [prop]: event.target.value })
   }
+  const handleCheckedChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValues({ ...values, [prop]: event.target.checked })
+  };
 
   return (
     <Grid container spacing={block_spacing}>
@@ -254,6 +267,16 @@ const LandingPage = () => {
                 <TuneIcon className={'cardheader-icon'} />
                 <Typography className={'cardheader-title'} variant='h4'>Options</Typography>
               </CustomCardHeader>
+
+              <CustomFormControl fullWidth>
+                <Stack className={'control-element'} direction={'row'} alignItems={'center'} spacing={3}>
+                  <IOSSwitch 
+                    checked={values.isConfirmedERC20} onChange={handleCheckedChange('isConfirmedERC20')}
+                  />
+                  <Typography className={'control-switch-title'}>Confirms to ERC20 protocol</Typography>
+                </Stack>
+                <FormHelperText className={'control-help'}>Your token will const all the functionalities, and conforms to ERC20 protocol</FormHelperText>
+              </CustomFormControl>
             </CustomCardContent>
           </CustomCard>
           {/** END Options_card */}
