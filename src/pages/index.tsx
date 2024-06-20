@@ -19,6 +19,7 @@ import {
   FountainPenTip as FountainPenTipIcon,
   WindowShutterSettings as WindowShutterSettingsIcon,
   InformationOutline as InformationOutlineIcon,
+  PlusCircleOutline as PlusCircleOutlineIcon,
 } from 'mdi-material-ui'
 import { BorderRadius } from 'mdi-material-ui';
 import { ChangeEvent, useState } from 'react';
@@ -446,6 +447,35 @@ const LandingPage = () => {
                     </CustomFormControl>
                   </Grid>
                 </Grid>
+
+                <CustomFormControl fullWidth>
+                  <Typography variant='caption' align='center' color={theme.palette.customColors.semiwhite}>Breakdown of Taxes</Typography>
+                </CustomFormControl>
+
+                {/** BEGIN TEAM_ADDRESS_block_in_Options_card_tax_part*/}       
+                <Box marginBottom={4}>
+                  <Typography className={'control-title'} variant='caption'>
+                    <Stack direction={'row'} alignItems={'center'} spacing={1}>
+                      <Box>TEAM ADDRESS</Box>
+                      <Tooltip title="Specify which addresses should receive a percentage of the Team Tax Alloction" className='cursorPoint'>
+                        <InformationOutlineIcon className='extra-small-icon' color='success' />
+                      </Tooltip>
+                    </Stack>
+                  </Typography>
+                  
+                  {/** address list*/}
+                  <Box>
+                  </Box>
+
+                  {/** Add new button */}
+                  <Box>
+                    <Button variant='text' color='success'>
+                      <PlusCircleOutlineIcon/>&nbsp;&nbsp;
+                      <Typography variant='body2' style={{ display: 'inline', color: theme.palette.success.main, textDecoration: 'underline'}}>Add a new address</Typography>
+                    </Button>
+                  </Box>
+                </Box>
+                {/** END TEAM_ADDRESS_block_in_Options_card_tax_part */}
 
                 <CustomFormControl fullWidth>
                   <Select 
