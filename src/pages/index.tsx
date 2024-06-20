@@ -10,7 +10,7 @@ import TopExperts from 'src/views/landing/TopExperts'
 import LawyersCategory from 'src/views/landing/LawyersCategory'
 import DoctorsCategory from 'src/views/landing/DoctorsCategory'
 import ExerciseCategory from 'src/views/landing/ExerciseCategory'
-import { Badge, Box, Button, Card, CardContent, CardHeader, Checkbox, Chip, FormControl, FormHelperText, Link, MenuItem, Paper, Select, SelectChangeEvent, Stack, TextField, Tooltip, Typography } from '@mui/material'
+import { Badge, Box, Button, Card, CardContent, CardHeader, Checkbox, Chip, FormControl, FormHelperText, InputAdornment, Link, MenuItem, OutlinedInput, Paper, Select, SelectChangeEvent, Stack, TextField, Tooltip, Typography } from '@mui/material'
 import { 
   MonitorShimmer as MonitorShimmerIcon,
   TruckOutline as TruckOutlineIcon,
@@ -96,6 +96,9 @@ interface State {
   isAntiWhale: boolean,
   isTax: boolean,
   //////////////////////
+  burnPercent: number,
+  teamPercent: number,
+  //////////////////////
   swap_router: string,
   access_type: string,
 }
@@ -122,8 +125,12 @@ const LandingPage = () => {
     isBurnable: false,
     isPausable: false,
     isRecoverable: false,
-    isAntiWhale: false,
+    isAntiWhale: false, 
     isTax: false,
+    //////////////////////
+    burnPercent: 0,
+    teamPercent: 0,
+    //////////////////////
     swap_router: 'uniswap_router_v2',
     access_type: 'Owner',
   })
@@ -384,7 +391,60 @@ const LandingPage = () => {
               {/** END Options_card_switch_part */}
 
               {/** BEGIN Options_card_tax_part */}
-              <Box></Box>
+              <Box>
+                <Grid container spacing={4}>
+                  <Grid item xs={6}>
+                    <CustomFormControl fullWidth>
+                      <Typography className={'control-title'} variant='caption'>
+                        <Stack direction={'row'} alignItems={'center'} spacing={1}>
+                          <Box>BURN</Box>
+                          <Tooltip title="Reduces total supply in real time as people transact the token, increasing rarity" className='cursorPoint'>
+                            <InformationOutlineIcon className='extra-small-icon' color='success' />
+                          </Tooltip>
+                        </Stack>
+                      </Typography>
+                      <OutlinedInput 
+                        className={'control-element'}
+                        value={values.burnPercent}
+                        onChange={handleChange('burnPercent')}
+                        placeholder=""
+                        type="number"
+                        inputProps={{
+                          min: 0,
+                          max: 100,
+                          pattern: "\\d*",
+                        }}
+                        endAdornment={<InputAdornment position="end">%</InputAdornment>}
+                      />
+                    </CustomFormControl>
+                  </Grid>
+                  <Grid item xs={6}>                    
+                    <CustomFormControl fullWidth>                      
+                      <Typography className={'control-title'} variant='caption'>
+                        <Stack direction={'row'} alignItems={'center'} spacing={1}>
+                          <Box>TEAM</Box>
+                          <Tooltip title="Route a percentage of taxes to your team wallets as people transact the token" className='cursorPoint'>
+                            <InformationOutlineIcon className='extra-small-icon' color='success' />
+                          </Tooltip>
+                        </Stack>
+                      </Typography>
+                      <OutlinedInput 
+                        className={'control-element'}
+                        value={values.teamPercent}
+                        onChange={handleChange('teamPercent')}
+                        placeholder=""
+                        type="number"
+                        inputProps={{
+                          min: 0,
+                          max: 100,
+                          pattern: "\\d*",
+                        }}
+                        endAdornment={<InputAdornment position="end">%</InputAdornment>}
+                      />
+                    </CustomFormControl>
+                  </Grid>
+                </Grid>
+              </Box>
               {/** END Options_card_tax_part */}
 
               {/** BEGIN Options_card_final_part */}
