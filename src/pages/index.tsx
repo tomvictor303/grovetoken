@@ -98,6 +98,7 @@ interface State {
   //////////////////////
   burnPercent: number,
   teamPercent: number,
+  taxCurrency: string,
   //////////////////////
   swap_router: string,
   access_type: string,
@@ -130,6 +131,7 @@ const LandingPage = () => {
     //////////////////////
     burnPercent: 0,
     teamPercent: 0,
+    taxCurrency: "",
     //////////////////////
     swap_router: 'uniswap_router_v2',
     access_type: 'Owner',
@@ -444,6 +446,24 @@ const LandingPage = () => {
                     </CustomFormControl>
                   </Grid>
                 </Grid>
+
+                <CustomFormControl fullWidth>
+                  <Select 
+                    className={'control-element'}
+                    value={values.taxCurrency}
+                    onChange={handleSelectChange('taxCurrency')}
+                    displayEmpty           
+                  >
+                    {/* <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem> */}
+                    <MenuItem value={'eth'}>Send tax in ETH</MenuItem>
+                    <MenuItem value={'token'}>Send tax in Token</MenuItem>
+                  </Select>
+                  <FormHelperText className={'control-help'}>
+                    Select the currency to send to the team (ETH or tokens). The tax will be swapped if ETH is selected.
+                  </FormHelperText>
+                </CustomFormControl>
               </Box>
               {/** END Options_card_tax_part */}
 
