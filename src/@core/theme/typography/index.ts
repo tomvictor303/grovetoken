@@ -51,7 +51,8 @@ const Typography = (theme: Theme) => {
     },
     button: {
       letterSpacing: '0.3px',
-      color: theme.palette.text.primary
+      color: theme.palette.text.primary,
+      textTransform: 'none',
     },
     caption: {
       letterSpacing: '0.4px',
