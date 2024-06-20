@@ -487,7 +487,7 @@ const LandingPage = () => {
                 <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
                   <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'} spacing={1}>
                     <Typography>Commission Fee:</Typography>
-                    <Tooltip title="Commission Fee that you need to create token" className='cursorPoint'>
+                    <Tooltip title="Commission Fee is the cost that Grove charges to create the asset" className='cursorPoint'>
                       <InformationOutlineIcon className='extra-small-icon' color='success' />
                     </Tooltip>
                   </Stack>
@@ -499,7 +499,7 @@ const LandingPage = () => {
                 <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
                   <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'} spacing={1}>
                     <Typography>Gas Fee:</Typography>
-                    <Tooltip title="Gas Fee will be consumed during network" className='cursorPoint'>
+                    <Tooltip title="Gas Fee is the cost of sending a transaction on the blockchain network" className='cursorPoint'>
                       <InformationOutlineIcon className='extra-small-icon' color='success' />
                     </Tooltip>
                   </Stack>
