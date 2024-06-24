@@ -18,7 +18,7 @@ import {
   PlusCircleOutline as PlusCircleOutlineIcon,
 } from 'mdi-material-ui'
 import { BorderRadius } from 'mdi-material-ui';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import IOSSwitch from 'src/views/custom/IOSSwitch';
 import { CustomCard, CustomCardContent, CustomCardHeader, CustomFormControl } from 'src/views/custom/CustomCard';
 import InformationsCard from 'src/views/landing/InformationsCard';
@@ -28,6 +28,7 @@ import AgreementCard from 'src/views/landing/AgreementCard';
 import TransactionCard from 'src/views/landing/TransactionCard';
 import NetworkCard from 'src/views/landing/NetworkCard';
 import { getNetworkObject } from 'src/utils/networks';
+import { TokenType } from 'src/utils/enums';
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -75,6 +76,17 @@ const LandingPage = () => {
   const handleAutoCompleteChange = (prop: keyof HomeState) => (event: any, newValue: any) => {
     setValues({ ...values, [prop]: newValue })
   };
+
+  useEffect(() => {
+    let opts: any = {};
+    if (values?.token_type < TokenType.Advance) {
+      opts['token_decimals'] = 18;
+    }
+
+    if (Object.keys(opts).length > 0) {
+      setValues({ ...values, ...opts });
+    }
+  }, [values?.token_type])
 
   return (
     <Grid container spacing={block_spacing}>

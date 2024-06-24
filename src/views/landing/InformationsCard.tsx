@@ -84,6 +84,7 @@ const InformationsCard = ({ values, handleChange, handleSelectChange, handleChec
             onChange={handleChange('token_decimals')}
             placeholder=""
             type="number"
+            disabled={values.token_type < TokenType.Advance}
             inputProps={{
               min: 1,
               max: 18,
