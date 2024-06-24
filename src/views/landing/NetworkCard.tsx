@@ -9,9 +9,10 @@ import {
   InformationOutline as InformationOutlineIcon,
   PlusCircleOutline as PlusCircleOutlineIcon,
 } from 'mdi-material-ui'
-import { Checkbox, FormHelperText, Link, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material';
+import { Autocomplete, Box, Checkbox, FormHelperText, Link, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material';
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import networks from 'src/utils/networks';
 
 interface MyCardProps {
   values: HomeState
@@ -32,12 +33,34 @@ const NetworkCard = ({ values, handleChange, handleSelectChange, handleCheckedCh
         </CustomCardHeader>
 
         <CustomFormControl fullWidth>
-          <Stack direction={'row'} alignItems={'flex-start'} spacing={1}>
-            <Checkbox color="success" />
-            <Typography>
-              I have read, understood and agreed to the <Link className='cursorPoint' style={{ display: 'inline', color: theme.palette.success.main, textDecoration: 'underline'}}>Terms of Use</Link>.
-            </Typography>
-          </Stack>
+          <Autocomplete
+            className={'control-element'}
+            options={networks}
+            autoHighlight
+            getOptionLabel={(option) => option.name}
+            renderOption={(props, option) => (
+              <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                <img
+                  loading="lazy"
+                  width="20"
+                  srcSet={`${option.icon} 2x`}
+                  src={`${option.icon}`}
+                  alt=""
+                />
+                {option.name}
+              </Box>
+            )}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                inputProps={{
+                  ...params.inputProps,
+                  autoComplete: 'new-password', // disable autocomplete and autofill
+                }}
+              />
+            )}
+          />
+          <FormHelperText className={'control-help'}>Select the network on which you want to deploy your token</FormHelperText>
         </CustomFormControl>
       </CustomCardContent>
     </CustomCard>
