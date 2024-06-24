@@ -30,3 +30,11 @@ code[class*='language-'] {
 .extra-small-icon {
   font-size: 1rem!important;
 }
+
+w3m-button button {
+  background-color: red !important;
+}
+
+button[data-size='md'] {
+  background: red !important;
+}

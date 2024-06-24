@@ -431,18 +431,3 @@ export const getCountryObject = (code: string): CountryType | null => {
   }
   return null;
 }
-
-export const expertises: ExpertiseType[] = [
-  { code: 'lawyer', name: 'Lawyer', label: '⚖️ Lawyer' },
-  { code: 'doctor', name: 'Doctor', label: '👨🏻‍⚕️ Doctor' },
-  { code: 'exercise', name: 'Exercise', label: '💪 Exercise' },
-];
-
-export const getExpertiseObject = (code: string): ExpertiseType | null => {
-  for (let i = 0; i < expertises.length; i++) {
-    if (expertises[i].code === code) {
-      return expertises[i];
-    }
-  }
-  return null;
-}

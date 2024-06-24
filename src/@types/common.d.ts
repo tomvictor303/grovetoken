@@ -16,10 +16,24 @@ declare global {
     suggested?: boolean;
   }
 
-  type ExpertiseType = {  
-    code: string;
+  enum TokenType {
+    Basic = 0,
+    Custom = 1,
+    Advance = 2,
+  }
+
+  type NetworkConnection = {
+    chainId: number;
+    rpc: string;
+    explorer: string;
+  }
+
+  type Network = {
     name: string;
-    label: string;
+    short_name: string;
+    currency: string;
+    mainnet: NetworkConnection;
+    testnet?: NetworkConnection;
   }
 }
 
