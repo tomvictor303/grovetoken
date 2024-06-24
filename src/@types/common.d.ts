@@ -32,6 +32,7 @@ declare global {
     name: string;
     short_name: string;
     currency: string;
+    icon: string;
     mainnet: NetworkConnection;
     testnet?: NetworkConnection;
   }

@@ -26,6 +26,8 @@ import SupplyCard from 'src/views/landing/SupplyCard';
 import OptionsCard from 'src/views/landing/OptionsCard';
 import AgreementCard from 'src/views/landing/AgreementCard';
 import TransactionCard from 'src/views/landing/TransactionCard';
+import NetworkCard from 'src/views/landing/NetworkCard';
+import { getNetworkObject } from 'src/utils/networks';
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -33,6 +35,7 @@ const LandingPage = () => {
 
   // ** States
   const [values, setValues] = useState<HomeState>({
+    network: getNetworkObject('GRV'),
     token_type: 0,
     token_name: '',
     token_symbol: '',
@@ -69,18 +72,24 @@ const LandingPage = () => {
   const handleCheckedChange = (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [prop]: event.target.checked })
   };
+  const handleAutoCompleteChange = (prop: keyof HomeState) => (event: any, newValue: any) => {
+    setValues({ ...values, [prop]: newValue })
+  };
 
   return (
     <Grid container spacing={block_spacing}>
       <Grid item xs={12}>
         <Box textAlign={'center'} py={15}>
-          <Typography variant='h2' mb={4} style={{color: theme.palette.customColors.semiwhite}}>Create your Token on <span style={{ color: theme.palette.success.main }}>Ethereum</span></Typography>
-          <Typography variant='h5'>Easily deploy your Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.</Typography>
-          <Typography variant='h5'>No login. No setup. No coding required.</Typography>
+          <Typography variant='h2' mb={4} style={{color: theme.palette.customColors.semiwhite}}>Create your Token on <span style={{ color: theme.palette.success.main }}>{values?.network?.name??''}</span></Typography>
+          <Typography variant='h5'>Create and deploy your smart contract in minutes!</Typography>
+          <Typography variant='h5'>No coding or login required | verified on chain instantly | advance features and options</Typography>
         </Box>
       </Grid>
       <Grid item xs={12} md={4}>
         <Stack spacing={block_spacing}>
+          {/** BEGIN Network_card */}
+          <NetworkCard values={values} handleAutoCompleteChange={handleAutoCompleteChange} handleChange={handleChange} handleSelectChange={handleSelectChange} handleCheckedChange={handleCheckedChange}/>
+          {/** END Network_card */}
           {/** BEGIN Informations_card */}
           <InformationsCard values={values} handleChange={handleChange} handleSelectChange={handleSelectChange} handleCheckedChange={handleCheckedChange}/>
           {/** END Informations_card */}

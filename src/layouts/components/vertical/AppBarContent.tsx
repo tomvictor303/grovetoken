@@ -69,8 +69,17 @@ const AppBarContent = (props: Props) => {
           </IconButton>
         ) : null}
         <Box>
-          <Link passHref href={`/`}>
-            <LogoImg className={`cursorPoint`} alt='Home' src='/images/logos/logo2.png'/>
+          <Link href={`/`} legacyBehavior>
+            <a style={{textDecoration: 'none!important'}}>
+              <Stack alignItems={'center'} paddingTop={2}>
+                <Box>
+                  <LogoImg className={`cursorPoint`} alt='Home' src='/images/logos/logo2.png'/>
+                </Box>
+                <Box>
+                  <Typography variant='h6' style={{margin: 0, fontFamily: 'Poppins', fontWeight: 900, lineHeight: 1}}>Token Generator&nbsp;&nbsp;</Typography>
+                </Box>
+              </Stack>
+            </a>
           </Link>
         </Box>
       </Box>

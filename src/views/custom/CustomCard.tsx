@@ -41,6 +41,14 @@ export const CustomFormControl = styled(FormControl)(({ theme }) => ({
     paddingBottom: '12px',
     borderWidth: '5px',
   },
+  '& .control-element .MuiAutocomplete-inputRoot': {
+    paddingTop: '0px',
+    paddingBottom: '0px',
+  },
+  '& .control-element .MuiAutocomplete-input': {
+    paddingTop: '12px!important',
+    paddingBottom: '12px!important',
+  },
   '& .control-element fieldset': {
     borderWidth: '2px',
     borderColor: '#777E90'
