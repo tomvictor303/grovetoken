@@ -12,6 +12,7 @@ import {
 import { FormHelperText, MenuItem, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { TokenType } from 'src/utils/enums';
 
 interface MyCardProps {
   values: HomeState
@@ -46,7 +47,11 @@ const InformationsCard = ({ values, handleChange, handleSelectChange, handleChec
             <MenuItem value={1}>Custom</MenuItem>
             <MenuItem value={2}>Advance</MenuItem>
           </Select>
-          <FormHelperText className={'control-help'}>Select the base configuration of your token (Free and Basic have limited configurations)</FormHelperText>
+          <FormHelperText className={'control-help'}>
+            {values.token_type === TokenType.Basic && ("Basic Type configuration has limited options.")}
+            {values.token_type === TokenType.Custom && ("Custom Type configuration has selective options.")}
+            {values.token_type === TokenType.Advance && ("Advance Type configuration with industry best features.")}
+          </FormHelperText>
         </CustomFormControl>
 
         <CustomFormControl fullWidth>
