@@ -42,9 +42,9 @@ const InformationsCard = ({ values, handleChange, handleSelectChange, handleChec
             {/* <MenuItem value="">
               <em>None</em>
             </MenuItem> */}
-            <MenuItem value={0}>Free</MenuItem>
-            <MenuItem value={1}>Basic</MenuItem>
-            <MenuItem value={2}>Custom</MenuItem>
+            <MenuItem value={0}>Basic</MenuItem>
+            <MenuItem value={1}>Custom</MenuItem>
+            <MenuItem value={2}>Advance</MenuItem>
           </Select>
           <FormHelperText className={'control-help'}>Select the base configuration of your token (Free and Basic have limited configurations)</FormHelperText>
         </CustomFormControl>
