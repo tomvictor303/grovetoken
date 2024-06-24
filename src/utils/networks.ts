@@ -3,6 +3,7 @@ const networks: Network[] = [
     name: 'Grove',
     short_name: 'GRV',
     currency: 'GRV',
+    icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/23196.png',
     mainnet: {
       chainId: 770077,
       rpc: 'https://mainnet.grovechain.io/',
@@ -18,6 +19,7 @@ const networks: Network[] = [
     name: 'Ethereum',
     short_name: 'ETH',
     currency: 'ETH',
+    icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
     mainnet: {
       chainId: 1,
       rpc: 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
@@ -33,6 +35,7 @@ const networks: Network[] = [
     name: 'Binance Smart Chain',
     short_name: 'BNB',
     currency: 'BNB',
+    icon: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png',
     mainnet: {
       chainId: 56,
       rpc: 'https://bsc-dataseed.binance.org/',
@@ -48,6 +51,7 @@ const networks: Network[] = [
     name: 'Arbitrum',
     short_name: 'ARB',
     currency: 'ETH',
+    icon: 'https://cryptologos.cc/logos/arbitrum-arb-logo.png',
     mainnet: {
       chainId: 42161,
       rpc: 'https://arb1.arbitrum.io/rpc',
@@ -63,6 +67,7 @@ const networks: Network[] = [
     name: 'Polygon',
     short_name: 'MATIC',
     currency: 'MATIC',
+    icon: 'https://cryptologos.cc/logos/polygon-matic-logo.png',
     mainnet: {
       chainId: 137,
       rpc: 'https://rpc-mainnet.maticvigil.com/',
@@ -78,6 +83,7 @@ const networks: Network[] = [
     name: 'Avalanche',
     short_name: 'AVAX',
     currency: 'AVAX',
+    icon: 'https://cryptologos.cc/logos/avalanche-avax-logo.png',
     mainnet: {
       chainId: 43114,
       rpc: 'https://api.avax.network/ext/bc/C/rpc',
@@ -93,6 +99,7 @@ const networks: Network[] = [
     name: 'Fantom',
     short_name: 'FTM',
     currency: 'FTM',
+    icon: 'https://cryptologos.cc/logos/fantom-ftm-logo.png',
     mainnet: {
       chainId: 250,
       rpc: 'https://rpc.ftm.tools/',
@@ -108,6 +115,7 @@ const networks: Network[] = [
     name: 'Cronos',
     short_name: 'CRO',
     currency: 'CRO',
+    icon: 'https://cryptologos.cc/logos/cronos-cro-logo.png',
     mainnet: {
       chainId: 25,
       rpc: 'https://evm-cronos.crypto.org/',
@@ -123,6 +131,7 @@ const networks: Network[] = [
     name: 'zkSync',
     short_name: 'ZKS',
     currency: 'ETH',
+    icon: 'https://cryptologos.cc/logos/zksync-zks-logo.png',
     mainnet: {
       chainId: 324,
       rpc: 'https://zksync2-mainnet.zksync.io',
@@ -138,6 +147,7 @@ const networks: Network[] = [
     name: 'Base',
     short_name: 'BASE',
     currency: 'ETH',
+    icon: 'https://cryptologos.cc/logos/base-base-logo.png',
     mainnet: {
       chainId: 8453,
       rpc: 'https://mainnet.base.org/',
@@ -153,6 +163,7 @@ const networks: Network[] = [
     name: 'Shibarium',
     short_name: 'SHIB',
     currency: 'SHIB',
+    icon: 'https://cryptologos.cc/logos/shiba-inu-shib-logo.png',
     mainnet: {
       chainId: 969,
       rpc: 'https://rpc.shibarium.network/',
@@ -168,6 +179,7 @@ const networks: Network[] = [
     name: 'Optimism',
     short_name: 'OP',
     currency: 'ETH',
+    icon: 'https://cryptologos.cc/logos/optimism-op-logo.png',
     mainnet: {
       chainId: 10,
       rpc: 'https://mainnet.optimism.io',
@@ -183,6 +195,7 @@ const networks: Network[] = [
     name: 'Boba Network',
     short_name: 'BOBA',
     currency: 'ETH',
+    icon: 'https://cryptologos.cc/logos/boba-network-boba-logo.png',
     mainnet: {
       chainId: 288,
       rpc: 'https://mainnet.boba.network/',
@@ -198,6 +211,7 @@ const networks: Network[] = [
     name: 'TomoChain',
     short_name: 'TOMO',
     currency: 'TOMO',
+    icon: 'https://cryptologos.cc/logos/tomochain-tomo-logo.png',
     mainnet: {
       chainId: 88,
       rpc: 'https://rpc.tomochain.com',
