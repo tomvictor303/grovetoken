@@ -81,8 +81,8 @@ const LandingPage = () => {
       <Grid item xs={12}>
         <Box textAlign={'center'} py={15}>
           <Typography variant='h2' mb={4} style={{color: theme.palette.customColors.semiwhite}}>Create your Token on <span style={{ color: theme.palette.success.main }}>{values?.network?.name??''}</span></Typography>
-          <Typography variant='h5'>Easily deploy your Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.</Typography>
-          <Typography variant='h5'>No login. No setup. No coding required.</Typography>
+          <Typography variant='h5'>Create and deploy your smart contract in minutes!</Typography>
+          <Typography variant='h5'>No coding or login required | verified on chain instantly | advance features and options</Typography>
         </Box>
       </Grid>
       <Grid item xs={12} md={4}>
