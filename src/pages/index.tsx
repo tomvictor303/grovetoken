@@ -26,6 +26,7 @@ import SupplyCard from 'src/views/landing/SupplyCard';
 import OptionsCard from 'src/views/landing/OptionsCard';
 import AgreementCard from 'src/views/landing/AgreementCard';
 import TransactionCard from 'src/views/landing/TransactionCard';
+import NetworkCard from 'src/views/landing/NetworkCard';
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -81,6 +82,9 @@ const LandingPage = () => {
       </Grid>
       <Grid item xs={12} md={4}>
         <Stack spacing={block_spacing}>
+          {/** BEGIN Network_card */}
+          <NetworkCard values={values} handleChange={handleChange} handleSelectChange={handleSelectChange} handleCheckedChange={handleCheckedChange}/>
+          {/** END Network_card */}
           {/** BEGIN Informations_card */}
           <InformationsCard values={values} handleChange={handleChange} handleSelectChange={handleSelectChange} handleCheckedChange={handleCheckedChange}/>
           {/** END Informations_card */}
