@@ -1,5 +1,7 @@
 declare global {
   interface HomeState {
+    network: Network | null,
+    //////////////////////
     token_type: number
     token_name: string
     token_symbol: string

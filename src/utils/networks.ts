@@ -225,4 +225,13 @@ const networks: Network[] = [
   }
 ];
 
+export const getNetworkObject = (short_name: string): Network | null => {
+  for (let i = 0; i < networks.length; i++) {
+    if (networks[i].short_name === short_name) {
+      return networks[i];
+    }
+  }
+  return null;
+}
+
 export default networks;

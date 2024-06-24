@@ -9,7 +9,7 @@ import {
   InformationOutline as InformationOutlineIcon,
   PlusCircleOutline as PlusCircleOutlineIcon,
 } from 'mdi-material-ui'
-import { Autocomplete, Box, Checkbox, FormHelperText, Link, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material';
+import { Autocomplete, Box, Checkbox, FormHelperText, InputAdornment, Link, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material';
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import networks from 'src/utils/networks';
@@ -19,9 +19,10 @@ interface MyCardProps {
   handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
   handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
   handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleAutoCompleteChange: (prop: keyof HomeState) => (event: any, newValue: any) => void
 }
 
-const NetworkCard = ({ values, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
+const NetworkCard = ({ values, handleChange, handleSelectChange, handleCheckedChange, handleAutoCompleteChange}: MyCardProps) => {
   const theme = useTheme();
 
   return <>    
@@ -36,6 +37,8 @@ const NetworkCard = ({ values, handleChange, handleSelectChange, handleCheckedCh
           <Autocomplete
             className={'control-element'}
             options={networks}
+            value={values.network}
+            onChange={handleAutoCompleteChange('network')}
             autoHighlight
             getOptionLabel={(option) => option.name}
             renderOption={(props, option) => (
@@ -56,6 +59,17 @@ const NetworkCard = ({ values, handleChange, handleSelectChange, handleCheckedCh
                 inputProps={{
                   ...params.inputProps,
                   autoComplete: 'new-password', // disable autocomplete and autofill
+                  // startAdornment: selectedOption ? (
+                  //   <InputAdornment position="start">
+                  //     <img
+                  //       loading="lazy"
+                  //       width="20"
+                  //       srcSet={`${selectedOption.icon} 2x`}
+                  //       src={`${selectedOption.icon}`}
+                  //       alt=""
+                  //     />
+                  //   </InputAdornment>
+                  // ) : null,
                 }}
               />
             )}
