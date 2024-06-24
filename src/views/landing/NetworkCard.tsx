@@ -56,20 +56,23 @@ const NetworkCard = ({ values, handleChange, handleSelectChange, handleCheckedCh
             renderInput={(params) => (
               <TextField
                 {...params}
+                InputProps={{
+                  ...params.InputProps,
+                  startAdornment: values?.network ? (
+                    <InputAdornment position="start">
+                      <img
+                        loading="lazy"
+                        width="20"
+                        srcSet={`${values?.network.icon} 2x`}
+                        src={`${values?.network.icon}`}
+                        alt=""
+                      />
+                    </InputAdornment>
+                  ) : null,
+                }}
                 inputProps={{
                   ...params.inputProps,
                   autoComplete: 'new-password', // disable autocomplete and autofill
-                  // startAdornment: selectedOption ? (
-                  //   <InputAdornment position="start">
-                  //     <img
-                  //       loading="lazy"
-                  //       width="20"
-                  //       srcSet={`${selectedOption.icon} 2x`}
-                  //       src={`${selectedOption.icon}`}
-                  //       alt=""
-                  //     />
-                  //   </InputAdornment>
-                  // ) : null,
                 }}
               />
             )}
