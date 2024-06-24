@@ -1,3 +1,7 @@
+// export const networks: Network[] = [
+
+// ];
+
 export const countries: CountryType[] = [
   { code: 'AD', label: 'Andorra', phone: '376' },
   {
