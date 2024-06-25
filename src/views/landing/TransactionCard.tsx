@@ -51,7 +51,7 @@ const TransactionCard = ({ values, handleChange, handleSelectChange, handleCheck
                 <InformationOutlineIcon className='extra-small-icon' color='success' />
               </Tooltip>
             </Stack>
-            <Chip label="Variable" color="primary" variant="filled" />
+            <Chip label="Variable" color="warning" variant="filled" sx={{backgroundColor: 'rgb(251,116,34)'}}/>
           </Stack>
         </CustomFormControl>
       </CustomCardContent>
