@@ -80,7 +80,7 @@ const SupplyCard = ({ values, handleChange, handleSelectChange, handleCheckedCha
             inputProps={{
               pattern: "\\d*",
             }}
-            disabled={values.token_type===TokenType.Basic}
+            disabled={values.supply_type==='Fixed'}
           />
           <FormHelperText className={'control-help'}>The maximum number of coins you can mint from the contract</FormHelperText>
         </CustomFormControl>
