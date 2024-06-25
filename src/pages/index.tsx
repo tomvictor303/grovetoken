@@ -78,13 +78,29 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
-    let opts: any = {};
-    if (values?.token_type < TokenType.Advance) {
-      opts['token_decimals'] = 18;
+    // Forceful setting values for low level token_types
+    if (values?.token_type === TokenType.Basic) {
+      let initial_supply = 1000000
+      setValues({ 
+        ...values, 
+        token_decimals: 18,
+        supply_type: 'Fixed',
+        initial_supply,
+        maximum_supply: initial_supply,
+      });
     }
-
-    if (Object.keys(opts).length > 0) {
-      setValues({ ...values, ...opts });
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+    if (values?.token_type === TokenType.Custom) {
+      let initial_supply = 1000000000
+      setValues({ 
+        ...values, 
+        token_decimals: 18,
+        supply_type: 'Fixed',
+        initial_supply,
+        maximum_supply: initial_supply,
+      }); 
     }
   }, [values?.token_type])
 
