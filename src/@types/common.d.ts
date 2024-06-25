@@ -22,6 +22,12 @@ declare global {
     explorer: string;
   }
 
+  type CommissionFee = {
+    basic: number;
+    custom: number;
+    advance: number;
+  }
+
   type Network = {
     name: string;
     short_name: string;
@@ -29,6 +35,7 @@ declare global {
     icon: string;
     mainnet: NetworkConnection;
     testnet?: NetworkConnection;
+    commission_fee?: CommissionFee;
   }
 }
 

@@ -12,6 +12,7 @@ import {
 import { Checkbox, Chip, FormHelperText, Link, MenuItem, Select, SelectChangeEvent, Stack, TextField, Tooltip, Typography } from '@mui/material';
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { TokenType } from 'src/utils/enums';
 
 interface MyCardProps {
   values: HomeState
@@ -22,6 +23,19 @@ interface MyCardProps {
 
 const TransactionCard = ({ values, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
+  // BEGIN commision_fee_issue
+  let commision_fee: number = 0.1;
+  if (values.network?.commission_fee) {
+    if (values.token_type === TokenType.Basic) {
+      commision_fee = values.network?.commission_fee.basic;
+    }
+    if (values.token_type === TokenType.Custom) {
+      commision_fee = values.network?.commission_fee.custom;
+    }
+    if (values.token_type === TokenType.Advance) {
+      commision_fee = values.network?.commission_fee.advance;
+    }
+  } // END commision_fee_issue
 
   return <>    
     <CustomCard>
@@ -39,7 +53,7 @@ const TransactionCard = ({ values, handleChange, handleSelectChange, handleCheck
                 <InformationOutlineIcon className='extra-small-icon' color='success' />
               </Tooltip>
             </Stack>
-            <Chip label="0.55 ETH" color="success" variant="filled" />
+            <Chip label={`${Number(commision_fee).toLocaleString('en')} ${values.network?.currency}`} color="success" variant="filled" />
           </Stack>
         </CustomFormControl>
 
