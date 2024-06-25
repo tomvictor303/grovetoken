@@ -128,6 +128,7 @@ const LandingPage = () => {
         supply_type: 'Fixed',
         initial_supply,
         maximum_supply: initial_supply,
+        access_type: 'Owner',
       });
     }
     /////////////////////////////////////////////
@@ -141,6 +142,7 @@ const LandingPage = () => {
         supply_type: 'Fixed',
         initial_supply,
         maximum_supply: initial_supply,
+        access_type: 'Owner',
       }); 
     }
   }, [values?.token_type])
