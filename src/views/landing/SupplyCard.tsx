@@ -68,7 +68,8 @@ const SupplyCard = ({ values, handleChange, handleSelectChange, handleCheckedCha
           <FormHelperText className={'control-help'}>The number of coins minted during the creation of the contract</FormHelperText>
         </CustomFormControl>
 
-        <CustomFormControl fullWidth>
+        <CustomFormControl fullWidth 
+            sx={{ display: values.supply_type==='Unlimited'?'none':undefined }}>
           <Typography className={'control-title'} variant='caption'>MAXIMUM SUPPLY*</Typography>
           <TextField 
             className={'control-element'}
