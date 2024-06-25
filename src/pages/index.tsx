@@ -104,6 +104,22 @@ const LandingPage = () => {
     }
   }, [values?.token_type])
 
+  useEffect(() => {
+    if ( values?.supply_type === 'Fixed' ) {
+      setValues({ ...values, maximum_supply: values?.initial_supply })
+    } else {      
+      if ( values?.initial_supply > values?.maximum_supply ) {
+        setValues({ ...values, maximum_supply: values?.initial_supply })
+      }
+    }
+  }, [values?.initial_supply])
+
+  useEffect(() => {
+    if ( values?.initial_supply > values?.maximum_supply ) {
+      setValues({ ...values, initial_supply: values?.maximum_supply })
+    }
+  }, [values?.maximum_supply])
+
   return (
     <Grid container spacing={block_spacing}>
       <Grid item xs={12}>
