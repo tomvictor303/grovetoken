@@ -26,7 +26,7 @@ declare global {
     taxCurrency: string,
     //////////////////////
     swap_router: string,
-    access_type: string,
+    access_type: "Owner" | "Roles",
   }
 }
 

@@ -10,8 +10,9 @@ import {
   PlusCircleOutline as PlusCircleOutlineIcon,
 } from 'mdi-material-ui'
 import { Checkbox, FormHelperText, Link, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import TermsOfServiceDialog from './TermsOfServiceDialog';
 
 interface MyCardProps {
   values: HomeState
@@ -22,6 +23,7 @@ interface MyCardProps {
 
 const AgreementCard = ({ values, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
+  const [open, setOpen] = useState<boolean>(false);
 
   return <>    
     <CustomCard>
@@ -35,12 +37,14 @@ const AgreementCard = ({ values, handleChange, handleSelectChange, handleChecked
           <Stack direction={'row'} alignItems={'flex-start'} spacing={1}>
             <Checkbox color="success" />
             <Typography>
-              I have read, understood and agreed to the <Link className='cursorPoint' style={{ display: 'inline', color: theme.palette.success.main, textDecoration: 'underline'}}>Terms of Use</Link>.
+              I have read, understood and agreed to the <Link onClick={()=>{setOpen(true);}} className='cursorPoint' style={{ display: 'inline', color: theme.palette.success.main, textDecoration: 'underline'}}>Terms of Use</Link>.
             </Typography>
           </Stack>
         </CustomFormControl>
       </CustomCardContent>
     </CustomCard>
+
+    <TermsOfServiceDialog open={open} onClose={()=>{setOpen(false);}}/>
   </>
 }
 

@@ -18,7 +18,7 @@ import {
   PlusCircleOutline as PlusCircleOutlineIcon,
 } from 'mdi-material-ui'
 import { BorderRadius } from 'mdi-material-ui';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import IOSSwitch from 'src/views/custom/IOSSwitch';
 import { CustomCard, CustomCardContent, CustomCardHeader, CustomFormControl } from 'src/views/custom/CustomCard';
 import InformationsCard from 'src/views/landing/InformationsCard';
@@ -28,6 +28,7 @@ import AgreementCard from 'src/views/landing/AgreementCard';
 import TransactionCard from 'src/views/landing/TransactionCard';
 import NetworkCard from 'src/views/landing/NetworkCard';
 import { getNetworkObject } from 'src/utils/networks';
+import { TokenType } from 'src/utils/enums';
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -64,6 +65,14 @@ const LandingPage = () => {
   })
 
   const handleChange = (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => {
+    if (prop === 'initial_supply') {
+      handleInitialSupplyChange(event.target.value);
+      return;
+    }
+    if (prop === 'maximum_supply') {
+      handleMaximumSupplyChange(event.target.value);
+      return;
+    }
     setValues({ ...values, [prop]: event.target.value })
   }
   const handleSelectChange = (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => {
@@ -75,6 +84,68 @@ const LandingPage = () => {
   const handleAutoCompleteChange = (prop: keyof HomeState) => (event: any, newValue: any) => {
     setValues({ ...values, [prop]: newValue })
   };
+
+  // special change handlers
+  const handleInitialSupplyChange = (newValue: string) => {
+    const isValidIntegerString = /^\d*$/; // Allow numeric, empty string.
+    if (!isValidIntegerString.test(newValue)) {
+      return;
+    }
+    const new_initial_supply: number = parseInt(newValue, 10);
+    /////////////////
+    if ( values?.supply_type === 'Fixed' || values?.supply_type === 'Unlimited' ) {
+      setValues({ ...values, initial_supply: new_initial_supply, maximum_supply: new_initial_supply })
+    } else {
+      if ( new_initial_supply > values?.maximum_supply ) {
+        setValues({ ...values, initial_supply: new_initial_supply, maximum_supply: new_initial_supply })
+      } else {
+        setValues({ ...values, initial_supply: new_initial_supply })
+      }
+    }
+  }
+
+  const handleMaximumSupplyChange = (newValue: string) => {
+    const isValidIntegerString = /^\d*$/; // Allow numeric, empty string.
+    if (!isValidIntegerString.test(newValue)) {
+      return;
+    }
+    const new_maximum_supply: number = parseInt(newValue, 10);
+    /////////////////    
+    if ( new_maximum_supply < values?.initial_supply ) {
+      setValues({ ...values, initial_supply: new_maximum_supply, maximum_supply: new_maximum_supply })
+    } else {
+      setValues({ ...values, maximum_supply: new_maximum_supply })
+    }
+  }
+
+  useEffect(() => {
+    // Forceful setting values for low level token_types
+    if (values?.token_type === TokenType.Basic) {
+      let initial_supply = 1000000
+      setValues({ 
+        ...values, 
+        token_decimals: 18,
+        supply_type: 'Fixed',
+        initial_supply,
+        maximum_supply: initial_supply,
+        access_type: 'Owner',
+      });
+    }
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+    if (values?.token_type === TokenType.Custom) {
+      let initial_supply = 1000000000
+      setValues({ 
+        ...values, 
+        token_decimals: 18,
+        supply_type: 'Fixed',
+        initial_supply,
+        maximum_supply: initial_supply,
+        access_type: 'Owner',
+      }); 
+    }
+  }, [values?.token_type])
 
   return (
     <Grid container spacing={block_spacing}>

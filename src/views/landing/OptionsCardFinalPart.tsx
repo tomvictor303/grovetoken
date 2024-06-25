@@ -13,6 +13,7 @@ import { Box, Button, FormHelperText, Grid, InputAdornment, MenuItem, OutlinedIn
 import { ChangeEvent } from 'react';
 import IOSSwitch from '../custom/IOSSwitch';
 import { styled, useTheme } from '@mui/material/styles';
+import { TokenType } from 'src/utils/enums';
 
 interface MyCardProps {
   values: HomeState
@@ -49,7 +50,8 @@ const OptionsCardFinalPart = ({ values, handleChange, handleSelectChange, handle
           className={'control-element'}
           value={values.access_type}
           onChange={handleSelectChange('access_type')}
-          displayEmpty           
+          displayEmpty 
+          disabled={values?.token_type!==TokenType.Advance}           
         >
           {/* <MenuItem value="">
             <em>None</em>

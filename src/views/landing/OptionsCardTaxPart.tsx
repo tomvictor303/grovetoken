@@ -26,6 +26,11 @@ const OptionsCardTaxPart = ({ values, handleChange, handleSelectChange, handleCh
 
   return <>
     <Box>
+
+      <CustomFormControl fullWidth>
+        <Typography variant='caption' align='center' color={theme.palette.customColors.semiwhite}>Breakdown of Taxes</Typography>
+      </CustomFormControl>
+      
       <Grid container spacing={4}>
         <Grid item xs={6}>
           <CustomFormControl fullWidth>
@@ -78,10 +83,6 @@ const OptionsCardTaxPart = ({ values, handleChange, handleSelectChange, handleCh
           </CustomFormControl>
         </Grid>
       </Grid>
-
-      <CustomFormControl fullWidth>
-        <Typography variant='caption' align='center' color={theme.palette.customColors.semiwhite}>Breakdown of Taxes</Typography>
-      </CustomFormControl>
 
       {/** BEGIN TEAM_ADDRESS_block_in_Options_card_tax_part*/}       
       <Box marginBottom={4}>

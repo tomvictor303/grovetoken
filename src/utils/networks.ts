@@ -13,7 +13,12 @@ const networks: Network[] = [
       chainId: 770077,
       rpc: 'https://testnet.grovechain.io/',
       explorer: 'https://testnet.grvscan.io/'
-    }
+    },
+    commission_fee: {
+      basic: 10000,
+      custom: 35000,
+      advance: 150000
+    },
   },
   {
     name: 'Ethereum',

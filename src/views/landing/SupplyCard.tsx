@@ -12,6 +12,7 @@ import {
 import { FormHelperText, MenuItem, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { TokenType } from 'src/utils/enums';
 
 interface MyCardProps {
   values: HomeState
@@ -37,14 +38,15 @@ const SupplyCard = ({ values, handleChange, handleSelectChange, handleCheckedCha
             className={'control-element'}
             value={values.supply_type}
             onChange={handleSelectChange('supply_type')}
-            displayEmpty           
+            displayEmpty
+            disabled={values.token_type===TokenType.Basic}           
           >
             {/* <MenuItem value="">
               <em>None</em>
             </MenuItem> */}
             <MenuItem value={'Fixed'}>Fixed</MenuItem>
             <MenuItem value={'Capped'}>Capped</MenuItem>
-            <MenuItem value={'Unlimited'}>Unlimited</MenuItem>
+            <MenuItem value={'Unlimited'} disabled={values.token_type < TokenType.Advance}>Unlimited</MenuItem>
           </Select>
           <FormHelperText className={'control-help'}>Fixed / Capped / Unlimited</FormHelperText>
         </CustomFormControl>
@@ -61,11 +63,13 @@ const SupplyCard = ({ values, handleChange, handleSelectChange, handleCheckedCha
               min: 0,
               pattern: "\\d*",
             }}
+            disabled={values.token_type===TokenType.Basic}
           />
           <FormHelperText className={'control-help'}>The number of coins minted during the creation of the contract</FormHelperText>
         </CustomFormControl>
 
-        <CustomFormControl fullWidth>
+        <CustomFormControl fullWidth 
+            sx={{ display: values.supply_type==='Unlimited'?'none':undefined }}>
           <Typography className={'control-title'} variant='caption'>MAXIMUM SUPPLY*</Typography>
           <TextField 
             className={'control-element'}
@@ -76,6 +80,7 @@ const SupplyCard = ({ values, handleChange, handleSelectChange, handleCheckedCha
             inputProps={{
               pattern: "\\d*",
             }}
+            disabled={values.supply_type==='Fixed'}
           />
           <FormHelperText className={'control-help'}>The maximum number of coins you can mint from the contract</FormHelperText>
         </CustomFormControl>

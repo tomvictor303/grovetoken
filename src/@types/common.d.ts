@@ -16,16 +16,16 @@ declare global {
     suggested?: boolean;
   }
 
-  enum TokenType {
-    Basic = 0,
-    Custom = 1,
-    Advance = 2,
-  }
-
   type NetworkConnection = {
     chainId: number;
     rpc: string;
     explorer: string;
+  }
+
+  type CommissionFee = {
+    basic: number;
+    custom: number;
+    advance: number;
   }
 
   type Network = {
@@ -35,6 +35,7 @@ declare global {
     icon: string;
     mainnet: NetworkConnection;
     testnet?: NetworkConnection;
+    commission_fee?: CommissionFee;
   }
 }
 
