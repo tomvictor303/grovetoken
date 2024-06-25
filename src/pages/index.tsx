@@ -65,6 +65,14 @@ const LandingPage = () => {
   })
 
   const handleChange = (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => {
+    if (prop === 'initial_supply') {
+      handleInitialSupplyChange(event.target.value);
+      return;
+    }
+    if (prop === 'maximum_supply') {
+      handleMaximumSupplyChange(event.target.value);
+      return;
+    }
     setValues({ ...values, [prop]: event.target.value })
   }
   const handleSelectChange = (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => {
@@ -76,6 +84,39 @@ const LandingPage = () => {
   const handleAutoCompleteChange = (prop: keyof HomeState) => (event: any, newValue: any) => {
     setValues({ ...values, [prop]: newValue })
   };
+
+  // special change handlers
+  const handleInitialSupplyChange = (newValue: string) => {
+    const isValidIntegerString = /^\d*$/; // Allow numeric, empty string.
+    if (!isValidIntegerString.test(newValue)) {
+      return;
+    }
+    const new_initial_supply: number = parseInt(newValue, 10);
+    /////////////////
+    if ( values?.supply_type === 'Fixed' || values?.supply_type === 'Unlimited' ) {
+      setValues({ ...values, initial_supply: new_initial_supply, maximum_supply: new_initial_supply })
+    } else {
+      if ( new_initial_supply > values?.maximum_supply ) {
+        setValues({ ...values, initial_supply: new_initial_supply, maximum_supply: new_initial_supply })
+      } else {
+        setValues({ ...values, initial_supply: new_initial_supply })
+      }
+    }
+  }
+
+  const handleMaximumSupplyChange = (newValue: string) => {
+    const isValidIntegerString = /^\d*$/; // Allow numeric, empty string.
+    if (!isValidIntegerString.test(newValue)) {
+      return;
+    }
+    const new_maximum_supply: number = parseInt(newValue, 10);
+    /////////////////    
+    if ( new_maximum_supply < values?.initial_supply ) {
+      setValues({ ...values, initial_supply: new_maximum_supply, maximum_supply: new_maximum_supply })
+    } else {
+      setValues({ ...values, maximum_supply: new_maximum_supply })
+    }
+  }
 
   useEffect(() => {
     // Forceful setting values for low level token_types
@@ -103,22 +144,6 @@ const LandingPage = () => {
       }); 
     }
   }, [values?.token_type])
-
-  useEffect(() => {
-    if ( values?.supply_type === 'Fixed' ) {
-      setValues({ ...values, maximum_supply: values?.initial_supply })
-    } else {      
-      if ( values?.initial_supply > values?.maximum_supply ) {
-        setValues({ ...values, maximum_supply: values?.initial_supply })
-      }
-    }
-  }, [values?.initial_supply])
-
-  useEffect(() => {
-    if ( values?.initial_supply > values?.maximum_supply ) {
-      setValues({ ...values, initial_supply: values?.maximum_supply })
-    }
-  }, [values?.maximum_supply])
 
   return (
     <Grid container spacing={block_spacing}>
