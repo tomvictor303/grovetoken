@@ -46,7 +46,7 @@ const SupplyCard = ({ values, handleChange, handleSelectChange, handleCheckedCha
             </MenuItem> */}
             <MenuItem value={'Fixed'}>Fixed</MenuItem>
             <MenuItem value={'Capped'}>Capped</MenuItem>
-            <MenuItem value={'Unlimited'}>Unlimited</MenuItem>
+            <MenuItem value={'Unlimited'} disabled={values.token_type < TokenType.Advance}>Unlimited</MenuItem>
           </Select>
           <FormHelperText className={'control-help'}>Fixed / Capped / Unlimited</FormHelperText>
         </CustomFormControl>
