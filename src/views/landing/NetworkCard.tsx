@@ -13,16 +13,19 @@ import { Autocomplete, Box, Checkbox, FormHelperText, InputAdornment, Link, Menu
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import networks from 'src/utils/networks';
+import { Control, FieldErrors } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState
+  values: HomeState;
+  control: Control<HomeState, any>;
+  errors: FieldErrors<HomeState>;
   handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
   handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
   handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
   handleAutoCompleteChange: (prop: keyof HomeState) => (event: any, newValue: any) => void
 }
 
-const NetworkCard = ({ values, handleChange, handleSelectChange, handleCheckedChange, handleAutoCompleteChange}: MyCardProps) => {
+const NetworkCard = ({ values, control, errors, handleChange, handleSelectChange, handleCheckedChange, handleAutoCompleteChange}: MyCardProps) => {
   const theme = useTheme();
 
   return <>    

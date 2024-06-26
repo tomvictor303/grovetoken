@@ -13,15 +13,18 @@ import { Checkbox, Chip, FormHelperText, Link, MenuItem, Select, SelectChangeEve
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { TokenType } from 'src/utils/enums';
+import { Control, FieldErrors } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState
+  values: HomeState;
+  control: Control<HomeState, any>;
+  errors: FieldErrors<HomeState>;
   handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
   handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
   handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const TransactionCard = ({ values, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
+const TransactionCard = ({ values, control, errors, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
   // BEGIN commision_fee_issue
   let commision_fee: number = 0.1;

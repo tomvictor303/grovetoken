@@ -2,6 +2,7 @@
 import Grid from "@mui/material/Grid";
 
 import { styled, useTheme } from "@mui/material/styles";
+import { useForm, Controller } from 'react-hook-form';
 
 // ** LandingPage Components Imports
 
@@ -60,6 +61,43 @@ import { TokenType } from "src/utils/enums";
 const LandingPage = () => {
   const theme = useTheme();
   const block_spacing = 6;
+  // react-hook-form
+  const { control, handleSubmit, formState: { errors } } = useForm<HomeState>({
+    defaultValues: {
+      network: getNetworkObject("GRV"),
+      token_type: 0,
+      token_name: "",
+      token_symbol: "",
+      token_decimals: 18,
+      //////////////////////
+      supply_type: "Fixed",
+      initial_supply: 0,
+      maximum_supply: 10000000,
+      //////////////////////
+      isConformedERC20: false,
+      isVerifiedOnEtherscan: false,
+      isNoCopyrightLink: false,
+      isMintable: false,
+      isBurnable: false,
+      isPausable: false,
+      isRecoverable: false,
+      isAntiWhale: false, 
+      isTax: false,
+      //////////////////////
+      buyPercent: 0,
+      sellPercent: 0,
+      transferPercent: 0,
+      //////////////////////
+      burnPercent: 0,
+      teamPercent: 0,
+      taxCurrency: "token",
+      //////////////////////
+      teamAddressList: [],
+      //////////////////////
+      swap_router: 'uniswap_router_v2',
+      access_type: 'Owner',
+    }
+  });
 
   // ** States
   const [values, setValues] = useState<HomeState>({
@@ -116,42 +154,8 @@ const LandingPage = () => {
   };
   const handleAutoCompleteChange = (prop: keyof HomeState) => (event: any, newValue: any) => {
     setValues({ ...values, [prop]: newValue })
-  };
-
-  // special change handlers
-  const handleInitialSupplyChange = (newValue: string) => {
-    const isValidIntegerString = /^\d*$/; // Allow numeric, empty string.
-    if (!isValidIntegerString.test(newValue)) {
-      return;
-    }
-    const new_initial_supply: number = parseInt(newValue, 10);
-    /////////////////
-    if ( values?.supply_type === 'Fixed' || values?.supply_type === 'Unlimited' ) {
-      setValues({ ...values, initial_supply: new_initial_supply, maximum_supply: new_initial_supply })
-    } else {
-      if ( new_initial_supply > values?.maximum_supply ) {
-        setValues({ ...values, initial_supply: new_initial_supply, maximum_supply: new_initial_supply })
-      } else {
-        setValues({ ...values, initial_supply: new_initial_supply })
-      }
-    }
-  }
-
-  const handleMaximumSupplyChange = (newValue: string) => {
-    const isValidIntegerString = /^\d*$/; // Allow numeric, empty string.
-    if (!isValidIntegerString.test(newValue)) {
-      return;
-    }
-    const new_maximum_supply: number = parseInt(newValue, 10);
-    /////////////////    
-    if ( new_maximum_supply < values?.initial_supply ) {
-      setValues({ ...values, initial_supply: new_maximum_supply, maximum_supply: new_maximum_supply })
-    } else {
-      setValues({ ...values, maximum_supply: new_maximum_supply })
-    }
-  }
-
-  /////////////////////////////////////
+  };  
+  
   // BEGIN tax_related_handlers
   const handleTAChange =
     (prop: keyof TeamAddress, index: number) =>
@@ -187,6 +191,45 @@ const LandingPage = () => {
   };
   // END tax_related_handlers
   /////////////////////////////////////
+
+  /////////////////////////////////////
+  /////////////////////////////////////
+  /////////////////////////////////////
+  /////////////////////////////////////
+  /////////////////////////////////////
+  /////////////////////////////////////
+  // special change handlers
+  const handleInitialSupplyChange = (newValue: string) => {
+    const isValidIntegerString = /^\d*$/; // Allow numeric, empty string.
+    if (!isValidIntegerString.test(newValue)) {
+      return;
+    }
+    const new_initial_supply: number = parseInt(newValue, 10);
+    /////////////////
+    if ( values?.supply_type === 'Fixed' || values?.supply_type === 'Unlimited' ) {
+      setValues({ ...values, initial_supply: new_initial_supply, maximum_supply: new_initial_supply })
+    } else {
+      if ( new_initial_supply > values?.maximum_supply ) {
+        setValues({ ...values, initial_supply: new_initial_supply, maximum_supply: new_initial_supply })
+      } else {
+        setValues({ ...values, initial_supply: new_initial_supply })
+      }
+    }
+  }
+
+  const handleMaximumSupplyChange = (newValue: string) => {
+    const isValidIntegerString = /^\d*$/; // Allow numeric, empty string.
+    if (!isValidIntegerString.test(newValue)) {
+      return;
+    }
+    const new_maximum_supply: number = parseInt(newValue, 10);
+    /////////////////    
+    if ( new_maximum_supply < values?.initial_supply ) {
+      setValues({ ...values, initial_supply: new_maximum_supply, maximum_supply: new_maximum_supply })
+    } else {
+      setValues({ ...values, maximum_supply: new_maximum_supply })
+    }
+  }
 
   useEffect(() => {
     // Forceful setting values for low level token_types
@@ -240,118 +283,137 @@ const LandingPage = () => {
       });
     }
   }, [values?.token_type]);
+  // end special change handlers
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
 
   return (
-    <Grid container spacing={block_spacing}>
-      <Grid item xs={12}>
-        <Box textAlign={"center"} py={15}>
-          <Typography
-            variant="h2"
-            mb={4}
-            style={{ color: theme.palette.customColors.semiwhite }}
-          >
-            Create your Token on{" "}
-            <span style={{ color: theme.palette.success.main }}>
-              {values?.network?.name ?? ""}
-            </span>
-          </Typography>
-          <Typography variant="h5">
-            Create and deploy your smart contract in minutes!
-          </Typography>
-          <Typography variant="h5">
-            No coding or login required | verified on chain instantly | advance
-            features and options
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid item xs={12} md={4}>
-        <Stack spacing={block_spacing}>
-          {/** BEGIN Network_card */}
-          <NetworkCard
-            values={values}
-            handleAutoCompleteChange={handleAutoCompleteChange}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleCheckedChange={handleCheckedChange}
-          />
-          {/** END Network_card */}
-          {/** BEGIN Informations_card */}
-          <InformationsCard
-            values={values}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleCheckedChange={handleCheckedChange}
-          />
-          {/** END Informations_card */}
-
-          {/** BEGIN Supply_card */}
-          <SupplyCard
-            values={values}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleCheckedChange={handleCheckedChange}
-          />
-          {/** END Supply_card */}
-        </Stack>
-      </Grid>
-
-      <Grid item xs={12} md={4}>
-        <Stack spacing={block_spacing}>
-          {/** BEGIN Options_card */}
-          <OptionsCard
-            values={values}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleCheckedChange={handleCheckedChange}
-            handleTAChange={handleTAChange}
-            addNewTeamAddress={addNewTeamAddress}
-            removeTeamAddress={removeTeamAddress}
-          />
-          {/** END Options_card */}
-        </Stack>
-      </Grid>
-
-      <Grid item xs={12} md={4}>
-        <Stack spacing={block_spacing}>
-          {/** BEGIN Network_card */}
-          {/* <CustomCard>
-            <CustomCardContent>
-              <CustomCardHeader>
-                <LanIcon className={'cardheader-icon'} />
-                <Typography className={'cardheader-title'} variant='h4'>Network</Typography>
-              </CustomCardHeader>
-            </CustomCardContent>
-          </CustomCard> */}
-          {/** END Network_card */}
-
-          {/** BEGIN Agreement_card */}
-          <AgreementCard
-            values={values}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleCheckedChange={handleCheckedChange}
-          />
-          {/** END Agreement_card */}
-
-          {/** BEGIN Transaction_card */}
-          <TransactionCard
-            values={values}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleCheckedChange={handleCheckedChange}
-          />
-          {/** END Transaction_card */}
-
-          {/** BEGIN confirm_button */}
-          <Box>
-            <Button variant="contained" fullWidth color="success">
-              Confirm
-            </Button>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Grid container spacing={block_spacing}>
+        <Grid item xs={12}>
+          <Box textAlign={"center"} py={15}>
+            <Typography
+              variant="h2"
+              mb={4}
+              style={{ color: theme.palette.customColors.semiwhite }}
+            >
+              Create your Token on{" "}
+              <span style={{ color: theme.palette.success.main }}>
+                {values?.network?.name ?? ""}
+              </span>
+            </Typography>
+            <Typography variant="h5">
+              Create and deploy your smart contract in minutes!
+            </Typography>
+            <Typography variant="h5">
+              No coding or login required | verified on chain instantly | advance
+              features and options
+            </Typography>
           </Box>
-          {/** END confirm_button */}
-        </Stack>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Stack spacing={block_spacing}>
+            {/** BEGIN Network_card */}
+            <NetworkCard
+              values={values}
+              control={control}
+              errors={errors}
+              handleAutoCompleteChange={handleAutoCompleteChange}
+              handleChange={handleChange}
+              handleSelectChange={handleSelectChange}
+              handleCheckedChange={handleCheckedChange}
+            />
+            {/** END Network_card */}
+            {/** BEGIN Informations_card */}
+            <InformationsCard
+              values={values}
+              control={control} 
+              errors={errors}
+              handleChange={handleChange}
+              handleSelectChange={handleSelectChange}
+              handleCheckedChange={handleCheckedChange}
+            />
+            {/** END Informations_card */}
+
+            {/** BEGIN Supply_card */}
+            <SupplyCard
+              values={values}
+              control={control}
+              errors={errors}
+              handleChange={handleChange}
+              handleSelectChange={handleSelectChange}
+              handleCheckedChange={handleCheckedChange}
+            />
+            {/** END Supply_card */}
+          </Stack>
+        </Grid>
+
+        <Grid item xs={12} md={4}>
+          <Stack spacing={block_spacing}>
+            {/** BEGIN Options_card */}
+            <OptionsCard
+              values={values}
+              control={control}
+              errors={errors}
+              handleChange={handleChange}
+              handleSelectChange={handleSelectChange}
+              handleCheckedChange={handleCheckedChange}
+              handleTAChange={handleTAChange}
+              addNewTeamAddress={addNewTeamAddress}
+              removeTeamAddress={removeTeamAddress}
+            />
+            {/** END Options_card */}
+          </Stack>
+        </Grid>
+
+        <Grid item xs={12} md={4}>
+          <Stack spacing={block_spacing}>
+            {/** BEGIN Network_card */}
+            {/* <CustomCard>
+              <CustomCardContent>
+                <CustomCardHeader>
+                  <LanIcon className={'cardheader-icon'} />
+                  <Typography className={'cardheader-title'} variant='h4'>Network</Typography>
+                </CustomCardHeader>
+              </CustomCardContent>
+            </CustomCard> */}
+            {/** END Network_card */}
+
+            {/** BEGIN Agreement_card */}
+            <AgreementCard
+              values={values}
+              control={control}
+              errors={errors}
+              handleChange={handleChange}
+              handleSelectChange={handleSelectChange}
+              handleCheckedChange={handleCheckedChange}
+            />
+            {/** END Agreement_card */}
+
+            {/** BEGIN Transaction_card */}
+            <TransactionCard
+              values={values}
+              control={control}
+              errors={errors}
+              handleChange={handleChange}
+              handleSelectChange={handleSelectChange}
+              handleCheckedChange={handleCheckedChange}
+            />
+            {/** END Transaction_card */}
+
+            {/** BEGIN confirm_button */}
+            <Box>
+              <Button type="submit" variant="contained" fullWidth color="success">
+                Confirm
+              </Button>
+            </Box>
+            {/** END confirm_button */}
+          </Stack>
+        </Grid>
       </Grid>
-    </Grid>
+    </form>
   );
 };
 

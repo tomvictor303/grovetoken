@@ -33,9 +33,12 @@ import { ChangeEvent } from "react";
 import IOSSwitch from "../custom/IOSSwitch";
 import { styled, useTheme } from "@mui/material/styles";
 import { TokenType } from "src/utils/enums";
+import { Control, FieldErrors } from "react-hook-form";
 
 interface MyCardProps {
   values: HomeState;
+  control: Control<HomeState, any>;
+  errors: FieldErrors<HomeState>;
   handleChange: (
     prop: keyof HomeState
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
@@ -48,7 +51,9 @@ interface MyCardProps {
 }
 
 const OptionsCardSwitchPart = ({
-  values,
+  values, 
+  control, 
+  errors, 
   handleChange,
   handleSelectChange,
   handleCheckedChange

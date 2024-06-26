@@ -13,15 +13,18 @@ import { FormHelperText, MenuItem, Select, SelectChangeEvent, TextField, Typogra
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { TokenType } from 'src/utils/enums';
+import { Control, FieldErrors } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState
+  values: HomeState;
+  control: Control<HomeState, any>;
+  errors: FieldErrors<HomeState>;
   handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
   handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
   handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const SupplyCard = ({ values, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
+const SupplyCard = ({ values, control, errors, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
 
   return <>

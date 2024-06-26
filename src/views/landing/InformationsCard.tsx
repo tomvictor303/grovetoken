@@ -13,15 +13,18 @@ import { FormHelperText, MenuItem, Select, SelectChangeEvent, TextField, Typogra
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { TokenType } from 'src/utils/enums';
+import { Control, Controller, FieldErrors, FieldValues } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState
+  values: HomeState,
+  control: Control<HomeState, any>,
+  errors: FieldErrors<HomeState>,
   handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
   handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
   handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const InformationsCard = ({ values, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
+const InformationsCard = ({ values, control, errors, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
 
   return <>
@@ -32,49 +35,73 @@ const InformationsCard = ({ values, handleChange, handleSelectChange, handleChec
           <Typography className={'cardheader-title'} variant='h4'>Informations</Typography>
         </CustomCardHeader>
 
-        <CustomFormControl fullWidth>
-          <Typography className={'control-title'} variant='caption'>TOKEN TYPE*</Typography>
-          <Select 
-            className={'control-element'}
-            value={values.token_type}
-            onChange={handleSelectChange('token_type')}
-            displayEmpty           
-          >
-            {/* <MenuItem value="">
-              <em>None</em>
-            </MenuItem> */}
-            <MenuItem value={0}>Basic</MenuItem>
-            <MenuItem value={1}>Custom</MenuItem>
-            <MenuItem value={2}>Advance</MenuItem>
-          </Select>
-          <FormHelperText className={'control-help'}>
-            {values.token_type === TokenType.Basic && ("Basic Type configuration has limited options.")}
-            {values.token_type === TokenType.Custom && ("Custom Type configuration has selective options.")}
-            {values.token_type === TokenType.Advance && ("Advance Type configuration with industry best features.")}
-          </FormHelperText>
-        </CustomFormControl>
+        <Controller
+          name="token_type"
+          control={control}
+          rules={{ required: 'Token Type is required' }}
+          render={({ field, fieldState: { error } }) => (
+            <CustomFormControl fullWidth>
+              <Typography className={'control-title'} variant='caption'>TOKEN TYPE*</Typography>
+              <Select
+                {...field} 
+                className={'control-element'}
+                displayEmpty           
+              >
+                {/* <MenuItem value="">
+                  <em>None</em>
+                </MenuItem> */}
+                <MenuItem value={0}>Basic</MenuItem>
+                <MenuItem value={1}>Custom</MenuItem>
+                <MenuItem value={2}>Advance</MenuItem>
+              </Select>
+              <FormHelperText className={'control-help'}>
+                {field.value === TokenType.Basic && ("Basic Type configuration has limited options.")}
+                {field.value === TokenType.Custom && ("Custom Type configuration has selective options.")}
+                {field.value === TokenType.Advance && ("Advance Type configuration with industry best features.")}
+              </FormHelperText>
+            </CustomFormControl>
+          )}
+        />
+        
+        <Controller
+          name="token_name"
+          control={control}
+          defaultValue=""
+          rules={{ required: 'Token Name is required' }}
+          render={({ field }) => (
+            <CustomFormControl fullWidth>
+              <Typography className={'control-title'} variant='caption'>TOKEN NAME*</Typography>
+              <TextField
+                {...field}
+                error={!!errors.token_name}
+                className={'control-element'}
+                placeholder="My new token name"           
+              />
+              <FormHelperText className={'control-help'}>The name of your token</FormHelperText>
+              {errors.token_name && (<Typography variant={'caption'} color={'error'}>{errors.token_name.message}</Typography>)}
+            </CustomFormControl>
+          )}
+        />
 
-        <CustomFormControl fullWidth>
-          <Typography className={'control-title'} variant='caption'>TOKEN NAME*</Typography>
-          <TextField 
-            className={'control-element'}
-            value={values.token_name}
-            onChange={handleChange('token_name')}
-            placeholder="My new token name"           
-          />
-          <FormHelperText className={'control-help'}>The name of your token</FormHelperText>
-        </CustomFormControl>
-
-        <CustomFormControl fullWidth>
-          <Typography className={'control-title'} variant='caption'>TOKEN SYMBOL*</Typography>
-          <TextField 
-            className={'control-element'}
-            value={values.token_symbol}
-            onChange={handleChange('token_symbol')}
-            placeholder="TKN"           
-          />
-          <FormHelperText className={'control-help'}>Your token's symbol (e.g ETH)</FormHelperText>
-        </CustomFormControl>            
+        <Controller
+          name="token_symbol"
+          control={control}
+          defaultValue=""
+          rules={{ required: 'Token Symbol is required' }}
+          render={({ field }) => (            
+            <CustomFormControl fullWidth>
+              <Typography className={'control-title'} variant='caption'>TOKEN SYMBOL*</Typography>
+              <TextField
+                {...field}
+                error={!!errors.token_symbol}
+                className={'control-element'}
+                placeholder="TKN"           
+              />
+              <FormHelperText className={'control-help'}>Your token's symbol (e.g ETH)</FormHelperText>
+              {errors.token_symbol && (<Typography variant={'caption'} color={'error'}>{errors.token_symbol.message}</Typography>)}
+            </CustomFormControl>
+          )}
+        />            
 
         <CustomFormControl fullWidth>
           <Typography className={'control-title'} variant='caption'>DECIMALS*</Typography>

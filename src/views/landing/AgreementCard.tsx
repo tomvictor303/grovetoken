@@ -13,15 +13,18 @@ import { Checkbox, FormHelperText, Link, MenuItem, Select, SelectChangeEvent, St
 import { ChangeEvent, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import TermsOfServiceDialog from './TermsOfServiceDialog';
+import { Control, FieldErrors } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState
+  values: HomeState;
+  control: Control<HomeState, any>;
+  errors: FieldErrors<HomeState>;
   handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
   handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
   handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const AgreementCard = ({ values, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
+const AgreementCard = ({ values, control, errors, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
   const [open, setOpen] = useState<boolean>(false);
 
