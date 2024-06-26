@@ -289,7 +289,7 @@ const LandingPage = () => {
     console.log(data);
   };
 
-  const selected_network: Network | null = watch('network');
+  const [ network ] = watch(['network']);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -303,7 +303,7 @@ const LandingPage = () => {
             >
               Create your Token on{" "}
               <span style={{ color: theme.palette.success.main }}>
-                {selected_network?.name ?? "?"}
+                {network?.name ?? "?"}
               </span>
             </Typography>
             <Typography variant="h5">
@@ -319,25 +319,16 @@ const LandingPage = () => {
           <Stack spacing={block_spacing}>
             {/** BEGIN Network_card */}
             <NetworkCard
-              values={values}
               control={control}
               errors={errors}
               watch={watch}
-              handleAutoCompleteChange={handleAutoCompleteChange}
-              handleChange={handleChange}
-              handleSelectChange={handleSelectChange}
-              handleCheckedChange={handleCheckedChange}
             />
             {/** END Network_card */}
             {/** BEGIN Informations_card */}
             <InformationsCard
-              values={values}
               control={control} 
               errors={errors}
               watch={watch}
-              handleChange={handleChange}
-              handleSelectChange={handleSelectChange}
-              handleCheckedChange={handleCheckedChange}
             />
             {/** END Informations_card */}
 

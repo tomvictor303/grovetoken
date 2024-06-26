@@ -16,15 +16,14 @@ import { TokenType } from 'src/utils/enums';
 import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState,
   control: Control<HomeState, any>,
   errors: FieldErrors<HomeState>,
   watch: UseFormWatch<HomeState>,
 }
 
-const InformationsCard = ({ values, control, errors,  watch }: MyCardProps) => {
+const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
   const theme = useTheme();
-  const form_token_type: number = watch('token_type');
+  const [ token_type ] = watch(['token_type']);
 
   return <>
     <CustomCard>
@@ -116,7 +115,7 @@ const InformationsCard = ({ values, control, errors,  watch }: MyCardProps) => {
                 error={!!errors.token_decimals}
                 placeholder=""
                 type="number"
-                disabled={form_token_type < TokenType.Advance}
+                disabled={token_type < TokenType.Advance}
                 inputProps={{
                   min: 1,
                   max: 18,

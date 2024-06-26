@@ -16,13 +16,12 @@ import networks from 'src/utils/networks';
 import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState;
   control: Control<HomeState, any>;
   errors: FieldErrors<HomeState>;
   watch: UseFormWatch<HomeState>;
 }
 
-const NetworkCard = ({ values, control, errors,  watch }: MyCardProps) => {
+const NetworkCard = ({ control, errors,  watch }: MyCardProps) => {
   const theme = useTheme();
 
   return <>    
