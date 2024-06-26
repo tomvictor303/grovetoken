@@ -66,26 +66,31 @@ const OptionsCardSwitchPart = ({
   return (
     <>
       <Box>
-        <CustomFormControl fullWidth>
-          <Stack
-            className={"control-element"}
-            direction={"row"}
-            alignItems={"center"}
-            spacing={3}
-          >
-            <IOSSwitch
-              checked={values.isConformedERC20}
-              onChange={handleCheckedChange("isConformedERC20")}
-            />
-            <Typography className={"control-switch-title"}>
-              Conforms to ERC20 protocol
-            </Typography>
-          </Stack>
-          <FormHelperText className={"control-help"}>
-            Your token will const all the functionalities, and conforms to ERC20
-            protocol
-          </FormHelperText>
-        </CustomFormControl>
+        <Controller
+          name="isConformedERC20"
+          control={control}
+          render={({ field, fieldState: { error } }) => (
+            <CustomFormControl fullWidth>
+              <Stack
+                className={"control-element"}
+                direction={"row"}
+                alignItems={"center"}
+                spacing={3}
+              >
+                <IOSSwitch
+                  {...field}
+                />
+                <Typography className={"control-switch-title"}>
+                  Conforms to ERC20 protocol
+                </Typography>
+              </Stack>
+              <FormHelperText className={"control-help"}>
+                Your token will const all the functionalities, and conforms to ERC20
+                protocol
+              </FormHelperText>
+            </CustomFormControl>
+          )}
+        />
 
         <CustomFormControl fullWidth>
           <Stack

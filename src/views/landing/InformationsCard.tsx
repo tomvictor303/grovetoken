@@ -64,7 +64,6 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
         <Controller
           name="token_name"
           control={control}
-          defaultValue=""
           rules={{ required: 'Token Name is required' }}
           render={({ field, fieldState: { error } }) => (
             <CustomFormControl fullWidth>
@@ -84,7 +83,6 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
         <Controller
           name="token_symbol"
           control={control}
-          defaultValue=""
           rules={{ required: 'Token Symbol is required' }}
           render={({ field, fieldState: { error } }) => (            
             <CustomFormControl fullWidth>
@@ -104,7 +102,6 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
         <Controller
           name="token_decimals"
           control={control}
-          defaultValue={18}
           rules={{ required: 'Token decimal is required' }}
           render={({ field, fieldState: { error } }) => (            
             <CustomFormControl fullWidth>
