@@ -30,15 +30,15 @@ const TransactionCard = ({ values, control, errors, watch, handleChange, handleS
   const [ network, token_type, supply_type, isTax ] = watch(['network', 'token_type', 'supply_type', 'isTax']);
   // BEGIN commision_fee_issue
   let commision_fee: number = 0.1;
-  if (values.network?.commission_fee) {
-    if (values.token_type === TokenType.Basic) {
-      commision_fee = values.network?.commission_fee.basic;
+  if (network?.commission_fee) {
+    if (token_type === TokenType.Basic) {
+      commision_fee = network?.commission_fee.basic;
     }
-    if (values.token_type === TokenType.Custom) {
-      commision_fee = values.network?.commission_fee.custom;
+    if (token_type === TokenType.Custom) {
+      commision_fee = network?.commission_fee.custom;
     }
-    if (values.token_type === TokenType.Advance) {
-      commision_fee = values.network?.commission_fee.advance;
+    if (token_type === TokenType.Advance) {
+      commision_fee = network?.commission_fee.advance;
     }
   } // END commision_fee_issue
 
@@ -58,7 +58,7 @@ const TransactionCard = ({ values, control, errors, watch, handleChange, handleS
                 <InformationOutlineIcon className='extra-small-icon' color='success' />
               </Tooltip>
             </Stack>
-            <Chip label={`${Number(commision_fee).toLocaleString('en')} ${values.network?.currency}`} color="success" variant="filled" />
+            <Chip label={`${Number(commision_fee).toLocaleString('en')} ${network?.currency}`} color="success" variant="filled" />
           </Stack>
         </CustomFormControl>
 
