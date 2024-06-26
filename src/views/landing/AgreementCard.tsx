@@ -9,7 +9,7 @@ import {
   InformationOutline as InformationOutlineIcon,
   PlusCircleOutline as PlusCircleOutlineIcon,
 } from 'mdi-material-ui'
-import { Checkbox, FormHelperText, Link, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material';
+import { Box, Checkbox, FormHelperText, Link, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import TermsOfServiceDialog from './TermsOfServiceDialog';
@@ -36,15 +36,30 @@ const AgreementCard = ({ values, control, errors, watch, handleChange, handleSel
           <FountainPenTipIcon className={'cardheader-icon'} />
           <Typography className={'cardheader-title'} variant='h4'>Agreement</Typography>
         </CustomCardHeader>
-
-        <CustomFormControl fullWidth>
-          <Stack direction={'row'} alignItems={'flex-start'} spacing={1}>
-            <Checkbox color="success" />
-            <Typography>
-              I have read, understood and agreed to the <Link onClick={()=>{setOpen(true);}} className='cursorPoint' style={{ display: 'inline', color: theme.palette.success.main, textDecoration: 'underline'}}>Terms of Use</Link>.
-            </Typography>
-          </Stack>
-        </CustomFormControl>
+        
+        <Controller
+          name="isAgreedTerms"
+          control={control}
+          rules={{ required: 'You need to agree Terms of Use.' }}
+          render={({ field, fieldState: { error } }) => (
+            <CustomFormControl fullWidth>
+              <Stack direction={'row'} alignItems={'flex-start'} spacing={1}>
+                <Checkbox 
+                  {...field}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
+                  color={"success"} 
+                />
+                <Typography color={errors.isAgreedTerms?"error":undefined} >
+                  I have read, understood and agreed to the <Link onClick={()=>{setOpen(true);}} className='cursorPoint' style={{ display: 'inline', color: theme.palette.success.main, textDecoration: 'underline'}}>Terms of Use</Link>.
+                </Typography>
+              </Stack>
+              <Box px={4}>
+                {error && <Typography variant='caption' color="error">{error.message}</Typography>}
+              </Box>
+            </CustomFormControl>
+          )}
+        />
       </CustomCardContent>
     </CustomCard>
 
