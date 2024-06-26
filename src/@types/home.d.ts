@@ -27,7 +27,7 @@ declare global {
     //////////////////////
     burnPercent: number,
     teamPercent: number,
-    taxCurrency: string,
+    taxCurrency: "native" | "token",
     //////////////////////
     teamAddressList: Array<TeamAddress>,
     //////////////////////

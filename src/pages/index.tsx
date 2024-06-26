@@ -89,7 +89,7 @@ const LandingPage = () => {
     //////////////////////
     burnPercent: 0,
     teamPercent: 0,
-    taxCurrency: "",
+    taxCurrency: "token",
     //////////////////////
     teamAddressList: [],
     //////////////////////
@@ -199,7 +199,17 @@ const LandingPage = () => {
         initial_supply,
         maximum_supply: initial_supply,
         access_type: 'Owner',
+        isTax: false, // Basic is not able to use Tax
+        //////////////////////
+        buyPercent: 0,
+        sellPercent: 0,
+        transferPercent: 0,
+        //////////////////////
+        burnPercent: 0,
+        teamPercent: 0,
         taxCurrency: "token",
+        //////////////////////
+        teamAddressList: [],
       });
     }
     /////////////////////////////////////////////
@@ -207,6 +217,9 @@ const LandingPage = () => {
     /////////////////////////////////////////////
     if (values?.token_type === TokenType.Custom) {
       let initial_supply = 1000000000;
+      let buyPercent = values?.buyPercent < 5 ? values?.buyPercent : 5;
+      let sellPercent = values?.sellPercent < 5 ? values?.sellPercent : 5;
+      let transferPercent = values?.transferPercent < 5 ? values?.transferPercent : 5;
       setValues({
         ...values,
         token_decimals: 18,
@@ -214,7 +227,16 @@ const LandingPage = () => {
         initial_supply,
         maximum_supply: initial_supply,
         access_type: 'Owner',
-        taxCurrency: "token"
+        //////////////////////
+        buyPercent: 0,
+        sellPercent: 0,
+        transferPercent: 0,
+        //////////////////////
+        burnPercent: 0,
+        teamPercent: 0,
+        taxCurrency: "token",
+        //////////////////////
+        teamAddressList: [],
       });
     }
   }, [values?.token_type]);
