@@ -44,6 +44,7 @@ const NetworkCard = ({ control, errors,  watch }: MyCardProps) => {
                 options={networks}
                 autoHighlight
                 getOptionLabel={(option) => option.name}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
                 onChange={(_, newValue) => field.onChange(newValue)}
                 renderOption={(props, option) => (
                   <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
