@@ -13,19 +13,21 @@ import { FormHelperText, MenuItem, Select, SelectChangeEvent, TextField, Typogra
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { TokenType } from 'src/utils/enums';
-import { Control, Controller, FieldErrors, FieldValues } from 'react-hook-form';
+import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
 
 interface MyCardProps {
   values: HomeState,
   control: Control<HomeState, any>,
   errors: FieldErrors<HomeState>,
+  watch: UseFormWatch<HomeState>,
   handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
   handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
   handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const InformationsCard = ({ values, control, errors, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
+const InformationsCard = ({ values, control, errors,  watch, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
+  const selected_token_type: number = watch('token_type');
 
   return <>
     <CustomCard>
@@ -103,23 +105,32 @@ const InformationsCard = ({ values, control, errors, handleChange, handleSelectC
           )}
         />            
 
-        <CustomFormControl fullWidth>
-          <Typography className={'control-title'} variant='caption'>DECIMALS*</Typography>
-          <TextField 
-            className={'control-element'}
-            value={values.token_decimals}
-            onChange={handleChange('token_decimals')}
-            placeholder=""
-            type="number"
-            disabled={values.token_type < TokenType.Advance}
-            inputProps={{
-              min: 1,
-              max: 18,
-              pattern: "\\d*",
-            }}
-          />
-          <FormHelperText className={'control-help'}>The number of decimal of your token (default 18)</FormHelperText>
-        </CustomFormControl>
+        <Controller
+          name="token_decimals"
+          control={control}
+          defaultValue={18}
+          rules={{ required: 'Token decimal is required' }}
+          render={({ field }) => (            
+            <CustomFormControl fullWidth>
+              <Typography className={'control-title'} variant='caption'>DECIMALS*</Typography>
+              <TextField 
+                className={'control-element'}
+                {...field}
+                error={!!errors.token_decimals}
+                placeholder=""
+                type="number"
+                disabled={selected_token_type < TokenType.Advance}
+                inputProps={{
+                  min: 1,
+                  max: 18,
+                  pattern: "\\d*",
+                }}
+              />
+              <FormHelperText className={'control-help'}>The number of decimal of your token (default 18)</FormHelperText>
+              {errors.token_decimals && (<Typography variant={'caption'} color={'error'}>{errors.token_decimals.message}</Typography>)}
+            </CustomFormControl>
+          )}
+        />
       </CustomCardContent>
     </CustomCard>
   </>

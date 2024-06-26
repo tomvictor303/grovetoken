@@ -62,7 +62,7 @@ const LandingPage = () => {
   const theme = useTheme();
   const block_spacing = 6;
   // react-hook-form
-  const { control, handleSubmit, formState: { errors } } = useForm<HomeState>({
+  const { control, handleSubmit, watch, formState: { errors } } = useForm<HomeState>({
     defaultValues: {
       network: getNetworkObject("GRV"),
       token_type: 0,
@@ -289,6 +289,8 @@ const LandingPage = () => {
     console.log(data);
   };
 
+  const selected_network: Network | null = watch('network');
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={block_spacing}>
@@ -301,7 +303,7 @@ const LandingPage = () => {
             >
               Create your Token on{" "}
               <span style={{ color: theme.palette.success.main }}>
-                {values?.network?.name ?? ""}
+                {selected_network?.name ?? "?"}
               </span>
             </Typography>
             <Typography variant="h5">
@@ -320,6 +322,7 @@ const LandingPage = () => {
               values={values}
               control={control}
               errors={errors}
+              watch={watch}
               handleAutoCompleteChange={handleAutoCompleteChange}
               handleChange={handleChange}
               handleSelectChange={handleSelectChange}
@@ -331,6 +334,7 @@ const LandingPage = () => {
               values={values}
               control={control} 
               errors={errors}
+              watch={watch}
               handleChange={handleChange}
               handleSelectChange={handleSelectChange}
               handleCheckedChange={handleCheckedChange}
@@ -342,6 +346,7 @@ const LandingPage = () => {
               values={values}
               control={control}
               errors={errors}
+              watch={watch}
               handleChange={handleChange}
               handleSelectChange={handleSelectChange}
               handleCheckedChange={handleCheckedChange}
@@ -357,6 +362,7 @@ const LandingPage = () => {
               values={values}
               control={control}
               errors={errors}
+              watch={watch}
               handleChange={handleChange}
               handleSelectChange={handleSelectChange}
               handleCheckedChange={handleCheckedChange}
@@ -386,6 +392,7 @@ const LandingPage = () => {
               values={values}
               control={control}
               errors={errors}
+              watch={watch}
               handleChange={handleChange}
               handleSelectChange={handleSelectChange}
               handleCheckedChange={handleCheckedChange}
@@ -397,6 +404,7 @@ const LandingPage = () => {
               values={values}
               control={control}
               errors={errors}
+              watch={watch}
               handleChange={handleChange}
               handleSelectChange={handleSelectChange}
               handleCheckedChange={handleCheckedChange}

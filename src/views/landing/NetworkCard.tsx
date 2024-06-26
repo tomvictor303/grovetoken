@@ -13,19 +13,20 @@ import { Autocomplete, Box, Checkbox, FormHelperText, InputAdornment, Link, Menu
 import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import networks from 'src/utils/networks';
-import { Control, FieldErrors } from 'react-hook-form';
+import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
 
 interface MyCardProps {
   values: HomeState;
   control: Control<HomeState, any>;
   errors: FieldErrors<HomeState>;
+  watch: UseFormWatch<HomeState>;
   handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
   handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
   handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
   handleAutoCompleteChange: (prop: keyof HomeState) => (event: any, newValue: any) => void
 }
 
-const NetworkCard = ({ values, control, errors, handleChange, handleSelectChange, handleCheckedChange, handleAutoCompleteChange}: MyCardProps) => {
+const NetworkCard = ({ values, control, errors,  watch, handleChange, handleSelectChange, handleCheckedChange, handleAutoCompleteChange}: MyCardProps) => {
   const theme = useTheme();
 
   return <>    
@@ -36,52 +37,62 @@ const NetworkCard = ({ values, control, errors, handleChange, handleSelectChange
           <Typography className={'cardheader-title'} variant='h4'>Network</Typography>
         </CustomCardHeader>
 
-        <CustomFormControl fullWidth>
-          <Autocomplete
-            className={'control-element'}
-            options={networks}
-            value={values.network}
-            onChange={handleAutoCompleteChange('network')}
-            autoHighlight
-            getOptionLabel={(option) => option.name}
-            renderOption={(props, option) => (
-              <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                <img
-                  loading="lazy"
-                  width="20"
-                  srcSet={`${option.icon} 2x`}
-                  src={`${option.icon}`}
-                  alt=""
-                />
-                {option.name}
-              </Box>
-            )}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                InputProps={{
-                  ...params.InputProps,
-                  startAdornment: values?.network ? (
-                    <InputAdornment position="start">
-                      <img
-                        loading="lazy"
-                        width="20"
-                        srcSet={`${values?.network.icon} 2x`}
-                        src={`${values?.network.icon}`}
-                        alt=""
-                      />
-                    </InputAdornment>
-                  ) : null,
-                }}
-                inputProps={{
-                  ...params.inputProps,
-                  autoComplete: 'new-password', // disable autocomplete and autofill
-                }}
+        <Controller
+          name="network"
+          control={control}
+          rules={{ required: 'Network is required' }}
+          render={({ field, fieldState: { error } }) => (
+            <CustomFormControl fullWidth>
+              <Autocomplete
+                className={'control-element'}                
+                {...field}
+                options={networks}
+                autoHighlight
+                getOptionLabel={(option) => option.name}
+                onChange={(_, newValue) => field.onChange(newValue)}
+                renderOption={(props, option) => (
+                  <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                    <img
+                      loading="lazy"
+                      width="20"
+                      srcSet={`${option.icon} 2x`}
+                      src={`${option.icon}`}
+                      alt=""
+                    />
+                    {option.name}
+                  </Box>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    error={!!errors.network}
+                    InputProps={{
+                      ...params.InputProps,
+                      startAdornment: field.value ? (
+                        <InputAdornment position="start">
+                          <img
+                            loading="lazy"
+                            width="20"
+                            srcSet={`${field.value.icon} 2x`}
+                            src={`${field.value.icon}`}
+                            alt=""
+                          />
+                        </InputAdornment>
+                      ) : null,
+                    }}
+                    inputProps={{
+                      ...params.inputProps,
+                      autoComplete: 'new-password', // disable autocomplete and autofill
+                    }}
+                  />
+                )}
               />
-            )}
-          />
-          <FormHelperText className={'control-help'}>Select the network on which you want to deploy your token</FormHelperText>
-        </CustomFormControl>
+              <FormHelperText className={'control-help'}>Select the network on which you want to deploy your token</FormHelperText>
+              {errors.network && (<Typography variant={'caption'} color={'error'}>{errors.network.message}</Typography>)}
+            </CustomFormControl>
+          )}
+        />
+
       </CustomCardContent>
     </CustomCard>
   </>

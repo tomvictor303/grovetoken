@@ -35,12 +35,13 @@ import { styled, useTheme } from "@mui/material/styles";
 import OptionsCardSwitchPart from "./OptionsCardSwitchPart";
 import OptionsCardTaxPart from "./OptionsCardTaxPart";
 import OptionsCardFinalPart from "./OptionsCardFinalPart";
-import { Control, FieldErrors } from "react-hook-form";
+import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
 
 interface MyCardProps {
   values: HomeState;
   control: Control<HomeState, any>;
   errors: FieldErrors<HomeState>;
+  watch: UseFormWatch<HomeState>;
   handleChange: (
     prop: keyof HomeState
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
@@ -63,6 +64,7 @@ const OptionsCard = ({
   values,
   control,
   errors,
+  watch,
   handleChange,
   handleSelectChange,
   handleCheckedChange,
@@ -88,6 +90,7 @@ const OptionsCard = ({
             values={values}
             control={control}
             errors={errors}
+            watch={watch}
             handleChange={handleChange}
             handleSelectChange={handleSelectChange}
             handleCheckedChange={handleCheckedChange}
@@ -106,6 +109,7 @@ const OptionsCard = ({
               values={values}
               control={control}
               errors={errors}
+              watch={watch}
               handleChange={handleChange}
               handleSelectChange={handleSelectChange}
               handleCheckedChange={handleCheckedChange}
@@ -123,6 +127,7 @@ const OptionsCard = ({
             values={values}
             control={control}
             errors={errors}
+            watch={watch}
             handleChange={handleChange}
             handleSelectChange={handleSelectChange}
             handleCheckedChange={handleCheckedChange}
