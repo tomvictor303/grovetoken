@@ -27,6 +27,8 @@ interface MyCardProps {
 
 const SupplyCard = ({ values, control, errors, watch, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
+  const form_token_type: number = watch('token_type');
+  const form_supply_type: string = watch('supply_type');
 
   return <>
     <CustomCard>
@@ -36,24 +38,30 @@ const SupplyCard = ({ values, control, errors, watch, handleChange, handleSelect
           <Typography className={'cardheader-title'} variant='h4'>Supply</Typography>
         </CustomCardHeader>
 
-        <CustomFormControl fullWidth>
-          <Typography className={'control-title'} variant='caption'>SUPPLY TYPE*</Typography>
-          <Select 
-            className={'control-element'}
-            value={values.supply_type}
-            onChange={handleSelectChange('supply_type')}
-            displayEmpty
-            disabled={values.token_type===TokenType.Basic}           
-          >
-            {/* <MenuItem value="">
-              <em>None</em>
-            </MenuItem> */}
-            <MenuItem value={'Fixed'}>Fixed</MenuItem>
-            <MenuItem value={'Capped'}>Capped</MenuItem>
-            <MenuItem value={'Unlimited'} disabled={values.token_type < TokenType.Advance}>Unlimited</MenuItem>
-          </Select>
-          <FormHelperText className={'control-help'}>Fixed / Capped / Unlimited</FormHelperText>
-        </CustomFormControl>
+        <Controller
+          name="supply_type"
+          control={control}
+          rules={{ required: 'Supply Type is required' }}
+          render={({ field, fieldState: { error } }) => (
+            <CustomFormControl fullWidth>
+              <Typography className={'control-title'} variant='caption'>SUPPLY TYPE*</Typography>
+              <Select                
+                {...field}
+                className={'control-element'}                
+                displayEmpty
+                disabled={form_token_type===TokenType.Basic}           
+              >
+                {/* <MenuItem value="">
+                  <em>None</em>
+                </MenuItem> */}
+                <MenuItem value={'Fixed'}>Fixed</MenuItem>
+                <MenuItem value={'Capped'}>Capped</MenuItem>
+                <MenuItem value={'Unlimited'} disabled={form_token_type < TokenType.Advance}>Unlimited</MenuItem>
+              </Select>
+              <FormHelperText className={'control-help'}>Fixed / Capped / Unlimited</FormHelperText>
+            </CustomFormControl>
+          )}
+        />
 
         <CustomFormControl fullWidth>
           <Typography className={'control-title'} variant='caption'>INITIAL SUPPLY</Typography>
@@ -67,13 +75,13 @@ const SupplyCard = ({ values, control, errors, watch, handleChange, handleSelect
               min: 0,
               pattern: "\\d*",
             }}
-            disabled={values.token_type===TokenType.Basic}
+            disabled={form_token_type===TokenType.Basic}
           />
           <FormHelperText className={'control-help'}>The number of coins minted during the creation of the contract</FormHelperText>
         </CustomFormControl>
 
         <CustomFormControl fullWidth 
-            sx={{ display: values.supply_type==='Unlimited'?'none':undefined }}>
+            sx={{ display: form_supply_type==='Unlimited'?'none':undefined }}>
           <Typography className={'control-title'} variant='caption'>MAXIMUM SUPPLY*</Typography>
           <TextField 
             className={'control-element'}
@@ -84,7 +92,7 @@ const SupplyCard = ({ values, control, errors, watch, handleChange, handleSelect
             inputProps={{
               pattern: "\\d*",
             }}
-            disabled={values.supply_type==='Fixed'}
+            disabled={form_supply_type==='Fixed'}
           />
           <FormHelperText className={'control-help'}>The maximum number of coins you can mint from the contract</FormHelperText>
         </CustomFormControl>

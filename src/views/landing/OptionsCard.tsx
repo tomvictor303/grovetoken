@@ -98,12 +98,6 @@ const OptionsCard = ({
           {/** END Options_card_switch_part */}
 
           {/** BEGIN Options_card_tax_part */}
-          {/* <OptionsCardTaxPart
-            values={values}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleCheckedChange={handleCheckedChange}
-          /> */}
           {values.isTax ? (
             <OptionsCardTaxPart
               values={values}

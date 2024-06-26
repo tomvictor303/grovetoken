@@ -28,6 +28,8 @@ interface MyCardProps {
 
 const OptionsCardFinalPart = ({ values, control, errors,  watch, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
+  const form_token_type: number = watch('token_type');
+  const form_supply_type: string = watch('supply_type');
 
   return <>
     <Box>
@@ -55,7 +57,7 @@ const OptionsCardFinalPart = ({ values, control, errors,  watch, handleChange, h
           value={values.access_type}
           onChange={handleSelectChange('access_type')}
           displayEmpty 
-          disabled={values?.token_type!==TokenType.Advance}           
+          disabled={form_token_type!==TokenType.Advance}           
         >
           {/* <MenuItem value="">
             <em>None</em>

@@ -24,7 +24,7 @@ interface MyCardProps {
 
 const InformationsCard = ({ values, control, errors,  watch }: MyCardProps) => {
   const theme = useTheme();
-  const selected_token_type: number = watch('token_type');
+  const form_token_type: number = watch('token_type');
 
   return <>
     <CustomCard>
@@ -116,7 +116,7 @@ const InformationsCard = ({ values, control, errors,  watch }: MyCardProps) => {
                 error={!!errors.token_decimals}
                 placeholder=""
                 type="number"
-                disabled={selected_token_type < TokenType.Advance}
+                disabled={form_token_type < TokenType.Advance}
                 inputProps={{
                   min: 1,
                   max: 18,
