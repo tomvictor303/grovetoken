@@ -29,6 +29,7 @@ declare global {
   }
 
   type Network = {
+    id: string;
     name: string;
     short_name: string;
     currency: string;

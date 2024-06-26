@@ -1,5 +1,6 @@
 const networks: Network[] = [
   {
+    id: 'GRV',
     name: 'Grove',
     short_name: 'GRV',
     currency: 'GRV',
@@ -18,25 +19,10 @@ const networks: Network[] = [
       basic: 10000,
       custom: 35000,
       advance: 150000
-    },
-  },
-  {
-    name: 'Ethereum',
-    short_name: 'ETH',
-    currency: 'ETH',
-    icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
-    mainnet: {
-      chainId: 1,
-      rpc: 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
-      explorer: 'https://etherscan.io/'
-    },
-    testnet: {
-      chainId: 5, // Goerli Testnet
-      rpc: 'https://goerli.infura.io/v3/YOUR_INFURA_PROJECT_ID',
-      explorer: 'https://goerli.etherscan.io/'
     }
   },
   {
+    id: 'BNB',
     name: 'Binance Smart Chain',
     short_name: 'BNB',
     currency: 'BNB',
@@ -53,102 +39,24 @@ const networks: Network[] = [
     }
   },
   {
-    name: 'Arbitrum',
-    short_name: 'ARB',
+    id: 'ETH',
+    name: 'Ethereum',
+    short_name: 'ETH',
     currency: 'ETH',
-    icon: 'https://cryptologos.cc/logos/arbitrum-arb-logo.png',
+    icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
     mainnet: {
-      chainId: 42161,
-      rpc: 'https://arb1.arbitrum.io/rpc',
-      explorer: 'https://arbiscan.io/'
+      chainId: 1,
+      rpc: 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+      explorer: 'https://etherscan.io/'
     },
     testnet: {
-      chainId: 421611,
-      rpc: 'https://rinkeby.arbitrum.io/rpc',
-      explorer: 'https://testnet.arbiscan.io/'
+      chainId: 5,
+      rpc: 'https://goerli.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+      explorer: 'https://goerli.etherscan.io/'
     }
   },
   {
-    name: 'Polygon',
-    short_name: 'MATIC',
-    currency: 'MATIC',
-    icon: 'https://cryptologos.cc/logos/polygon-matic-logo.png',
-    mainnet: {
-      chainId: 137,
-      rpc: 'https://rpc-mainnet.maticvigil.com/',
-      explorer: 'https://polygonscan.com/'
-    },
-    testnet: {
-      chainId: 80001,
-      rpc: 'https://rpc-mumbai.maticvigil.com/',
-      explorer: 'https://mumbai.polygonscan.com/'
-    }
-  },
-  {
-    name: 'Avalanche',
-    short_name: 'AVAX',
-    currency: 'AVAX',
-    icon: 'https://cryptologos.cc/logos/avalanche-avax-logo.png',
-    mainnet: {
-      chainId: 43114,
-      rpc: 'https://api.avax.network/ext/bc/C/rpc',
-      explorer: 'https://cchain.explorer.avax.network/'
-    },
-    testnet: {
-      chainId: 43113,
-      rpc: 'https://api.avax-test.network/ext/bc/C/rpc',
-      explorer: 'https://cchain.explorer.avax-test.network/'
-    }
-  },
-  {
-    name: 'Fantom',
-    short_name: 'FTM',
-    currency: 'FTM',
-    icon: 'https://cryptologos.cc/logos/fantom-ftm-logo.png',
-    mainnet: {
-      chainId: 250,
-      rpc: 'https://rpc.ftm.tools/',
-      explorer: 'https://ftmscan.com/'
-    },
-    testnet: {
-      chainId: 4002,
-      rpc: 'https://rpc.testnet.fantom.network/',
-      explorer: 'https://testnet.ftmscan.com/'
-    }
-  },
-  {
-    name: 'Cronos',
-    short_name: 'CRO',
-    currency: 'CRO',
-    icon: 'https://cryptologos.cc/logos/cronos-cro-logo.png',
-    mainnet: {
-      chainId: 25,
-      rpc: 'https://evm-cronos.crypto.org/',
-      explorer: 'https://cronoscan.com/'
-    },
-    testnet: {
-      chainId: 338,
-      rpc: 'https://evm-t3.cronos.org/',
-      explorer: 'https://testnet.cronoscan.com/'
-    }
-  },
-  {
-    name: 'zkSync',
-    short_name: 'ZKS',
-    currency: 'ETH',
-    icon: 'https://cryptologos.cc/logos/zksync-zks-logo.png',
-    mainnet: {
-      chainId: 324,
-      rpc: 'https://zksync2-mainnet.zksync.io',
-      explorer: 'https://explorer.zksync.io/'
-    },
-    testnet: {
-      chainId: 280,
-      rpc: 'https://zksync2-testnet.zksync.dev',
-      explorer: 'https://rinkeby-explorer.zksync.io/'
-    }
-  },
-  {
+    id: 'BASE',
     name: 'Base',
     short_name: 'BASE',
     currency: 'ETH',
@@ -165,6 +73,7 @@ const networks: Network[] = [
     }
   },
   {
+    id: 'SHIB',
     name: 'Shibarium',
     short_name: 'SHIB',
     currency: 'SHIB',
@@ -181,6 +90,109 @@ const networks: Network[] = [
     }
   },
   {
+    id: 'MATIC',
+    name: 'Polygon',
+    short_name: 'MATIC',
+    currency: 'MATIC',
+    icon: 'https://cryptologos.cc/logos/polygon-matic-logo.png',
+    mainnet: {
+      chainId: 137,
+      rpc: 'https://rpc-mainnet.maticvigil.com/',
+      explorer: 'https://polygonscan.com/'
+    },
+    testnet: {
+      chainId: 80001,
+      rpc: 'https://rpc-mumbai.maticvigil.com/',
+      explorer: 'https://mumbai.polygonscan.com/'
+    }
+  },
+  {
+    id: 'ARB',
+    name: 'Arbitrum',
+    short_name: 'ARB',
+    currency: 'ETH',
+    icon: 'https://cryptologos.cc/logos/arbitrum-arb-logo.png',
+    mainnet: {
+      chainId: 42161,
+      rpc: 'https://arb1.arbitrum.io/rpc',
+      explorer: 'https://arbiscan.io/'
+    },
+    testnet: {
+      chainId: 421611,
+      rpc: 'https://rinkeby.arbitrum.io/rpc',
+      explorer: 'https://testnet.arbiscan.io/'
+    }
+  },
+  {
+    id: 'AVAX',
+    name: 'Avalanche',
+    short_name: 'AVAX',
+    currency: 'AVAX',
+    icon: 'https://cryptologos.cc/logos/avalanche-avax-logo.png',
+    mainnet: {
+      chainId: 43114,
+      rpc: 'https://api.avax.network/ext/bc/C/rpc',
+      explorer: 'https://cchain.explorer.avax.network/'
+    },
+    testnet: {
+      chainId: 43113,
+      rpc: 'https://api.avax-test.network/ext/bc/C/rpc',
+      explorer: 'https://cchain.explorer.avax-test.network/'
+    }
+  },
+  {
+    id: 'FTM',
+    name: 'Fantom',
+    short_name: 'FTM',
+    currency: 'FTM',
+    icon: 'https://cryptologos.cc/logos/fantom-ftm-logo.png',
+    mainnet: {
+      chainId: 250,
+      rpc: 'https://rpc.ftm.tools/',
+      explorer: 'https://ftmscan.com/'
+    },
+    testnet: {
+      chainId: 4002,
+      rpc: 'https://rpc.testnet.fantom.network/',
+      explorer: 'https://testnet.ftmscan.com/'
+    }
+  },
+  {
+    id: 'ZKS',
+    name: 'zkSync',
+    short_name: 'ZKS',
+    currency: 'ETH',
+    icon: 'https://cryptologos.cc/logos/zksync-zks-logo.png',
+    mainnet: {
+      chainId: 324,
+      rpc: 'https://zksync2-mainnet.zksync.io',
+      explorer: 'https://explorer.zksync.io/'
+    },
+    testnet: {
+      chainId: 280,
+      rpc: 'https://zksync2-testnet.zksync.dev',
+      explorer: 'https://rinkeby-explorer.zksync.io/'
+    }
+  },
+  {
+    id: 'ATOM',
+    name: 'Cosmos',
+    short_name: 'ATOM',
+    currency: 'ATOM',
+    icon: 'https://cryptologos.cc/logos/cosmos-atom-logo.png',
+    mainnet: {
+      chainId: 1,
+      rpc: 'https://rpc.cosmos.network',
+      explorer: 'https://cosmos.bigdipper.live/'
+    },
+    testnet: {
+      chainId: 2,
+      rpc: 'https://rpc.testnet.cosmos.network',
+      explorer: 'https://testnet.cosmos.bigdipper.live/'
+    }
+  },
+  {
+    id: 'OP',
     name: 'Optimism',
     short_name: 'OP',
     currency: 'ETH',
@@ -197,6 +209,7 @@ const networks: Network[] = [
     }
   },
   {
+    id: 'BOBA',
     name: 'Boba Network',
     short_name: 'BOBA',
     currency: 'ETH',
@@ -213,6 +226,7 @@ const networks: Network[] = [
     }
   },
   {
+    id: 'TOMO',
     name: 'TomoChain',
     short_name: 'TOMO',
     currency: 'TOMO',
@@ -225,7 +239,41 @@ const networks: Network[] = [
     testnet: {
       chainId: 89,
       rpc: 'https://rpc.testnet.tomochain.com',
-      explorer: 'https://scan.testnet.tomochain.com/'
+      explorer: 'https://scan.testnet.tomochain.com'
+    }
+  },
+  {
+    id: 'GNO',
+    name: 'Gnosis',
+    short_name: 'GNO',
+    currency: 'GNO',
+    icon: 'https://cryptologos.cc/logos/gnosis-gno-logo.png',
+    mainnet: {
+      chainId: 100,
+      rpc: 'https://rpc.gnosischain.com',
+      explorer: 'https://blockscout.com/xdai/mainnet/'
+    },
+    testnet: {
+      chainId: 10200,
+      rpc: 'https://rpc.chiadochain.net',
+      explorer: 'https://blockscout.com/gnosis/chiado/'
+    }
+  },
+  {
+    id: 'CRO',
+    name: 'Cronos',
+    short_name: 'CRO',
+    currency: 'CRO',
+    icon: 'https://cryptologos.cc/logos/cronos-cro-logo.png',
+    mainnet: {
+      chainId: 25,
+      rpc: 'https://evm-cronos.crypto.org/',
+      explorer: 'https://cronoscan.com/'
+    },
+    testnet: {
+      chainId: 338,
+      rpc: 'https://evm-t3.cronos.org/',
+      explorer: 'https://testnet.cronoscan.com/'
     }
   }
 ];
