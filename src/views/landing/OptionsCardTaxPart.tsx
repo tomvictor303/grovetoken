@@ -156,7 +156,7 @@ const OptionsCardTaxPart = ({
                 type="number"
                 inputProps={{
                   min: 0,
-                  max: (values.token_type < TokenType.Advance ? 5 : 100),
+                  max: (token_type < TokenType.Advance ? 5 : 100),
                   pattern: "\\d*"
                 }}
                 endAdornment={<InputAdornment position="end">%</InputAdornment>}
@@ -187,7 +187,7 @@ const OptionsCardTaxPart = ({
                 type="number"
                 inputProps={{
                   min: 0,
-                  max: (values.token_type < TokenType.Advance ? 5 : 100),
+                  max: (token_type < TokenType.Advance ? 5 : 100),
                   pattern: "\\d*"
                 }}
                 endAdornment={<InputAdornment position="end">%</InputAdornment>}
@@ -218,7 +218,7 @@ const OptionsCardTaxPart = ({
                 type="number"
                 inputProps={{
                   min: 0,
-                  max: (values.token_type < TokenType.Advance ? 5 : 100),
+                  max: (token_type < TokenType.Advance ? 5 : 100),
                   pattern: "\\d*"
                 }}
                 endAdornment={<InputAdornment position="end">%</InputAdornment>}
@@ -357,7 +357,7 @@ const OptionsCardTaxPart = ({
             value={values.taxCurrency}
             onChange={handleSelectChange("taxCurrency")}
             displayEmpty
-            disabled={values.token_type !== TokenType.Advance}
+            disabled={token_type !== TokenType.Advance}
           >
             {/* <MenuItem value="">
             <em>None</em>

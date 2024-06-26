@@ -118,7 +118,7 @@ const OptionsCardSwitchPart = ({
             <IOSSwitch
               checked={values.isNoCopyrightLink}
               onChange={handleCheckedChange("isNoCopyrightLink")}
-              disabled={values.token_type !== TokenType.Advance}
+              disabled={token_type !== TokenType.Advance}
             />
             <Typography className={"control-switch-title"}>
               No copyright link
@@ -140,7 +140,7 @@ const OptionsCardSwitchPart = ({
             <IOSSwitch
               checked={values.isMintable}
               onChange={handleCheckedChange("isMintable")}
-              disabled={values.token_type !== TokenType.Advance}
+              disabled={token_type !== TokenType.Advance}
             />
             <Typography className={"control-switch-title"}>Mintable</Typography>
           </Stack>
@@ -159,7 +159,7 @@ const OptionsCardSwitchPart = ({
             <IOSSwitch
               checked={values.isBurnable}
               onChange={handleCheckedChange("isBurnable")}
-              disabled={values.token_type !== TokenType.Advance}
+              disabled={token_type !== TokenType.Advance}
             />
             <Typography className={"control-switch-title"}>Burnable</Typography>
           </Stack>
@@ -178,7 +178,7 @@ const OptionsCardSwitchPart = ({
             <IOSSwitch
               checked={values.isPausable}
               onChange={handleCheckedChange("isPausable")}
-              disabled={values.token_type !== TokenType.Advance}
+              disabled={token_type !== TokenType.Advance}
             />
             <Typography className={"control-switch-title"}>Pausable</Typography>
           </Stack>
@@ -197,7 +197,7 @@ const OptionsCardSwitchPart = ({
             <IOSSwitch
               checked={values.isRecoverable}
               onChange={handleCheckedChange("isRecoverable")}
-              disabled={values.token_type !== TokenType.Advance}
+              disabled={token_type !== TokenType.Advance}
             />
             <Typography className={"control-switch-title"}>
               Recoverable
@@ -218,7 +218,7 @@ const OptionsCardSwitchPart = ({
             <IOSSwitch
               checked={values.isAntiWhale}
               onChange={handleCheckedChange("isAntiWhale")}
-              disabled={values.token_type !== TokenType.Advance}
+              disabled={token_type !== TokenType.Advance}
             />
             <Typography className={"control-switch-title"}>
               Anti Whale
@@ -239,7 +239,7 @@ const OptionsCardSwitchPart = ({
             <IOSSwitch
               checked={values.isTax}
               onChange={handleCheckedChange("isTax")}
-              disabled={values.token_type === TokenType.Basic}
+              disabled={token_type === TokenType.Basic}
             />
             <Typography className={"control-switch-title"}>Tax</Typography>
           </Stack>
