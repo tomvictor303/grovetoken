@@ -20,12 +20,9 @@ interface MyCardProps {
   control: Control<HomeState, any>,
   errors: FieldErrors<HomeState>,
   watch: UseFormWatch<HomeState>,
-  handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
-  handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
-  handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const InformationsCard = ({ values, control, errors,  watch, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
+const InformationsCard = ({ values, control, errors,  watch }: MyCardProps) => {
   const theme = useTheme();
   const selected_token_type: number = watch('token_type');
 
