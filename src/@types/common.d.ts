@@ -37,6 +37,11 @@ declare global {
     testnet?: NetworkConnection;
     commission_fee?: CommissionFee;
   }
+
+  type TeamAddress = {
+    address: string;
+    percent: number;
+  }
 }
 
 export {};
