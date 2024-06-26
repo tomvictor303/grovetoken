@@ -119,12 +119,6 @@ const OptionsCardTaxPart = ({
       </Grid>
     </>
   );
-  // const [comps, setComps] = React.useState<JSX.Element[]>([]);
-
-  // const addressClick = () => {
-  //   const generated = addressComponent(comps.length + 1);
-  //   setComps([...comps, generated]);
-  // };
 
   return (
     <>
@@ -324,9 +318,6 @@ const OptionsCardTaxPart = ({
 
           {/** address list*/}
           <Box marginTop={4}>
-            {/* {comps.map((item, index) => (
-              <>{item}</>
-            ))} */}
             {values.teamAddressList.map((item: TeamAddress, index: number) => (
               <>{addressComponent(item, index, handleTAChange)}</>
             ))}
@@ -351,50 +342,6 @@ const OptionsCardTaxPart = ({
           </Box>
         </Box>
         {/** END TEAM_ADDRESS_block_in_Options_card_tax_part */}
-        {/* <Grid container spacing={4} style={{ alignItems: "center" }}>
-          <Grid item xs={1} style={{ paddingTop: 0 }}>
-            <Typography className={"cardheader-title"} variant="caption">
-              #1
-            </Typography>
-          </Grid>
-          <Grid item xs={7}>
-            <CustomFormControl fullWidth style={{ margin: "auto" }}>
-              <OutlinedInput
-                className={"control-element"}
-                value={values.buyPercent}
-                onChange={handleChange("buyPercent")}
-                placeholder=""
-                type="number"
-                inputProps={{
-                  min: 0,
-                  max: 5,
-                  pattern: "\\d*"
-                }}
-                endAdornment={<InputAdornment position="end">%</InputAdornment>}
-              />
-            </CustomFormControl>
-          </Grid>
-          <Grid item xs={3}>
-            <CustomFormControl fullWidth style={{ margin: "auto" }}>
-              <OutlinedInput
-                className={"control-element"}
-                value={values.sellPercent}
-                onChange={handleChange("sellPercent")}
-                placeholder=""
-                type="number"
-                inputProps={{
-                  min: 0,
-                  max: 5,
-                  pattern: "\\d*"
-                }}
-                endAdornment={<InputAdornment position="end">%</InputAdornment>}
-              />
-            </CustomFormControl>
-          </Grid>
-          <Grid item xs={1}>
-            <DeleteOutlineIcon style={{ color: "red" }} />
-          </Grid>
-        </Grid> */}
 
         <CustomFormControl fullWidth>
           <Select
