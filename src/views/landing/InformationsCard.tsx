@@ -66,17 +66,17 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
           control={control}
           defaultValue=""
           rules={{ required: 'Token Name is required' }}
-          render={({ field }) => (
+          render={({ field, fieldState: { error } }) => (
             <CustomFormControl fullWidth>
               <Typography className={'control-title'} variant='caption'>TOKEN NAME*</Typography>
               <TextField
                 {...field}
-                error={!!errors.token_name}
+                error={!!error}
                 className={'control-element'}
                 placeholder="My new token name"           
               />
               <FormHelperText className={'control-help'}>The name of your token</FormHelperText>
-              {errors.token_name && (<Typography variant={'caption'} color={'error'}>{errors.token_name.message}</Typography>)}
+              {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
             </CustomFormControl>
           )}
         />
@@ -86,17 +86,17 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
           control={control}
           defaultValue=""
           rules={{ required: 'Token Symbol is required' }}
-          render={({ field }) => (            
+          render={({ field, fieldState: { error } }) => (            
             <CustomFormControl fullWidth>
               <Typography className={'control-title'} variant='caption'>TOKEN SYMBOL*</Typography>
               <TextField
                 {...field}
-                error={!!errors.token_symbol}
+                error={!!error}
                 className={'control-element'}
                 placeholder="TKN"           
               />
               <FormHelperText className={'control-help'}>Your token's symbol (e.g ETH)</FormHelperText>
-              {errors.token_symbol && (<Typography variant={'caption'} color={'error'}>{errors.token_symbol.message}</Typography>)}
+              {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
             </CustomFormControl>
           )}
         />            
@@ -106,13 +106,13 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
           control={control}
           defaultValue={18}
           rules={{ required: 'Token decimal is required' }}
-          render={({ field }) => (            
+          render={({ field, fieldState: { error } }) => (            
             <CustomFormControl fullWidth>
               <Typography className={'control-title'} variant='caption'>DECIMALS*</Typography>
               <TextField 
                 className={'control-element'}
                 {...field}
-                error={!!errors.token_decimals}
+                error={!!error}
                 placeholder=""
                 type="number"
                 disabled={token_type < TokenType.Advance}
@@ -123,7 +123,7 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
                 }}
               />
               <FormHelperText className={'control-help'}>The number of decimal of your token (default 18)</FormHelperText>
-              {errors.token_decimals && (<Typography variant={'caption'} color={'error'}>{errors.token_decimals.message}</Typography>)}
+              {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
             </CustomFormControl>
           )}
         />
