@@ -228,9 +228,9 @@ const LandingPage = () => {
         maximum_supply: initial_supply,
         access_type: 'Owner',
         //////////////////////
-        buyPercent: 0,
-        sellPercent: 0,
-        transferPercent: 0,
+        buyPercent,
+        sellPercent,
+        transferPercent,
         //////////////////////
         burnPercent: 0,
         teamPercent: 0,

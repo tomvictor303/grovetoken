@@ -148,7 +148,7 @@ const OptionsCardTaxPart = ({
                 type="number"
                 inputProps={{
                   min: 0,
-                  max: 5,
+                  max: (values.token_type < TokenType.Advance ? 5 : 100),
                   pattern: "\\d*"
                 }}
                 endAdornment={<InputAdornment position="end">%</InputAdornment>}
@@ -179,7 +179,7 @@ const OptionsCardTaxPart = ({
                 type="number"
                 inputProps={{
                   min: 0,
-                  max: 5,
+                  max: (values.token_type < TokenType.Advance ? 5 : 100),
                   pattern: "\\d*"
                 }}
                 endAdornment={<InputAdornment position="end">%</InputAdornment>}
@@ -210,7 +210,7 @@ const OptionsCardTaxPart = ({
                 type="number"
                 inputProps={{
                   min: 0,
-                  max: 5,
+                  max: (values.token_type < TokenType.Advance ? 5 : 100),
                   pattern: "\\d*"
                 }}
                 endAdornment={<InputAdornment position="end">%</InputAdornment>}
