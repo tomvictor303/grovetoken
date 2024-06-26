@@ -21,9 +21,15 @@ declare global {
     isAntiWhale: boolean,
     isTax: boolean,
     //////////////////////
+    buyPercent: number,
+    sellPercent: number,
+    transferPercent: number,
+    //////////////////////
     burnPercent: number,
     teamPercent: number,
     taxCurrency: string,
+    //////////////////////
+    teamAddressList: Array<TeamAddress>,
     //////////////////////
     swap_router: string,
     access_type: "Owner" | "Roles",
