@@ -27,7 +27,7 @@ interface MyCardProps {
 
 const SupplyCard = ({ values, control, errors, watch, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
-  const [ token_type, supply_type ] = watch(['token_type', 'supply_type']);
+  const [ network, token_type, supply_type, isTax ] = watch(['network', 'token_type', 'supply_type', 'isTax']);
 
   return <>
     <CustomCard>

@@ -27,6 +27,7 @@ interface MyCardProps {
 
 const TransactionCard = ({ values, control, errors, watch, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
   const theme = useTheme();
+  const [ network, token_type, supply_type, isTax ] = watch(['network', 'token_type', 'supply_type', 'isTax']);
   // BEGIN commision_fee_issue
   let commision_fee: number = 0.1;
   if (values.network?.commission_fee) {

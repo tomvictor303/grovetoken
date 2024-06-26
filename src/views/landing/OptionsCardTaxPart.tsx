@@ -74,8 +74,7 @@ const OptionsCardTaxPart = ({
   removeTeamAddress
 }: MyCardProps) => {
   const theme = useTheme();
-  const form_token_type: number = watch('token_type');
-  const form_supply_type: string = watch('supply_type');
+  const [ network, token_type, supply_type, isTax ] = watch(['network', 'token_type', 'supply_type', 'isTax']);
 
   const addressComponent = (
     teamAddress: TeamAddress,
