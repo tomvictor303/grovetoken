@@ -264,9 +264,9 @@ const OptionsCardTaxPart = ({
             <CustomFormControl fullWidth>
               <Typography className={"control-title"} variant="caption">
                 <Stack direction={"row"} alignItems={"center"} spacing={1}>
-                  <Box>Marketing</Box>
+                  <Box>Team</Box>
                   <Tooltip
-                    title="Route a percentage of taxes to your team wallets as people transact the token"
+                    title="Team is specified by owner as Marketing / Owner or some other wallet desired."
                     className="cursorPoint"
                   >
                     <InformationOutlineIcon
