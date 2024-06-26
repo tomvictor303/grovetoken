@@ -16,16 +16,12 @@ import TermsOfServiceDialog from './TermsOfServiceDialog';
 import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState;
   control: Control<HomeState, any>;
   errors: FieldErrors<HomeState>;
   watch: UseFormWatch<HomeState>;
-  handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
-  handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
-  handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const AgreementCard = ({ values, control, errors, watch, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
+const AgreementCard = ({ control, errors, watch }: MyCardProps) => {
   const theme = useTheme();
   const [open, setOpen] = useState<boolean>(false);
 
@@ -50,7 +46,7 @@ const AgreementCard = ({ values, control, errors, watch, handleChange, handleSel
                   onChange={(e) => field.onChange(e.target.checked)}
                   color={"success"} 
                 />
-                <Typography color={errors.isAgreedTerms?"error":undefined} >
+                <Typography color={error?"error":undefined} >
                   I have read, understood and agreed to the <Link onClick={()=>{setOpen(true);}} className='cursorPoint' style={{ display: 'inline', color: theme.palette.success.main, textDecoration: 'underline'}}>Terms of Use</Link>.
                 </Typography>
               </Stack>

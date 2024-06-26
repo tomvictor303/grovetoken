@@ -60,7 +60,7 @@ const NetworkCard = ({ control, errors,  watch }: MyCardProps) => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    error={!!errors.network}
+                    error={!!error}
                     InputProps={{
                       ...params.InputProps,
                       startAdornment: field.value ? (
@@ -83,7 +83,7 @@ const NetworkCard = ({ control, errors,  watch }: MyCardProps) => {
                 )}
               />
               <FormHelperText className={'control-help'}>Select the network on which you want to deploy your token</FormHelperText>
-              {errors.network && (<Typography variant={'caption'} color={'error'}>{errors.network.message}</Typography>)}
+              {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
             </CustomFormControl>
           )}
         />

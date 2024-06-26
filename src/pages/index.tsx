@@ -133,6 +133,7 @@ const LandingPage = () => {
     //////////////////////
     swap_router: 'uniswap_router_v2',
     access_type: 'Owner',
+    isAgreedTerms: false,
   })
 
   const handleChange = (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -380,13 +381,9 @@ const LandingPage = () => {
 
             {/** BEGIN Agreement_card */}
             <AgreementCard
-              values={values}
               control={control}
               errors={errors}
               watch={watch}
-              handleChange={handleChange}
-              handleSelectChange={handleSelectChange}
-              handleCheckedChange={handleCheckedChange}
             />
             {/** END Agreement_card */}
 
