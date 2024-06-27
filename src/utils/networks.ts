@@ -23,11 +23,11 @@ const networks: Network[] = [
     scan_name: "GRVscan",
     routers: [
       {
-        name: "BSC",
+        name: "Grove Bep20",
         address: "0xe4D96Cf7f47656200FBC3b6110DC8E785216EF0E"
       },
       {
-        name: "ETH",
+        name: "Grove Erc20",
         address: "0x3711020351da65a99eb9a821Bb7706E193C9aaa0"
       },
     ],
