@@ -25,7 +25,12 @@ const OptionsCardTaxAddressComponent = ({
   fields,
   append,
   remove,
-}: MyCardProps) => {   
+}: MyCardProps) => {
+
+  const isValidEthereumAddress = (address: string) => {
+    return /^0x[a-fA-F0-9]{40}$/.test(address);
+  };
+
   return <>
     <Box key={item.id}>
       <Grid container spacing={4} style={{ alignItems: "center" }}>
@@ -38,7 +43,10 @@ const OptionsCardTaxAddressComponent = ({
           <Controller
             name={`teamAddressList.${index}.address`}
             control={control}
-            rules={{ required: 'Address is required' }}
+            rules={{
+              required: 'Address is required',
+              validate: address => isValidEthereumAddress(address) || 'Invalid address',
+            }}
             render={({ field, fieldState: { error } }) => (
               <CustomFormControl fullWidth style={{ margin: "auto" }}>
                 <OutlinedInput
@@ -48,7 +56,6 @@ const OptionsCardTaxAddressComponent = ({
                   placeholder="0x..."
                   type="text"
                 />
-                {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
               </CustomFormControl>
             )}
           />
@@ -57,9 +64,12 @@ const OptionsCardTaxAddressComponent = ({
           <Controller
             name={`teamAddressList.${index}.percent`}
             control={control}
-            rules={{ required: 'Percent is required' }}
+            rules={{
+              required: 'Percent is required',
+              validate: value => value >= 0 || 'The percent must be greater than 0'
+            }}
             render={({ field, fieldState: { error } }) => (
-              <CustomFormControl fullWidth style={{ margin: "auto" }}>                
+              <CustomFormControl fullWidth style={{ margin: "auto" }}>
                 <OutlinedInput
                   className={"control-element"}
                   {...field}
@@ -73,7 +83,6 @@ const OptionsCardTaxAddressComponent = ({
                   }}
                   endAdornment={<InputAdornment position="end">%</InputAdornment>}
                 />
-                {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
               </CustomFormControl>
             )}
           />
@@ -87,6 +96,18 @@ const OptionsCardTaxAddressComponent = ({
             }}
           />
         </Grid>
+      </Grid>
+      <Grid container spacing={4} style={{ alignItems: "flex-start" }} marginTop={-5} marginBottom={3}>
+        {/** BEGIN error_text_area */}
+        <Grid item xs={1}></Grid>
+        <Grid item xs={6}>
+          {errors?.teamAddressList?.[index]?.address && (<Typography variant={'caption'} color={'error'}>{errors?.teamAddressList?.[index]?.address?.message}</Typography>)}
+        </Grid>
+        <Grid item xs={4}>
+          {errors?.teamAddressList?.[index]?.percent && (<Typography variant={'caption'} color={'error'}>{errors?.teamAddressList?.[index]?.percent?.message}</Typography>)}
+        </Grid>
+        <Grid item xs={1}></Grid>
+        {/** END error_text_area */}
       </Grid>
     </Box>
   </>

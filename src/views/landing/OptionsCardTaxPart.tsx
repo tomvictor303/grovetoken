@@ -57,8 +57,18 @@ const OptionsCardTaxPart = ({
   remove,
 }: MyCardProps) => {
   const theme = useTheme();
-  const [network, token_type, supply_type, isTax] = watch(['network', 'token_type', 'supply_type', 'isTax']);
+  const [network, token_type, supply_type, isTax, burnPercent, teamPercent, teamAddressList] = watch(['network', 'token_type', 'supply_type', 'isTax', 'burnPercent', 'teamPercent', 'teamAddressList']);
 
+  const totalPercent = teamAddressList.reduce((sum, item) => sum + (Number(item.percent) || 0), 0);
+
+  const isValidEthereumAddress = (address) => {
+    return /^0x[a-fA-F0-9]{40}$/.test(address);
+  };
+  
+  // Usage example
+  const address = "0x32Be343B94f860124dC4fEe278FDCBD38C102D88";
+  console.log(isValidEthereumAddress(address)); // true or false
+  
   return (
     <>
       <Box>
@@ -67,7 +77,10 @@ const OptionsCardTaxPart = ({
             <Controller
               name="buyPercent"
               control={control}
-              rules={{ required: 'Please fill the field' }}
+              rules={{
+                required: 'Please fill the field',
+                validate: value => value >= 0 || 'The tax must be greater than 0'
+              }}
               render={({ field, fieldState: { error } }) => (
                 <CustomFormControl fullWidth>
                   <Typography className={"control-title"} variant="caption">
@@ -106,7 +119,10 @@ const OptionsCardTaxPart = ({
             <Controller
               name="sellPercent"
               control={control}
-              rules={{ required: 'Please fill the field' }}
+              rules={{
+                required: 'Please fill the field',
+                validate: value => value >= 0 || 'The tax must be greater than 0'
+              }}
               render={({ field, fieldState: { error } }) => (
                 <CustomFormControl fullWidth>
                   <Typography className={"control-title"} variant="caption">
@@ -145,7 +161,10 @@ const OptionsCardTaxPart = ({
             <Controller
               name="transferPercent"
               control={control}
-              rules={{ required: 'Please fill the field' }}
+              rules={{
+                required: 'Please fill the field',
+                validate: value => value >= 0 || 'The tax must be greater than 0'
+              }}
               render={({ field, fieldState: { error } }) => (
                 <CustomFormControl fullWidth>
                   <Typography className={"control-title"} variant="caption">
@@ -196,7 +215,10 @@ const OptionsCardTaxPart = ({
             <Controller
               name="burnPercent"
               control={control}
-              rules={{ required: 'Please fill the field' }}
+              rules={{
+                required: 'Please fill the field',
+                validate: value => value >= 0 || 'The ratio must be greater than 0'
+              }}
               render={({ field, fieldState: { error } }) => (
                 <CustomFormControl fullWidth>
                   <Typography className={"control-title"} variant="caption">
@@ -235,7 +257,10 @@ const OptionsCardTaxPart = ({
             <Controller
               name="teamPercent"
               control={control}
-              rules={{ required: 'Please fill the field' }}
+              rules={{
+                required: 'Please fill the field',
+                validate: value => value >= 0 || 'The ratio must be greater than 0'
+              }}
               render={({ field, fieldState: { error } }) => (
                 <CustomFormControl fullWidth>
                   <Typography className={"control-title"} variant="caption">
@@ -274,8 +299,13 @@ const OptionsCardTaxPart = ({
 
         <Box marginTop={-8}>
           <FormHelperText className={"control-help"}>
-            Burn + Marketing = 100%
+            Burn + Marketing = {Number(burnPercent) + Number(teamPercent)}%
           </FormHelperText>
+          {Number(burnPercent) + Number(teamPercent) !== 100 && (
+            <Typography variant={'caption'} color={'error'}>
+              The total must be 100%!
+            </Typography>
+          )}
         </Box>
 
         {/** BEGIN TEAM_ADDRESS_block_in_Options_card_tax_part*/}
@@ -304,16 +334,25 @@ const OptionsCardTaxPart = ({
                 control={control}
                 errors={errors}
                 watch={watch}
-                fields={fields} 
-                append={append} 
-                remove={remove} 
+                fields={fields}
+                append={append}
+                remove={remove}
               />
             </>))}
           </Box>
 
+          {fields.length !== 0 && totalPercent !== 100 && (
+            <Box marginTop={2}>
+              <Typography variant={'caption'} color={'error'}>
+                The total of the addresses shares must be 100%!
+              </Typography>
+            </Box>
+          )}
+
+
           {/** Add new button */}
           <Box>
-            <Button variant="text" color="success" onClick={()=>{append({ address: '', percent: 0})}}>
+            <Button variant="text" color="success" onClick={() => { append({ address: '', percent: 0 }) }}>
               <PlusCircleOutlineIcon />
               &nbsp;&nbsp;
               <Typography

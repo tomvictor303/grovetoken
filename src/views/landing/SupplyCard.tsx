@@ -63,7 +63,10 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
         <Controller
           name="initial_supply"
           control={control}
-          rules={{ required: 'Initial Supply is required' }}
+          rules={{
+            required: 'Initial Supply is required',
+            validate: value => value > 1 || 'Initial Supply must be greater than 1'
+          }}
           render={({ field, fieldState: { error } }) => (
             <CustomFormControl fullWidth>
               <Typography className={'control-title'} variant='caption'>INITIAL SUPPLY</Typography>
@@ -82,7 +85,6 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
                 }}
                 inputProps={{
                   min: 0,
-                  pattern: "\\d*",
                 }}
                 disabled={token_type === TokenType.Basic}
               />
@@ -95,7 +97,10 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
         <Controller
           name="maximum_supply"
           control={control}
-          rules={{ required: 'Maximum Supply is required' }}
+          rules={{
+            required: 'Maximum Supply is required',
+            validate: value => value > 1 || 'Maximum Supply must be greater than 1'
+          }}
           render={({ field, fieldState: { error } }) => (
             <CustomFormControl fullWidth
               sx={{ display: supply_type === 'Unlimited' ? 'none' : undefined }}>
@@ -115,7 +120,6 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
                 }}
                 inputProps={{
                   min: 0,
-                  pattern: "\\d*",
                 }}
                 disabled={supply_type === 'Fixed'}
               />
