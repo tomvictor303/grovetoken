@@ -103,7 +103,7 @@ const LandingPage = () => {
     defaultValues
   });
 
-  const [ network, token_type ] = watch(['network', 'token_type']);
+  const [ network, token_type, supply_type, initial_supply, maximum_supply ] = watch(['network', 'token_type', 'supply_type', 'initial_supply', 'maximum_supply']);
 
   // ** States
   const [values, setValues] = useState<HomeState>({
@@ -213,10 +213,10 @@ const LandingPage = () => {
     }
     const new_initial_supply: number = parseInt(newValue, 10);
     /////////////////
-    if ( values?.supply_type === 'Fixed' || values?.supply_type === 'Unlimited' ) {
+    if ( supply_type === 'Fixed' || supply_type === 'Unlimited' ) {
       setValue('maximum_supply', new_initial_supply, { shouldValidate: true });
     } else {
-      if ( new_initial_supply > values?.maximum_supply ) {
+      if ( new_initial_supply > maximum_supply ) {
         setValue('maximum_supply', new_initial_supply, { shouldValidate: true });
       } else {
       }
@@ -230,7 +230,7 @@ const LandingPage = () => {
     }
     const new_maximum_supply: number = parseInt(newValue, 10);
     /////////////////    
-    if ( new_maximum_supply < values?.initial_supply ) {
+    if ( new_maximum_supply < initial_supply ) {
       setValue('initial_supply', new_maximum_supply, { shouldValidate: true });
     } else {
     }
