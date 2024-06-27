@@ -35,37 +35,27 @@ import { styled, useTheme } from "@mui/material/styles";
 import OptionsCardSwitchPart from "./OptionsCardSwitchPart";
 import OptionsCardTaxPart from "./OptionsCardTaxPart";
 import OptionsCardFinalPart from "./OptionsCardFinalPart";
+import { Control, Controller, FieldArrayWithId, FieldErrors, FieldValues, UseFieldArrayAppend, UseFieldArrayRemove, UseFormWatch } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState;
-  handleChange: (
-    prop: keyof HomeState
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-  handleSelectChange: (
-    prop: keyof HomeState
-  ) => (event: SelectChangeEvent<any>) => void;
-  handleCheckedChange: (
-    prop: keyof HomeState
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleTAChange: (
-    prop: keyof TeamAddress,
-    index: number
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-
-  addNewTeamAddress: () => void;
-  removeTeamAddress: (index: number) => void;
+  control: Control<HomeState, any>;
+  errors: FieldErrors<HomeState>;
+  watch: UseFormWatch<HomeState>;
+  fields: FieldArrayWithId<HomeState, "teamAddressList", "id">[];
+  append: UseFieldArrayAppend<HomeState, "teamAddressList">;
+  remove: UseFieldArrayRemove;
 }
 
 const OptionsCard = ({
-  values,
-  handleChange,
-  handleSelectChange,
-  handleCheckedChange,
-  handleTAChange,
-  addNewTeamAddress,
-  removeTeamAddress
+  control,
+  errors,
+  watch,
+  fields,
+  append,
+  remove,
 }: MyCardProps) => {
   const theme = useTheme();
+  const [network, token_type, supply_type, isTax] = watch(['network', 'token_type', 'supply_type', 'isTax']);
 
   return (
     <>
@@ -80,29 +70,21 @@ const OptionsCard = ({
 
           {/** BEGIN Options_card_switch_part */}
           <OptionsCardSwitchPart
-            values={values}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleCheckedChange={handleCheckedChange}
+            control={control}
+            errors={errors}
+            watch={watch}
           />
           {/** END Options_card_switch_part */}
 
           {/** BEGIN Options_card_tax_part */}
-          {/* <OptionsCardTaxPart
-            values={values}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleCheckedChange={handleCheckedChange}
-          /> */}
-          {values.isTax ? (
+          {isTax ? (
             <OptionsCardTaxPart
-              values={values}
-              handleChange={handleChange}
-              handleSelectChange={handleSelectChange}
-              handleCheckedChange={handleCheckedChange}
-              handleTAChange={handleTAChange}
-              addNewTeamAddress={addNewTeamAddress}
-              removeTeamAddress={removeTeamAddress}
+              control={control}
+              errors={errors}
+              watch={watch}
+              fields={fields} 
+              append={append} 
+              remove={remove}
             />
           ) : (
             <></>
@@ -111,10 +93,9 @@ const OptionsCard = ({
 
           {/** BEGIN Options_card_final_part */}
           <OptionsCardFinalPart
-            values={values}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleCheckedChange={handleCheckedChange}
+            control={control}
+            errors={errors}
+            watch={watch}
           />
           {/** END Options_card_final_part */}
         </CustomCardContent>

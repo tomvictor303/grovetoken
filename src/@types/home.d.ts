@@ -33,7 +33,9 @@ declare global {
     //////////////////////
     swap_router: string,
     access_type: "Owner" | "Roles",
+    //////////////////////
+    isAgreedTerms: boolean,
   }
 }
 
-export {};
+export { };

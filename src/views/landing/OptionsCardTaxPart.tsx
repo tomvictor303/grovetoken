@@ -36,186 +36,149 @@ import { ChangeEvent } from "react";
 import IOSSwitch from "../custom/IOSSwitch";
 import { styled, useTheme } from "@mui/material/styles";
 import { TokenType } from "src/utils/enums";
+import { Control, Controller, FieldArrayWithId, FieldErrors, FieldValues, UseFieldArrayAppend, UseFieldArrayRemove, UseFormWatch } from 'react-hook-form';
+import OptionsCardTaxAddressComponent from "./OptionsCardTaxAddressComponent";
 
 interface MyCardProps {
-  values: HomeState;
-  handleChange: (
-    prop: keyof HomeState
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-  handleSelectChange: (
-    prop: keyof HomeState
-  ) => (event: SelectChangeEvent<any>) => void;
-  handleCheckedChange: (
-    prop: keyof HomeState
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleTAChange: (
-    prop: keyof TeamAddress,
-    index: number
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-
-  addNewTeamAddress: () => void;
-  removeTeamAddress: (index: number) => void;
+  control: Control<HomeState, any>;
+  errors: FieldErrors<HomeState>;
+  watch: UseFormWatch<HomeState>;
+  fields: FieldArrayWithId<HomeState, "teamAddressList", "id">[];
+  append: UseFieldArrayAppend<HomeState, "teamAddressList">;
+  remove: UseFieldArrayRemove;
 }
 
 const OptionsCardTaxPart = ({
-  values,
-  handleChange,
-  handleSelectChange,
-  handleCheckedChange,
-  handleTAChange,
-  addNewTeamAddress,
-  removeTeamAddress
+  control,
+  errors,
+  watch,
+  fields,
+  append,
+  remove,
 }: MyCardProps) => {
   const theme = useTheme();
-
-  const addressComponent = (
-    teamAddress: TeamAddress,
-    index: number,
-    handleTAChange: any
-  ) => (
-    <>
-      <Grid container spacing={4} style={{ alignItems: "center" }}>
-        <Grid item xs={1} style={{ paddingTop: 0 }}>
-          <Typography className={"cardheader-title"} variant="caption">
-            #{index + 1}
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <CustomFormControl fullWidth style={{ margin: "auto" }}>
-            <OutlinedInput
-              className={"control-element"}
-              value={teamAddress.address}
-              onChange={handleTAChange("address", index)}
-              placeholder="0x..."
-              type="text"
-            />
-          </CustomFormControl>
-        </Grid>
-        <Grid item xs={4}>
-          <CustomFormControl fullWidth style={{ margin: "auto" }}>
-            <OutlinedInput
-              className={"control-element"}
-              value={teamAddress.percent}
-              onChange={handleTAChange("percent", index)}
-              placeholder=""
-              type="number"
-              inputProps={{
-                min: 0,
-                max: 100,
-                pattern: "\\d*"
-              }}
-              endAdornment={<InputAdornment position="end">%</InputAdornment>}
-            />
-          </CustomFormControl>
-        </Grid>
-        <Grid item xs={1}>
-          <DeleteOutlineIcon
-            style={{ color: "red", cursor: "pointer" }}
-            onClick={() => {
-              removeTeamAddress(index);
-            }}
-          />
-        </Grid>
-      </Grid>
-    </>
-  );
+  const [network, token_type, supply_type, isTax] = watch(['network', 'token_type', 'supply_type', 'isTax']);
 
   return (
     <>
       <Box>
         <Grid container spacing={4}>
           <Grid item xs={4}>
-            <CustomFormControl fullWidth>
-              <Typography className={"control-title"} variant="caption">
-                <Stack direction={"row"} alignItems={"center"} spacing={1}>
-                  <Box>Buy</Box>
-                  <Tooltip
-                    title="% of tax collected when a user buy coins"
-                    className="cursorPoint"
-                  >
-                    <InformationOutlineIcon
-                      className="extra-small-icon"
-                      color="success"
-                    />
-                  </Tooltip>
-                </Stack>
-              </Typography>
-              <OutlinedInput
-                className={"control-element"}
-                value={values.buyPercent}
-                onChange={handleChange("buyPercent")}
-                placeholder=""
-                type="number"
-                inputProps={{
-                  min: 0,
-                  max: (values.token_type < TokenType.Advance ? 5 : 100),
-                  pattern: "\\d*"
-                }}
-                endAdornment={<InputAdornment position="end">%</InputAdornment>}
-              />
-            </CustomFormControl>
+            <Controller
+              name="buyPercent"
+              control={control}
+              rules={{ required: 'Please fill the field' }}
+              render={({ field, fieldState: { error } }) => (
+                <CustomFormControl fullWidth>
+                  <Typography className={"control-title"} variant="caption">
+                    <Stack direction={"row"} alignItems={"center"} spacing={1}>
+                      <Box>Buy</Box>
+                      <Tooltip
+                        title="% of tax collected when a user buy coins"
+                        className="cursorPoint"
+                      >
+                        <InformationOutlineIcon
+                          className="extra-small-icon"
+                          color="success"
+                        />
+                      </Tooltip>
+                    </Stack>
+                  </Typography>
+                  <OutlinedInput
+                    className={"control-element"}
+                    {...field}
+                    error={!!error}
+                    placeholder=""
+                    type="number"
+                    inputProps={{
+                      min: 0,
+                      max: (token_type < TokenType.Advance ? 5 : 100),
+                      pattern: "\\d*"
+                    }}
+                    endAdornment={<InputAdornment position="end">%</InputAdornment>}
+                  />
+                  {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
+                </CustomFormControl>
+              )}
+            />
           </Grid>
           <Grid item xs={4}>
-            <CustomFormControl fullWidth>
-              <Typography className={"control-title"} variant="caption">
-                <Stack direction={"row"} alignItems={"center"} spacing={1}>
-                  <Box>Sell</Box>
-                  <Tooltip
-                    title="% of tax collected when a user sell coins"
-                    className="cursorPoint"
-                  >
-                    <InformationOutlineIcon
-                      className="extra-small-icon"
-                      color="success"
-                    />
-                  </Tooltip>
-                </Stack>
-              </Typography>
-              <OutlinedInput
-                className={"control-element"}
-                value={values.sellPercent}
-                onChange={handleChange("sellPercent")}
-                placeholder=""
-                type="number"
-                inputProps={{
-                  min: 0,
-                  max: (values.token_type < TokenType.Advance ? 5 : 100),
-                  pattern: "\\d*"
-                }}
-                endAdornment={<InputAdornment position="end">%</InputAdornment>}
-              />
-            </CustomFormControl>
+            <Controller
+              name="sellPercent"
+              control={control}
+              rules={{ required: 'Please fill the field' }}
+              render={({ field, fieldState: { error } }) => (
+                <CustomFormControl fullWidth>
+                  <Typography className={"control-title"} variant="caption">
+                    <Stack direction={"row"} alignItems={"center"} spacing={1}>
+                      <Box>Sell</Box>
+                      <Tooltip
+                        title="% of tax collected when a user sell coins"
+                        className="cursorPoint"
+                      >
+                        <InformationOutlineIcon
+                          className="extra-small-icon"
+                          color="success"
+                        />
+                      </Tooltip>
+                    </Stack>
+                  </Typography>
+                  <OutlinedInput
+                    className={"control-element"}
+                    {...field}
+                    error={!!error}
+                    placeholder=""
+                    type="number"
+                    inputProps={{
+                      min: 0,
+                      max: (token_type < TokenType.Advance ? 5 : 100),
+                      pattern: "\\d*"
+                    }}
+                    endAdornment={<InputAdornment position="end">%</InputAdornment>}
+                  />
+                  {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
+                </CustomFormControl>
+              )}
+            />
           </Grid>
           <Grid item xs={4}>
-            <CustomFormControl fullWidth>
-              <Typography className={"control-title"} variant="caption">
-                <Stack direction={"row"} alignItems={"center"} spacing={1}>
-                  <Box>Transfer</Box>
-                  <Tooltip
-                    title="% of tax collected when a user transfer coins"
-                    className="cursorPoint"
-                  >
-                    <InformationOutlineIcon
-                      className="extra-small-icon"
-                      color="success"
-                    />
-                  </Tooltip>
-                </Stack>
-              </Typography>
-              <OutlinedInput
-                className={"control-element"}
-                value={values.transferPercent}
-                onChange={handleChange("transferPercent")}
-                placeholder=""
-                type="number"
-                inputProps={{
-                  min: 0,
-                  max: (values.token_type < TokenType.Advance ? 5 : 100),
-                  pattern: "\\d*"
-                }}
-                endAdornment={<InputAdornment position="end">%</InputAdornment>}
-              />
-            </CustomFormControl>
+            <Controller
+              name="transferPercent"
+              control={control}
+              rules={{ required: 'Please fill the field' }}
+              render={({ field, fieldState: { error } }) => (
+                <CustomFormControl fullWidth>
+                  <Typography className={"control-title"} variant="caption">
+                    <Stack direction={"row"} alignItems={"center"} spacing={1}>
+                      <Box>Transfer</Box>
+                      <Tooltip
+                        title="% of tax collected when a user transfer coins"
+                        className="cursorPoint"
+                      >
+                        <InformationOutlineIcon
+                          className="extra-small-icon"
+                          color="success"
+                        />
+                      </Tooltip>
+                    </Stack>
+                  </Typography>
+                  <OutlinedInput
+                    className={"control-element"}
+                    {...field}
+                    error={!!error}
+                    placeholder=""
+                    type="number"
+                    inputProps={{
+                      min: 0,
+                      max: (token_type < TokenType.Advance ? 5 : 100),
+                      pattern: "\\d*"
+                    }}
+                    endAdornment={<InputAdornment position="end">%</InputAdornment>}
+                  />
+                  {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
+                </CustomFormControl>
+              )}
+            />
           </Grid>
         </Grid>
         <CustomFormControl fullWidth>
@@ -230,66 +193,82 @@ const OptionsCardTaxPart = ({
 
         <Grid container spacing={4}>
           <Grid item xs={6}>
-            <CustomFormControl fullWidth>
-              <Typography className={"control-title"} variant="caption">
-                <Stack direction={"row"} alignItems={"center"} spacing={1}>
-                  <Box>Burn</Box>
-                  <Tooltip
-                    title="Burn goes to the dead wallet"
-                    className="cursorPoint"
-                  >
-                    <InformationOutlineIcon
-                      className="extra-small-icon"
-                      color="success"
-                    />
-                  </Tooltip>
-                </Stack>
-              </Typography>
-              <OutlinedInput
-                className={"control-element"}
-                value={values.burnPercent}
-                onChange={handleChange("burnPercent")}
-                placeholder=""
-                type="number"
-                inputProps={{
-                  min: 0,
-                  max: 100,
-                  pattern: "\\d*"
-                }}
-                endAdornment={<InputAdornment position="end">%</InputAdornment>}
-              />
-            </CustomFormControl>
+            <Controller
+              name="burnPercent"
+              control={control}
+              rules={{ required: 'Please fill the field' }}
+              render={({ field, fieldState: { error } }) => (
+                <CustomFormControl fullWidth>
+                  <Typography className={"control-title"} variant="caption">
+                    <Stack direction={"row"} alignItems={"center"} spacing={1}>
+                      <Box>Burn</Box>
+                      <Tooltip
+                        title="Burn goes to the dead wallet"
+                        className="cursorPoint"
+                      >
+                        <InformationOutlineIcon
+                          className="extra-small-icon"
+                          color="success"
+                        />
+                      </Tooltip>
+                    </Stack>
+                  </Typography>
+                  <OutlinedInput
+                    className={"control-element"}
+                    {...field}
+                    error={!!error}
+                    placeholder=""
+                    type="number"
+                    inputProps={{
+                      min: 0,
+                      max: 100,
+                      pattern: "\\d*"
+                    }}
+                    endAdornment={<InputAdornment position="end">%</InputAdornment>}
+                  />
+                  {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
+                </CustomFormControl>
+              )}
+            />
           </Grid>
           <Grid item xs={6}>
-            <CustomFormControl fullWidth>
-              <Typography className={"control-title"} variant="caption">
-                <Stack direction={"row"} alignItems={"center"} spacing={1}>
-                  <Box>Team</Box>
-                  <Tooltip
-                    title="Team is specified by owner as Marketing / Owner or some other wallet desired."
-                    className="cursorPoint"
-                  >
-                    <InformationOutlineIcon
-                      className="extra-small-icon"
-                      color="success"
-                    />
-                  </Tooltip>
-                </Stack>
-              </Typography>
-              <OutlinedInput
-                className={"control-element"}
-                value={values.teamPercent}
-                onChange={handleChange("teamPercent")}
-                placeholder=""
-                type="number"
-                inputProps={{
-                  min: 0,
-                  max: 100,
-                  pattern: "\\d*"
-                }}
-                endAdornment={<InputAdornment position="end">%</InputAdornment>}
-              />
-            </CustomFormControl>
+            <Controller
+              name="teamPercent"
+              control={control}
+              rules={{ required: 'Please fill the field' }}
+              render={({ field, fieldState: { error } }) => (
+                <CustomFormControl fullWidth>
+                  <Typography className={"control-title"} variant="caption">
+                    <Stack direction={"row"} alignItems={"center"} spacing={1}>
+                      <Box>Team</Box>
+                      <Tooltip
+                        title="Team is specified by owner as Marketing / Owner or some other wallet desired."
+                        className="cursorPoint"
+                      >
+                        <InformationOutlineIcon
+                          className="extra-small-icon"
+                          color="success"
+                        />
+                      </Tooltip>
+                    </Stack>
+                  </Typography>
+                  <OutlinedInput
+                    className={"control-element"}
+                    {...field}
+                    error={!!error}
+                    placeholder=""
+                    type="number"
+                    inputProps={{
+                      min: 0,
+                      max: 100,
+                      pattern: "\\d*"
+                    }}
+                    endAdornment={<InputAdornment position="end">%</InputAdornment>}
+                  />
+                  {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
+                </CustomFormControl>
+              )}
+            />
           </Grid>
         </Grid>
 
@@ -318,14 +297,23 @@ const OptionsCardTaxPart = ({
 
           {/** address list*/}
           <Box marginTop={4}>
-            {values.teamAddressList.map((item: TeamAddress, index: number) => (
-              <>{addressComponent(item, index, handleTAChange)}</>
-            ))}
+            {fields.map((item, index) => (<>
+              <OptionsCardTaxAddressComponent
+                item={item}
+                index={index}
+                control={control}
+                errors={errors}
+                watch={watch}
+                fields={fields} 
+                append={append} 
+                remove={remove} 
+              />
+            </>))}
           </Box>
 
           {/** Add new button */}
           <Box>
-            <Button variant="text" color="success" onClick={addNewTeamAddress}>
+            <Button variant="text" color="success" onClick={()=>{append({ address: '', percent: 0})}}>
               <PlusCircleOutlineIcon />
               &nbsp;&nbsp;
               <Typography
@@ -343,28 +331,36 @@ const OptionsCardTaxPart = ({
         </Box>
         {/** END TEAM_ADDRESS_block_in_Options_card_tax_part */}
 
-        <CustomFormControl fullWidth>
-          <Select
-            className={"control-element"}
-            value={values.taxCurrency}
-            onChange={handleSelectChange("taxCurrency")}
-            displayEmpty
-            disabled={values.token_type !== TokenType.Advance}
-          >
-            {/* <MenuItem value="">
-            <em>None</em>
-          </MenuItem> */}
-            <MenuItem value={"native"}>
-              Send tax in {values.network?.currency}
-            </MenuItem>
-            <MenuItem value={"token"}>Send tax in Token</MenuItem>
-          </Select>
-          <FormHelperText className={"control-help"}>
-            Select the currency to send to the team ({values.network?.currency}{" "}
-            or tokens). The tax will be swapped if {values.network?.currency} is
-            selected.
-          </FormHelperText>
-        </CustomFormControl>
+        <Controller
+          name="taxCurrency"
+          control={control}
+          rules={{ required: 'Please fill the field' }}
+          render={({ field, fieldState: { error } }) => (
+            <CustomFormControl fullWidth>
+              <Select
+                className={"control-element"}
+                {...field}
+                error={!!error}
+                displayEmpty
+                disabled={token_type !== TokenType.Advance}
+              >
+                {/* <MenuItem value="">
+                  <em>None</em>
+                </MenuItem> */}
+                <MenuItem value={"native"}>
+                  Send tax in {network?.currency}
+                </MenuItem>
+                <MenuItem value={"token"}>Send tax in Token</MenuItem>
+              </Select>
+              <FormHelperText className={"control-help"}>
+                Select the currency to send to the team ({network?.currency}{" "}
+                or tokens). The tax will be swapped if {network?.currency} is
+                selected.
+              </FormHelperText>
+              {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
+            </CustomFormControl>
+          )}
+        />
       </Box>
     </>
   );
