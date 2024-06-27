@@ -30,7 +30,17 @@ const networks: Network[] = [
         name: "ETH",
         address: "0x3711020351da65a99eb9a821Bb7706E193C9aaa0"
       },
-    ]
+    ],
+    contracts: {      
+      BaseToken: "0x8a1C79ff7733a4F2c57A197372E8371649F0e388",
+      CustomToken: "0xcA34c18f596ED252EadF939e618b128038CAfe17",
+      RewardToken: "0x56d1500a0338C7a730b2078Ea8E2D49D77aC19ee",
+      FeeReceiver: "0xfa13b5E2bF78ECB033Da210150793f22b5f875E1",
+      Distributor: "0x409340Ac4Ce9f6946759409bd3A6105Ae30e9CCd",
+      DistributorGenerator: "0x2d2D40f80891b5Cc4143Cf3eF24092bC540756E5",
+      TaxReceiverGenerator: "0xc7393ce49bbFAEE830c7DdA0a75c3Db40F5ED3af",
+      TokenGenerator: "0xca9cd9C52B9D59d06136a757a34e75c6BaD8dEB8",
+    },
   },
   {
     id: 'BNB',
