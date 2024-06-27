@@ -60,14 +60,6 @@ const OptionsCardTaxPart = ({
   const [network, token_type, supply_type, isTax, burnPercent, teamPercent, teamAddressList] = watch(['network', 'token_type', 'supply_type', 'isTax', 'burnPercent', 'teamPercent', 'teamAddressList']);
 
   const totalPercent = teamAddressList.reduce((sum, item) => sum + (Number(item.percent) || 0), 0);
-
-  const isValidEthereumAddress = (address) => {
-    return /^0x[a-fA-F0-9]{40}$/.test(address);
-  };
-  
-  // Usage example
-  const address = "0x32Be343B94f860124dC4fEe278FDCBD38C102D88";
-  console.log(isValidEthereumAddress(address)); // true or false
   
   return (
     <>
