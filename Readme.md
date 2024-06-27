@@ -9,3 +9,6 @@ src\@core\theme\typography
 
 <h2>Element border radius</h2>
 theme.shape.borderRadius
+
+<h2>Validation</h2>
+React-hook-form
