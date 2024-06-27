@@ -38,23 +38,23 @@ const AjaxInterceptor = () => {
                 }
                 if (!config.headers["x-authorization"] && typeof window !== 'undefined') {
                     // jwt_token
-                    let jwt_token = window?.localStorage?.getItem('jwtToken');
-                    if ( jwt_token ) jwt_token = jwt_token?.replace(/"/g, '');
-                    config.headers["x-authorization"] = jwt_token;
+                    // let jwt_token = window?.localStorage?.getItem('jwtToken');
+                    // if ( jwt_token ) jwt_token = jwt_token?.replace(/"/g, '');
+                    // config.headers["x-authorization"] = jwt_token;
                 }
                 return [url, config];
             },
             response: function (response) {
                 // Modify the reponse object 
                 // BEGIN AJAX_AUTH_CHECK
-                if (
-                  typeof window !== 'undefined' && 
-                  response.status === 401 && 
-                  !window.location.pathname.includes('auth')
-                ) { 
-                  alert("Your request is unauthorized! Please login (again).");
-                  window.location.href = `/pages/login?redirectUri=${encodeURIComponent(window.location.href)}`;
-                }
+                // if (
+                //   typeof window !== 'undefined' && 
+                //   response.status === 401 && 
+                //   !window.location.pathname.includes('auth')
+                // ) { 
+                //   alert("Your request is unauthorized! Please login (again).");
+                //   window.location.href = `/pages/login?redirectUri=${encodeURIComponent(window.location.href)}`;
+                // }
                 // END AJAX_AUTH_CHECK
                 return response;
             },

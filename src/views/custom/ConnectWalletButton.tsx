@@ -8,7 +8,7 @@ function CustomOpenButton() {
   // 4. Use modal hook
   const { open } = useWeb3Modal();
   return <>
-    <Button variant="contained" color="success" size="large" onClick={() => open()}>Connect</Button>
+    <Button variant="contained" color="success" size="large" onClick={() => open({view:'Networks'})}>Connect</Button>
   </>
 }
 

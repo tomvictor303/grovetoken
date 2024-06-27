@@ -4,7 +4,7 @@ const networks: Network[] = [
     name: 'Grove',
     short_name: 'GRV',
     currency: 'GRV',
-    icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/23196.png',
+    icon: 'https://assets-global.website-files.com/62b03f7c4e77803f83b758a2/62b0c510ac78ba061da94401_newgrove-01_edited.png',
     mainnet: {
       chainId: 770077,
       rpc: 'https://mainnet.grovechain.io/',
@@ -23,11 +23,11 @@ const networks: Network[] = [
     scan_name: "GRVscan",
     routers: [
       {
-        name: "BSC",
+        name: "Grove Bep20",
         address: "0xe4D96Cf7f47656200FBC3b6110DC8E785216EF0E"
       },
       {
-        name: "ETH",
+        name: "Grove Erc20",
         address: "0x3711020351da65a99eb9a821Bb7706E193C9aaa0"
       },
     ],
@@ -63,7 +63,17 @@ const networks: Network[] = [
       rpc: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
       explorer: 'https://testnet.bscscan.com/'
     },
-    scan_name: "Bscscan"
+    scan_name: "Bscscan",
+    routers: [
+      {
+        name: "Uniswap V2",
+        address: "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+      },
+      {
+        name: "Uniswap V3",
+        address: "0x13f4EA83D0bd40E75C8222255bc855a974568Dd4"
+      }
+    ]
   },
   {
     id: 'ETH',
@@ -73,7 +83,7 @@ const networks: Network[] = [
     icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
     mainnet: {
       chainId: 1,
-      rpc: 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+      rpc: 'https://eth.llamarpc.com',
       explorer: 'https://etherscan.io/'
     },
     testnet: {
@@ -131,17 +141,17 @@ const networks: Network[] = [
     id: 'SHIB',
     name: 'Shibarium',
     short_name: 'SHIB',
-    currency: 'SHIB',
+    currency: 'BONE',
     icon: 'https://cryptologos.cc/logos/shiba-inu-shib-logo.png',
     mainnet: {
-      chainId: 969,
-      rpc: 'https://rpc.shibarium.network/',
-      explorer: 'https://shibariumscan.com/'
+      chainId: 109,
+      rpc: 'https://www.shibrpc.com',
+      explorer: 'https://shibariumscan.io'
     },
     testnet: {
-      chainId: 971,
-      rpc: 'https://testnet.shibarium.network/',
-      explorer: 'https://testnet.shibariumscan.com/'
+      chainId: 157,
+      rpc: 'https://puppynet.shibrpc.com',
+      explorer: 'https://puppyscan.shib.io'
     },
     commission_fee: {
       basic: 195,
@@ -167,6 +177,7 @@ const networks: Network[] = [
     currency: 'MATIC',
     icon: 'https://cryptologos.cc/logos/polygon-matic-logo.png',
     mainnet: {
+      name: 'Polygon Mainnet',
       chainId: 137,
       rpc: 'https://rpc-mainnet.maticvigil.com/',
       explorer: 'https://polygonscan.com/'
@@ -200,6 +211,7 @@ const networks: Network[] = [
     currency: 'ETH',
     icon: 'https://cryptologos.cc/logos/arbitrum-arb-logo.png',
     mainnet: {
+      name: 'Arbitrum One',
       chainId: 42161,
       rpc: 'https://arb1.arbitrum.io/rpc',
       explorer: 'https://arbiscan.io/'
