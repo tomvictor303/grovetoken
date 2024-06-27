@@ -14,6 +14,7 @@ import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { TokenType } from 'src/utils/enums';
 import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
+import NumberFormatCustom from '../custom/NumberFormatCustom';
 
 interface MyCardProps {
   control: Control<HomeState, any>;
@@ -75,7 +76,10 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
                   handleInitialSupplyChange(e.target.value);
                 }}
                 placeholder=""
-                type="number"
+                type="text" // Changed from "number" to "text" to allow formatted input
+                InputProps={{
+                  inputComponent: NumberFormatCustom as any,
+                }}
                 inputProps={{
                   min: 0,
                   pattern: "\\d*",
@@ -105,8 +109,12 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
                   handleMaximumSupplyChange(e.target.value);
                 }}
                 placeholder=""
-                type="number"
+                type="text" // Changed from "number" to "text" to allow formatted input
+                InputProps={{
+                  inputComponent: NumberFormatCustom as any,
+                }}
                 inputProps={{
+                  min: 0,
                   pattern: "\\d*",
                 }}
                 disabled={supply_type === 'Fixed'}
