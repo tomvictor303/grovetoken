@@ -70,7 +70,7 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
                 className={'control-element'}
                 {...field}
                 error={!!error}
-                onChange={(e)=>{
+                onChange={(e) => {
                   field.onChange(e);
                   handleInitialSupplyChange(e.target.value);
                 }}
@@ -82,7 +82,7 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
                 }}
                 disabled={token_type === TokenType.Basic}
               />
-              <FormHelperText className={'control-help'}>The number of coins minted during the creation of the contract</FormHelperText>
+              <FormHelperText className={'control-help'}>The number of tokens minted during the creation of the contract</FormHelperText>
               {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
             </CustomFormControl>
           )}
@@ -100,7 +100,7 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
                 className={'control-element'}
                 {...field}
                 error={!!error}
-                onChange={(e)=>{
+                onChange={(e) => {
                   field.onChange(e);
                   handleMaximumSupplyChange(e.target.value);
                 }}
@@ -111,7 +111,7 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
                 }}
                 disabled={supply_type === 'Fixed'}
               />
-              <FormHelperText className={'control-help'}>The maximum number of coins you can mint from the contract</FormHelperText>
+              <FormHelperText className={'control-help'}>The maximum number of tokens you can mint from the contract</FormHelperText>
               {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
             </CustomFormControl>
           )}

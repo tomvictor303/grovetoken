@@ -19,7 +19,18 @@ const networks: Network[] = [
       basic: 10000,
       custom: 35000,
       advance: 150000
-    }
+    },
+    scan_name: "GRVscan",
+    routers: [
+      {
+        name: "BSC",
+        address: "0xe4D96Cf7f47656200FBC3b6110DC8E785216EF0E"
+      },
+      {
+        name: "ETH",
+        address: "0x3711020351da65a99eb9a821Bb7706E193C9aaa0"
+      },
+    ]
   },
   {
     id: 'BNB',
@@ -32,11 +43,17 @@ const networks: Network[] = [
       rpc: 'https://bsc-dataseed.binance.org/',
       explorer: 'https://bscscan.com/'
     },
+    commission_fee: {
+      basic: 0.1,
+      custom: 0.4,
+      advance: 1
+    },
     testnet: {
       chainId: 97,
       rpc: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
       explorer: 'https://testnet.bscscan.com/'
-    }
+    },
+    scan_name: "Bscscan"
   },
   {
     id: 'ETH',
@@ -53,7 +70,23 @@ const networks: Network[] = [
       chainId: 5,
       rpc: 'https://goerli.infura.io/v3/YOUR_INFURA_PROJECT_ID',
       explorer: 'https://goerli.etherscan.io/'
-    }
+    },
+    commission_fee: {
+      basic: 0.028,
+      custom: 0.112,
+      advance: 0.28
+    },
+    scan_name: "Etherscan",
+    routers: [
+      {
+        name: "Uniswap V2",
+        address: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+      },
+      {
+        name: "Uniswap V3",
+        address: "0xE592427A0AEce92De3Edee1F18E0157C05861564"
+      },
+    ]
   },
   {
     id: 'BASE',
@@ -70,7 +103,19 @@ const networks: Network[] = [
       chainId: 84531,
       rpc: 'https://goerli.base.org/',
       explorer: 'https://goerli.basescan.org/'
-    }
+    },
+    commission_fee: {
+      basic: 0.028,
+      custom: 0.112,
+      advance: 0.28
+    },
+    scan_name: "Basescan",
+    routers: [
+      {
+        name: "Uniswap Universal",
+        address: "0x198EF79F1F515F02dFE9e3115eD9fC07183f02fC"
+      }
+    ]
   },
   {
     id: 'SHIB',
@@ -87,7 +132,23 @@ const networks: Network[] = [
       chainId: 971,
       rpc: 'https://testnet.shibarium.network/',
       explorer: 'https://testnet.shibariumscan.com/'
-    }
+    },
+    commission_fee: {
+      basic: 195,
+      custom: 780,
+      advance: 1950
+    },
+    scan_name: "Shibariumscan",
+    routers: [
+      {
+        name: "ChewySwap",
+        address: "0x2875F2D86d83635A859029872e745581530cEec7"
+      },
+      {
+        name: "Uniswap V2",
+        address: "0xEF83bbB63E8A7442E3a4a5d28d9bBf32D7c813c8"
+      },
+    ]
   },
   {
     id: 'MATIC',
@@ -104,7 +165,23 @@ const networks: Network[] = [
       chainId: 80001,
       rpc: 'https://rpc-mumbai.maticvigil.com/',
       explorer: 'https://mumbai.polygonscan.com/'
-    }
+    },
+    commission_fee: {
+      basic: 125,
+      custom: 500,
+      advance: 1250
+    },
+    scan_name: "Polygonscan",
+    routers: [
+      {
+        name: "QuickStop",
+        address: "0xf5b509bB0909a69B1c207E495f687a596C168E12"
+      },
+      {
+        name: "Uniswap V3",
+        address: "0xE592427A0AEce92De3Edee1F18E0157C05861564"
+      },
+    ]
   },
   {
     id: 'ARB',
@@ -121,7 +198,23 @@ const networks: Network[] = [
       chainId: 421611,
       rpc: 'https://rinkeby.arbitrum.io/rpc',
       explorer: 'https://testnet.arbiscan.io/'
-    }
+    },
+    commission_fee: {
+      basic: 0.028,
+      custom: 0.112,
+      advance: 0.28
+    },
+    scan_name: "Arbiscan",
+    routers: [
+      {
+        name: "GMX",
+        address: "0xaBBc5F99639c9B6bCb58544ddf04EFA6802F4064"
+      },
+      {
+        name: "Zyber",
+        address: "0x16e71B13fE6079B4312063F7E81F76d165Ad32Ad"
+      },
+    ]
   },
   {
     id: 'AVAX',
@@ -138,7 +231,19 @@ const networks: Network[] = [
       chainId: 43113,
       rpc: 'https://api.avax-test.network/ext/bc/C/rpc',
       explorer: 'https://cchain.explorer.avax-test.network/'
-    }
+    },
+    commission_fee: {
+      basic: 2.5,
+      custom: 10,
+      advance: 25
+    },
+    scan_name: "SnowTrace",
+    routers: [
+      {
+        name: "SushiSwap",
+        address: "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506"
+      }
+    ]
   },
   {
     id: 'FTM',
@@ -155,7 +260,19 @@ const networks: Network[] = [
       chainId: 4002,
       rpc: 'https://rpc.testnet.fantom.network/',
       explorer: 'https://testnet.ftmscan.com/'
-    }
+    },
+    commission_fee: {
+      basic: 50,
+      custom: 200,
+      advance: 500
+    },
+    scan_name: "FTMscan",
+    routers: [
+      {
+        name: "SpookySwap",
+        address: "0xF491e7B69E4244ad4002BC14e878a34207E38c29"
+      }
+    ]
   },
   {
     id: 'ZKS',
@@ -172,7 +289,19 @@ const networks: Network[] = [
       chainId: 280,
       rpc: 'https://zksync2-testnet.zksync.dev',
       explorer: 'https://rinkeby-explorer.zksync.io/'
-    }
+    },
+    commission_fee: {
+      basic: 0.01,
+      custom: 0.04,
+      advance: 0.1
+    },
+    scan_name: "ERA",
+    routers: [
+      {
+        name: "Pancakeswap V2",
+        address: "0x5aEaF2883FBf30f3D62471154eDa3C0c1b05942d"
+      }
+    ]
   },
   {
     id: 'ATOM',
@@ -185,11 +314,17 @@ const networks: Network[] = [
       rpc: 'https://rpc.cosmos.network',
       explorer: 'https://cosmos.bigdipper.live/'
     },
+    commission_fee: {
+      basic: 4.4,
+      custom: 17.6,
+      advance: 44
+    },
     testnet: {
       chainId: 2,
       rpc: 'https://rpc.testnet.cosmos.network',
       explorer: 'https://testnet.cosmos.bigdipper.live/'
-    }
+    },
+    scan_name: "ATOMscan"
   },
   {
     id: 'OP',
@@ -206,7 +341,13 @@ const networks: Network[] = [
       chainId: 420,
       rpc: 'https://goerli.optimism.io',
       explorer: 'https://goerli-optimism.etherscan.io/'
-    }
+    },
+    commission_fee: {
+      basic: 28,
+      custom: 112,
+      advance: 280
+    },
+    scan_name: "OP Mainnet"
   },
   {
     id: 'BOBA',
@@ -223,7 +364,13 @@ const networks: Network[] = [
       chainId: 28,
       rpc: 'https://rinkeby.boba.network/',
       explorer: 'https://blockexplorer.rinkeby.boba.network/'
-    }
+    },
+    commission_fee: {
+      basic: 0.028,
+      custom: 0.112,
+      advance: 0.28
+    },
+    scan_name: "Bobascan"
   },
   {
     id: 'TOMO',
@@ -240,7 +387,13 @@ const networks: Network[] = [
       chainId: 89,
       rpc: 'https://rpc.testnet.tomochain.com',
       explorer: 'https://scan.testnet.tomochain.com'
-    }
+    },
+    commission_fee: {
+      basic: 75,
+      custom: 300,
+      advance: 750
+    },
+    scan_name: "Tomoscan"
   },
   {
     id: 'GNO',
@@ -257,7 +410,13 @@ const networks: Network[] = [
       chainId: 10200,
       rpc: 'https://rpc.chiadochain.net',
       explorer: 'https://blockscout.com/gnosis/chiado/'
-    }
+    },
+    commission_fee: {
+      basic: 0.1,
+      custom: 0.4,
+      advance: 1
+    },
+    scan_name: "xDAI"
   },
   {
     id: 'CRO',
@@ -274,7 +433,13 @@ const networks: Network[] = [
       chainId: 338,
       rpc: 'https://evm-t3.cronos.org/',
       explorer: 'https://testnet.cronoscan.com/'
-    }
+    },
+    commission_fee: {
+      basic: 550,
+      custom: 2200,
+      advance: 5500
+    },
+    scan_name: "Cronoscan"
   }
 ];
 

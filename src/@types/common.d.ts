@@ -28,6 +28,11 @@ declare global {
     advance: number;
   }
 
+  type Router = {
+    name: string,
+    address: string
+  }
+
   type Network = {
     id: string;
     name: string;
@@ -37,6 +42,8 @@ declare global {
     mainnet: NetworkConnection;
     testnet?: NetworkConnection;
     commission_fee?: CommissionFee;
+    scan_name: string;
+    routers?: Router[];
   }
 
   type TeamAddress = {

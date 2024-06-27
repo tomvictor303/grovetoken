@@ -29,7 +29,7 @@ import {
   Tooltip,
   Typography
 } from "@mui/material";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import IOSSwitch from "../custom/IOSSwitch";
 import { styled, useTheme } from "@mui/material/styles";
 import { TokenType } from "src/utils/enums";
@@ -48,6 +48,10 @@ const OptionsCardSwitchPart = ({
 }: MyCardProps) => {
   const theme = useTheme();
   const [network, token_type, supply_type, isTax] = watch(['network', 'token_type', 'supply_type', 'isTax']);
+  const [isBrowser, setIsBrowser] = useState<boolean>(false);
+  useEffect(() => {
+    setIsBrowser(true);
+  }, [])
 
   return (
     <>
@@ -97,9 +101,13 @@ const OptionsCardSwitchPart = ({
                   onChange={(e) => field.onChange(e.target.checked)}
                   disabled={true}
                 />
-                <Typography className={"control-switch-title"}>
-                  Verified on Etherscan
-                </Typography>
+                {
+                  isBrowser && (
+                    <Typography className={"control-switch-title"}>
+                      Verified on {network?.scan_name}
+                    </Typography>
+                  )
+                }
               </Stack>
               <FormHelperText className={"control-help"}>
                 Your token will const all the functionalities, and conforms to ERC20
@@ -129,8 +137,8 @@ const OptionsCardSwitchPart = ({
                 </Typography>
               </Stack>
               <FormHelperText className={"control-help"}>
-                A link pointing to this page will be added in the description of
-                your contract (Free and Basic contracts only)
+                This weblink will be added in the description of your smart contract ( Basic and Custom only)
+
               </FormHelperText>
             </CustomFormControl>
           )}

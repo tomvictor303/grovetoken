@@ -80,7 +80,7 @@ const LandingPage = () => {
     isBurnable: false,
     isPausable: false,
     isRecoverable: false,
-    isAntiWhale: false, 
+    isAntiWhale: false,
     isTax: false,
     //////////////////////
     buyPercent: 0,
@@ -106,8 +106,8 @@ const LandingPage = () => {
     control,
     name: 'teamAddressList',
   });
-  const [ network, token_type, supply_type, initial_supply, maximum_supply ] = watch(['network', 'token_type', 'supply_type', 'initial_supply', 'maximum_supply']);
-  
+  const [network, token_type, supply_type, initial_supply, maximum_supply] = watch(['network', 'token_type', 'supply_type', 'initial_supply', 'maximum_supply']);
+
   // ** States
   // special change handlers
   const handleInitialSupplyChange = (newValue: string) => {
@@ -117,10 +117,10 @@ const LandingPage = () => {
     }
     const new_initial_supply: number = parseInt(newValue, 10);
     /////////////////
-    if ( supply_type === 'Fixed' || supply_type === 'Unlimited' ) {
+    if (supply_type === 'Fixed' || supply_type === 'Unlimited') {
       setValue('maximum_supply', new_initial_supply, { shouldValidate: true });
     } else {
-      if ( new_initial_supply > maximum_supply ) {
+      if (new_initial_supply > maximum_supply) {
         setValue('maximum_supply', new_initial_supply, { shouldValidate: true });
       } else {
       }
@@ -134,11 +134,11 @@ const LandingPage = () => {
     }
     const new_maximum_supply: number = parseInt(newValue, 10);
     /////////////////    
-    if ( new_maximum_supply < initial_supply ) {
+    if (new_maximum_supply < initial_supply) {
       setValue('initial_supply', new_maximum_supply, { shouldValidate: true });
     } else {
     }
-  }  
+  }
 
   useEffect(() => {
     let curValues: HomeState = getValues();
@@ -190,6 +190,11 @@ const LandingPage = () => {
   }, [token_type]);
   // end special change handlers
 
+  useEffect(() => {
+    let router_name: string = network?.routers?.length ? network.routers[0].name : ""
+    setValue('swap_router', router_name, { shouldValidate: true });
+  }, [network]);
+
   const onSubmit = (data: any) => {
     console.log(data);
   };
@@ -229,7 +234,7 @@ const LandingPage = () => {
             {/** END Network_card */}
             {/** BEGIN Informations_card */}
             <InformationsCard
-              control={control} 
+              control={control}
               errors={errors}
               watch={watch}
             />
@@ -254,8 +259,8 @@ const LandingPage = () => {
               control={control}
               errors={errors}
               watch={watch}
-              fields={fields} 
-              append={append} 
+              fields={fields}
+              append={append}
               remove={remove}
             />
             {/** END Options_card */}

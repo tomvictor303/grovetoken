@@ -43,8 +43,13 @@ const OptionsCardFinalPart = ({ control, errors, watch }: MyCardProps) => {
               {/* <MenuItem value="">
             <em>None</em>
           </MenuItem> */}
-              <MenuItem value={'uniswap_router_v2'}>Uniswap Router V2</MenuItem>
-              <MenuItem value={'pancakeswap_router_v2'}>Pancakeswap Router V2</MenuItem>
+              {network?.routers && network?.routers.map((router) => (
+                <MenuItem key={router.name} value={router.name}>
+                  {router.name}
+                </MenuItem>
+              ))}
+              {/* <MenuItem value={'uniswap_router_v2'}>Uniswap Router V2</MenuItem>
+              <MenuItem value={'pancakeswap_router_v2'}>Pancakeswap Router V2</MenuItem> */}
             </Select>
             <FormHelperText className={'control-help'}>Select the swap router to use</FormHelperText>
             {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
