@@ -10,29 +10,32 @@ import networks from 'src/utils/networks';
 // Your WalletConnect Cloud project ID
 export const projectId = 'd8b2c472e28bcf134eb8aed8b8c9ed22'
 
-// BSC Mainnet
-const bscMainnet = {
-  chainId: 56,
-  name: 'Binance Smart Chain',
-  currency: 'BNB',
-  explorerUrl: 'https://bscscan.com',
-  rpcUrl: 'https://bsc-dataseed.binance.org/'
-}
-
-// BSC Testnet
-const bscTestnet = {
-  chainId: 97,
-  name: 'Binance Smart Chain Testnet',
-  currency: 'BNB',
-  explorerUrl: 'https://testnet.bscscan.com',
-  rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545/'
-}
-
 const chains: any[] = [];
-if ( process.env.NEXT_PUBLIC_IS_TESTNET ) {
-  chains.push( bscTestnet )
-} else {
-  chains.push( bscMainnet )
+
+chains.push({
+  name: networks[0].name,
+  currency: networks[0].currency,
+  rpcUrl: networks[0].mainnet.rpc,
+  chainId: networks[0].mainnet.chainId,
+  explorerUrl: networks[0].mainnet.explorer,
+})
+
+chains.push({
+  name: networks[0].name + ' Testnet',
+  currency: networks[0].currency,
+  rpcUrl: networks[0]?.testnet?.rpc,
+  chainId: networks[0]?.testnet?.chainId,
+  explorerUrl: networks[0]?.testnet?.explorer,
+})
+
+for (let i = 1; i < networks.length; i++) {
+  chains.push({
+    name: networks[i].name,
+    currency: networks[i].currency,
+    rpcUrl: networks[i].mainnet.rpc,
+    chainId: networks[i].mainnet.chainId,
+    explorerUrl: networks[i].mainnet.explorer,
+  })
 }
 
 // Metadata

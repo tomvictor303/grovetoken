@@ -141,17 +141,17 @@ const networks: Network[] = [
     id: 'SHIB',
     name: 'Shibarium',
     short_name: 'SHIB',
-    currency: 'SHIB',
+    currency: 'BONE',
     icon: 'https://cryptologos.cc/logos/shiba-inu-shib-logo.png',
     mainnet: {
-      chainId: 969,
-      rpc: 'https://rpc.shibarium.network/',
-      explorer: 'https://shibariumscan.com/'
+      chainId: 109,
+      rpc: 'https://www.shibrpc.com',
+      explorer: 'https://shibariumscan.io'
     },
     testnet: {
-      chainId: 971,
-      rpc: 'https://testnet.shibarium.network/',
-      explorer: 'https://testnet.shibariumscan.com/'
+      chainId: 157,
+      rpc: 'https://puppynet.shibrpc.com',
+      explorer: 'https://puppyscan.shib.io'
     },
     commission_fee: {
       basic: 195,
