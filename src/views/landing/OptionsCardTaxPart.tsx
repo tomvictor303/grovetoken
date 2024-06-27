@@ -36,73 +36,28 @@ import { ChangeEvent } from "react";
 import IOSSwitch from "../custom/IOSSwitch";
 import { styled, useTheme } from "@mui/material/styles";
 import { TokenType } from "src/utils/enums";
-import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
+import { Control, Controller, FieldArrayWithId, FieldErrors, FieldValues, UseFieldArrayAppend, UseFieldArrayRemove, UseFormWatch } from 'react-hook-form';
+import OptionsCardTaxAddressComponent from "./OptionsCardTaxAddressComponent";
 
 interface MyCardProps {
   control: Control<HomeState, any>;
   errors: FieldErrors<HomeState>;
   watch: UseFormWatch<HomeState>;
+  fields: FieldArrayWithId<HomeState, "teamAddressList", "id">[];
+  append: UseFieldArrayAppend<HomeState, "teamAddressList">;
+  remove: UseFieldArrayRemove;
 }
 
 const OptionsCardTaxPart = ({
   control,
   errors,
   watch,
+  fields,
+  append,
+  remove,
 }: MyCardProps) => {
   const theme = useTheme();
   const [network, token_type, supply_type, isTax] = watch(['network', 'token_type', 'supply_type', 'isTax']);
-
-  const addressComponent = (
-    teamAddress: TeamAddress,
-    index: number,
-    handleTAChange: any
-  ) => (
-    <>
-      <Grid container spacing={4} style={{ alignItems: "center" }}>
-        <Grid item xs={1} style={{ paddingTop: 0 }}>
-          <Typography className={"cardheader-title"} variant="caption">
-            #{index + 1}
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <CustomFormControl fullWidth style={{ margin: "auto" }}>
-            <OutlinedInput
-              className={"control-element"}
-              value={teamAddress.address}
-              onChange={handleTAChange("address", index)}
-              placeholder="0x..."
-              type="text"
-            />
-          </CustomFormControl>
-        </Grid>
-        <Grid item xs={4}>
-          <CustomFormControl fullWidth style={{ margin: "auto" }}>
-            <OutlinedInput
-              className={"control-element"}
-              value={teamAddress.percent}
-              onChange={handleTAChange("percent", index)}
-              placeholder=""
-              type="number"
-              inputProps={{
-                min: 0,
-                max: 100,
-                pattern: "\\d*"
-              }}
-              endAdornment={<InputAdornment position="end">%</InputAdornment>}
-            />
-          </CustomFormControl>
-        </Grid>
-        <Grid item xs={1}>
-          <DeleteOutlineIcon
-            style={{ color: "red", cursor: "pointer" }}
-            onClick={() => {
-              // removeTeamAddress(index);
-            }}
-          />
-        </Grid>
-      </Grid>
-    </>
-  );
 
   return (
     <>
@@ -342,14 +297,23 @@ const OptionsCardTaxPart = ({
 
           {/** address list*/}
           <Box marginTop={4}>
-            {/*values.teamAddressList.map((item: TeamAddress, index: number) => (
-              <>{addressComponent(item, index, handleTAChange)}</>
-            ))*/}
+            {fields.map((item, index) => (<>
+              <OptionsCardTaxAddressComponent
+                item={item}
+                index={index}
+                control={control}
+                errors={errors}
+                watch={watch}
+                fields={fields} 
+                append={append} 
+                remove={remove} 
+              />
+            </>))}
           </Box>
 
           {/** Add new button */}
           <Box>
-            <Button variant="text" color="success" onClick={()=>{/*addNewTeamAddress*/}}>
+            <Button variant="text" color="success" onClick={()=>{append({ address: '', percent: 0})}}>
               <PlusCircleOutlineIcon />
               &nbsp;&nbsp;
               <Typography

@@ -2,7 +2,7 @@
 import Grid from "@mui/material/Grid";
 
 import { styled, useTheme } from "@mui/material/styles";
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useFieldArray } from 'react-hook-form';
 
 // ** LandingPage Components Imports
 
@@ -102,9 +102,12 @@ const LandingPage = () => {
   const { control, handleSubmit, watch, setValue, reset, getValues, formState: { errors } } = useForm<HomeState>({
     defaultValues
   });
-
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'teamAddressList',
+  });
   const [ network, token_type, supply_type, initial_supply, maximum_supply ] = watch(['network', 'token_type', 'supply_type', 'initial_supply', 'maximum_supply']);
-
+  
   // ** States
   // special change handlers
   const handleInitialSupplyChange = (newValue: string) => {
@@ -251,6 +254,9 @@ const LandingPage = () => {
               control={control}
               errors={errors}
               watch={watch}
+              fields={fields} 
+              append={append} 
+              remove={remove}
             />
             {/** END Options_card */}
           </Stack>

@@ -35,18 +35,24 @@ import { styled, useTheme } from "@mui/material/styles";
 import OptionsCardSwitchPart from "./OptionsCardSwitchPart";
 import OptionsCardTaxPart from "./OptionsCardTaxPart";
 import OptionsCardFinalPart from "./OptionsCardFinalPart";
-import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
+import { Control, Controller, FieldArrayWithId, FieldErrors, FieldValues, UseFieldArrayAppend, UseFieldArrayRemove, UseFormWatch } from 'react-hook-form';
 
 interface MyCardProps {
   control: Control<HomeState, any>;
   errors: FieldErrors<HomeState>;
   watch: UseFormWatch<HomeState>;
+  fields: FieldArrayWithId<HomeState, "teamAddressList", "id">[];
+  append: UseFieldArrayAppend<HomeState, "teamAddressList">;
+  remove: UseFieldArrayRemove;
 }
 
 const OptionsCard = ({
   control,
   errors,
   watch,
+  fields,
+  append,
+  remove,
 }: MyCardProps) => {
   const theme = useTheme();
   const [network, token_type, supply_type, isTax] = watch(['network', 'token_type', 'supply_type', 'isTax']);
@@ -76,6 +82,9 @@ const OptionsCard = ({
               control={control}
               errors={errors}
               watch={watch}
+              fields={fields} 
+              append={append} 
+              remove={remove}
             />
           ) : (
             <></>
