@@ -4,7 +4,7 @@ const networks: Network[] = [
     name: 'Grove',
     short_name: 'GRV',
     currency: 'GRV',
-    icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/23196.png',
+    icon: 'https://assets-global.website-files.com/62b03f7c4e77803f83b758a2/62b0c510ac78ba061da94401_newgrove-01_edited.png',
     mainnet: {
       chainId: 770077,
       rpc: 'https://mainnet.grovechain.io/',
@@ -83,7 +83,7 @@ const networks: Network[] = [
     icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
     mainnet: {
       chainId: 1,
-      rpc: 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+      rpc: 'https://eth.llamarpc.com',
       explorer: 'https://etherscan.io/'
     },
     testnet: {
@@ -211,6 +211,7 @@ const networks: Network[] = [
     currency: 'ETH',
     icon: 'https://cryptologos.cc/logos/arbitrum-arb-logo.png',
     mainnet: {
+      name: 'Arbitrum One',
       chainId: 42161,
       rpc: 'https://arb1.arbitrum.io/rpc',
       explorer: 'https://arbiscan.io/'
