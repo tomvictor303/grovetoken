@@ -123,7 +123,6 @@ const OptionsCardSwitchPart = ({
                   {...field}
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
-                  disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>
                   No copyright link
@@ -151,7 +150,6 @@ const OptionsCardSwitchPart = ({
                   {...field}
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
-                  disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>Mintable</Typography>
               </Stack>
@@ -176,7 +174,6 @@ const OptionsCardSwitchPart = ({
                   {...field}
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
-                  disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>Burnable</Typography>
               </Stack>
@@ -201,7 +198,6 @@ const OptionsCardSwitchPart = ({
                   {...field}
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
-                  disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>Pausable</Typography>
               </Stack>
@@ -226,7 +222,6 @@ const OptionsCardSwitchPart = ({
                   {...field}
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
-                  disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>
                   Recoverable
@@ -254,7 +249,6 @@ const OptionsCardSwitchPart = ({
                   {...field}
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
-                  disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>
                   Anti Whale
