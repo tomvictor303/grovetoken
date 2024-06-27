@@ -5,6 +5,7 @@ import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import { Web3Modal } from '@web3modal/ethers'
+import networks from 'src/utils/networks';
 
 // Your WalletConnect Cloud project ID
 export const projectId = 'd8b2c472e28bcf134eb8aed8b8c9ed22'

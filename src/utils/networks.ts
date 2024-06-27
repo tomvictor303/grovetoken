@@ -63,7 +63,17 @@ const networks: Network[] = [
       rpc: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
       explorer: 'https://testnet.bscscan.com/'
     },
-    scan_name: "Bscscan"
+    scan_name: "Bscscan",
+    routers: [
+      {
+        name: "Uniswap V2",
+        address: "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+      },
+      {
+        name: "Uniswap V3",
+        address: "0x13f4EA83D0bd40E75C8222255bc855a974568Dd4"
+      }
+    ]
   },
   {
     id: 'ETH',
