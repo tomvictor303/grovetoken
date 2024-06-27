@@ -1,5 +1,5 @@
 import { CustomCard, CustomCardContent, CustomCardHeader, CustomFormControl } from 'src/views/custom/CustomCard';
-import { 
+import {
   MonitorShimmer as MonitorShimmerIcon,
   TruckOutline as TruckOutlineIcon,
   Tune as TuneIcon,
@@ -21,9 +21,9 @@ interface MyCardProps {
   watch: UseFormWatch<HomeState>,
 }
 
-const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
+const InformationsCard = ({ control, errors, watch }: MyCardProps) => {
   const theme = useTheme();
-  const [ token_type ] = watch(['token_type']);
+  const [token_type] = watch(['token_type']);
 
   return <>
     <CustomCard>
@@ -41,9 +41,9 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
             <CustomFormControl fullWidth>
               <Typography className={'control-title'} variant='caption'>TOKEN TYPE*</Typography>
               <Select
-                {...field} 
+                {...field}
                 className={'control-element'}
-                displayEmpty           
+                displayEmpty
               >
                 {/* <MenuItem value="">
                   <em>None</em>
@@ -60,7 +60,7 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
             </CustomFormControl>
           )}
         />
-        
+
         <Controller
           name="token_name"
           control={control}
@@ -72,7 +72,7 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
                 {...field}
                 error={!!error}
                 className={'control-element'}
-                placeholder="My new token name"           
+                placeholder="My new token name"
               />
               <FormHelperText className={'control-help'}>The name of your token</FormHelperText>
               {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
@@ -84,29 +84,32 @@ const InformationsCard = ({ control, errors,  watch }: MyCardProps) => {
           name="token_symbol"
           control={control}
           rules={{ required: 'Token Symbol is required' }}
-          render={({ field, fieldState: { error } }) => (            
+          render={({ field, fieldState: { error } }) => (
             <CustomFormControl fullWidth>
               <Typography className={'control-title'} variant='caption'>TOKEN SYMBOL*</Typography>
               <TextField
                 {...field}
                 error={!!error}
                 className={'control-element'}
-                placeholder="TKN"           
+                placeholder="TKN"
               />
               <FormHelperText className={'control-help'}>Your token's symbol (e.g ETH)</FormHelperText>
               {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
             </CustomFormControl>
           )}
-        />            
+        />
 
         <Controller
           name="token_decimals"
           control={control}
-          rules={{ required: 'Token decimal is required' }}
-          render={({ field, fieldState: { error } }) => (            
+          rules={{
+            required: 'Token decimal is required',
+            validate: value => value > 1 || 'The number of decimals must be between 1 and 18'
+          }}
+          render={({ field, fieldState: { error } }) => (
             <CustomFormControl fullWidth>
               <Typography className={'control-title'} variant='caption'>DECIMALS*</Typography>
-              <TextField 
+              <TextField
                 className={'control-element'}
                 {...field}
                 error={!!error}

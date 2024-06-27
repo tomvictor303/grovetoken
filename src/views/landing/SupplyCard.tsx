@@ -14,6 +14,7 @@ import { ChangeEvent } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { TokenType } from 'src/utils/enums';
 import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
+import NumberFormatCustom from '../custom/NumberFormatCustom';
 
 interface MyCardProps {
   control: Control<HomeState, any>;
@@ -62,7 +63,10 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
         <Controller
           name="initial_supply"
           control={control}
-          rules={{ required: 'Initial Supply is required' }}
+          rules={{
+            required: 'Initial Supply is required',
+            validate: value => value > 1 || 'Initial Supply must be greater than 1'
+          }}
           render={({ field, fieldState: { error } }) => (
             <CustomFormControl fullWidth>
               <Typography className={'control-title'} variant='caption'>INITIAL SUPPLY</Typography>
@@ -75,10 +79,12 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
                   handleInitialSupplyChange(e.target.value);
                 }}
                 placeholder=""
-                type="number"
+                type="text" // Changed from "number" to "text" to allow formatted input
+                InputProps={{
+                  inputComponent: NumberFormatCustom as any,
+                }}
                 inputProps={{
                   min: 0,
-                  pattern: "\\d*",
                 }}
                 disabled={token_type === TokenType.Basic}
               />
@@ -91,7 +97,10 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
         <Controller
           name="maximum_supply"
           control={control}
-          rules={{ required: 'Maximum Supply is required' }}
+          rules={{
+            required: 'Maximum Supply is required',
+            validate: value => value > 1 || 'Maximum Supply must be greater than 1'
+          }}
           render={({ field, fieldState: { error } }) => (
             <CustomFormControl fullWidth
               sx={{ display: supply_type === 'Unlimited' ? 'none' : undefined }}>
@@ -105,9 +114,12 @@ const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleM
                   handleMaximumSupplyChange(e.target.value);
                 }}
                 placeholder=""
-                type="number"
+                type="text" // Changed from "number" to "text" to allow formatted input
+                InputProps={{
+                  inputComponent: NumberFormatCustom as any,
+                }}
                 inputProps={{
-                  pattern: "\\d*",
+                  min: 0,
                 }}
                 disabled={supply_type === 'Fixed'}
               />
