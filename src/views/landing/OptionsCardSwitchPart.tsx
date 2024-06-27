@@ -67,6 +67,7 @@ const OptionsCardSwitchPart = ({
                   {...field}
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
+                  disabled={true}
                 />
                 <Typography className={"control-switch-title"}>
                   Conforms to ERC20 protocol
@@ -94,6 +95,7 @@ const OptionsCardSwitchPart = ({
                   {...field}
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
+                  disabled={true}
                 />
                 <Typography className={"control-switch-title"}>
                   Verified on Etherscan

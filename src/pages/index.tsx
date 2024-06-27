@@ -143,7 +143,7 @@ const LandingPage = () => {
     if (token_type === TokenType.Basic) {
       let initial_supply = 1000000;
       reset({
-        ...defaultValues,
+        ...curValues,
         token_type: TokenType.Basic,
         token_decimals: 18,
         supply_type: "Fixed",
@@ -172,7 +172,7 @@ const LandingPage = () => {
       let sellPercent = curValues?.sellPercent < 5 ? curValues?.sellPercent : 5;
       let transferPercent = curValues?.transferPercent < 5 ? curValues?.transferPercent : 5;
       reset({
-        ...defaultValues,
+        ...curValues,
         token_type: TokenType.Custom,
         token_decimals: 18,
         supply_type: "Fixed",
