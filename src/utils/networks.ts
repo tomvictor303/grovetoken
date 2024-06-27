@@ -103,7 +103,7 @@ const networks: Network[] = [
     name: 'Base',
     short_name: 'BASE',
     currency: 'ETH',
-    icon: 'https://cryptologos.cc/logos/base-base-logo.png',
+    icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/27789.png',
     mainnet: {
       chainId: 8453,
       rpc: 'https://mainnet.base.org/',
@@ -289,7 +289,7 @@ const networks: Network[] = [
     name: 'zkSync',
     short_name: 'ZKS',
     currency: 'ETH',
-    icon: 'https://cryptologos.cc/logos/zksync-zks-logo.png',
+    icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/24091.png',
     mainnet: {
       chainId: 324,
       rpc: 'https://zksync2-mainnet.zksync.io',
@@ -341,7 +341,7 @@ const networks: Network[] = [
     name: 'Optimism',
     short_name: 'OP',
     currency: 'ETH',
-    icon: 'https://cryptologos.cc/logos/optimism-op-logo.png',
+    icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/11840.png',
     mainnet: {
       chainId: 10,
       rpc: 'https://mainnet.optimism.io',
@@ -364,7 +364,7 @@ const networks: Network[] = [
     name: 'Boba Network',
     short_name: 'BOBA',
     currency: 'ETH',
-    icon: 'https://cryptologos.cc/logos/boba-network-boba-logo.png',
+    icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/14556.png',
     mainnet: {
       chainId: 288,
       rpc: 'https://mainnet.boba.network/',
