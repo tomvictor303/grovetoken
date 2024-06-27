@@ -25,36 +25,36 @@ const AjaxInterceptor = () => {
                 //     config["credentials"] = 'include';
                 // }
                 if (!config.headers) {
-                    config.headers = {};
+                    // config.headers = {};
                 }
                 if (!config.headers["X-Requested-With"]) {
                   // This flag does not include automatically, if you use 'fetch'
                   // It is added automatically only if you use jQuery Ajax.
                   // If this header is absent, req.xhr is not set on node.js server side.
-                  config.headers["X-Requested-With"] = "XMLHttpRequest";
+                //   config.headers["X-Requested-With"] = "XMLHttpRequest";
                 }
                 if (!config.headers["Content-Type"]) {
-                    config.headers["Content-Type"] = 'application/json';
+                    // config.headers["Content-Type"] = 'application/json';
                 }
                 if (!config.headers["x-authorization"] && typeof window !== 'undefined') {
                     // jwt_token
-                    let jwt_token = window?.localStorage?.getItem('jwtToken');
-                    if ( jwt_token ) jwt_token = jwt_token?.replace(/"/g, '');
-                    config.headers["x-authorization"] = jwt_token;
+                    // let jwt_token = window?.localStorage?.getItem('jwtToken');
+                    // if ( jwt_token ) jwt_token = jwt_token?.replace(/"/g, '');
+                    // config.headers["x-authorization"] = jwt_token;
                 }
                 return [url, config];
             },
             response: function (response) {
                 // Modify the reponse object 
                 // BEGIN AJAX_AUTH_CHECK
-                if (
-                  typeof window !== 'undefined' && 
-                  response.status === 401 && 
-                  !window.location.pathname.includes('auth')
-                ) { 
-                  alert("Your request is unauthorized! Please login (again).");
-                  window.location.href = `/pages/login?redirectUri=${encodeURIComponent(window.location.href)}`;
-                }
+                // if (
+                //   typeof window !== 'undefined' && 
+                //   response.status === 401 && 
+                //   !window.location.pathname.includes('auth')
+                // ) { 
+                //   alert("Your request is unauthorized! Please login (again).");
+                //   window.location.href = `/pages/login?redirectUri=${encodeURIComponent(window.location.href)}`;
+                // }
                 // END AJAX_AUTH_CHECK
                 return response;
             },
