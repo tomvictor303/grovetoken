@@ -25,16 +25,16 @@ const AjaxInterceptor = () => {
                 //     config["credentials"] = 'include';
                 // }
                 if (!config.headers) {
-                    // config.headers = {};
+                    config.headers = {};
                 }
                 if (!config.headers["X-Requested-With"]) {
                   // This flag does not include automatically, if you use 'fetch'
                   // It is added automatically only if you use jQuery Ajax.
                   // If this header is absent, req.xhr is not set on node.js server side.
-                //   config.headers["X-Requested-With"] = "XMLHttpRequest";
+                  config.headers["X-Requested-With"] = "XMLHttpRequest";
                 }
                 if (!config.headers["Content-Type"]) {
-                    // config.headers["Content-Type"] = 'application/json';
+                    config.headers["Content-Type"] = 'application/json';
                 }
                 if (!config.headers["x-authorization"] && typeof window !== 'undefined') {
                     // jwt_token

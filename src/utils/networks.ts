@@ -177,6 +177,7 @@ const networks: Network[] = [
     currency: 'MATIC',
     icon: 'https://cryptologos.cc/logos/polygon-matic-logo.png',
     mainnet: {
+      name: 'Polygon Mainnet',
       chainId: 137,
       rpc: 'https://rpc-mainnet.maticvigil.com/',
       explorer: 'https://polygonscan.com/'

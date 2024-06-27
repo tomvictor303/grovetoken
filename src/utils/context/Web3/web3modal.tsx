@@ -30,7 +30,7 @@ chains.push({
 
 for (let i = 1; i < networks.length; i++) {
   chains.push({
-    name: networks[i].name,
+    name: networks[i].mainnet.name ?? networks[i].name,
     currency: networks[i].currency,
     rpcUrl: networks[i].mainnet.rpc,
     chainId: networks[i].mainnet.chainId,

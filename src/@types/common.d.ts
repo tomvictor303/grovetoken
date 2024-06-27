@@ -17,6 +17,7 @@ declare global {
   }
 
   type NetworkConnection = {
+    name?: string;
     chainId: number;
     rpc: string;
     explorer: string;
