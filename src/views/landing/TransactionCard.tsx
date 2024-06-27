@@ -16,16 +16,12 @@ import { TokenType } from 'src/utils/enums';
 import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState;
   control: Control<HomeState, any>;
   errors: FieldErrors<HomeState>;
   watch: UseFormWatch<HomeState>;
-  handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
-  handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
-  handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const TransactionCard = ({ values, control, errors, watch, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
+const TransactionCard = ({ control, errors, watch }: MyCardProps) => {
   const theme = useTheme();
   const [ network, token_type, supply_type, isTax ] = watch(['network', 'token_type', 'supply_type', 'isTax']);
   // BEGIN commision_fee_issue

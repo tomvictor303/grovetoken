@@ -99,112 +99,13 @@ const LandingPage = () => {
     isAgreedTerms: false,
   };
   // react-hook-form
-  const { control, handleSubmit, watch, setValue, reset, formState: { errors } } = useForm<HomeState>({
+  const { control, handleSubmit, watch, setValue, reset, getValues, formState: { errors } } = useForm<HomeState>({
     defaultValues
   });
 
   const [ network, token_type, supply_type, initial_supply, maximum_supply ] = watch(['network', 'token_type', 'supply_type', 'initial_supply', 'maximum_supply']);
 
   // ** States
-  const [values, setValues] = useState<HomeState>({
-    network: getNetworkObject("GRV"),
-    token_type: 0,
-    token_name: "",
-    token_symbol: "",
-    token_decimals: 18,
-    //////////////////////
-    supply_type: "Fixed",
-    initial_supply: 0,
-    maximum_supply: 10000000,
-    //////////////////////
-    isConformedERC20: false,
-    isVerifiedOnEtherscan: false,
-    isNoCopyrightLink: false,
-    isMintable: false,
-    isBurnable: false,
-    isPausable: false,
-    isRecoverable: false,
-    isAntiWhale: false, 
-    isTax: false,
-    //////////////////////
-    buyPercent: 0,
-    sellPercent: 0,
-    transferPercent: 0,
-    //////////////////////
-    burnPercent: 0,
-    teamPercent: 0,
-    taxCurrency: "token",
-    //////////////////////
-    teamAddressList: [],
-    //////////////////////
-    swap_router: 'uniswap_router_v2',
-    access_type: 'Owner',
-    isAgreedTerms: false,
-  })
-
-  const handleChange = (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => {
-    if (prop === 'initial_supply') {
-      handleInitialSupplyChange(event.target.value);
-      return;
-    }
-    if (prop === 'maximum_supply') {
-      handleMaximumSupplyChange(event.target.value);
-      return;
-    }
-    setValues({ ...values, [prop]: event.target.value })
-  }
-  const handleSelectChange = (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => {
-    setValues({ ...values, [prop]: event.target.value })
-  }
-  const handleCheckedChange = (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [prop]: event.target.checked })
-  };
-  const handleAutoCompleteChange = (prop: keyof HomeState) => (event: any, newValue: any) => {
-    setValues({ ...values, [prop]: newValue })
-  };  
-  
-  // BEGIN tax_related_handlers
-  const handleTAChange =
-    (prop: keyof TeamAddress, index: number) =>
-    (event: ChangeEvent<HTMLInputElement>) => {
-      let teamAddressList: Array<TeamAddress> = [...values.teamAddressList];
-      if (index < 0 || index >= teamAddressList.length) {
-        return;
-      }
-      teamAddressList[index] = {
-        ...teamAddressList[index],
-        [prop]: event.target.value
-      };
-      setValues({ ...values, teamAddressList });
-    };
-
-  const addNewTeamAddress = () => {
-    let teamAddressList: Array<TeamAddress> = [...values.teamAddressList];
-    teamAddressList.push({ address: "", percent: 0 });
-    setValues({ ...values, teamAddressList });
-  };
-
-  const removeTeamAddress = (index: number) => {
-    let teamAddressList: Array<TeamAddress> = [...values.teamAddressList];
-    const indexToRemove = index; // Index of the element you want to remove
-
-    if (indexToRemove > -1 && indexToRemove < teamAddressList.length) {
-      teamAddressList.splice(indexToRemove, 1);
-    }
-
-    console.log(teamAddressList);
-
-    setValues({ ...values, teamAddressList });
-  };
-  // END tax_related_handlers
-  /////////////////////////////////////
-
-  /////////////////////////////////////
-  /////////////////////////////////////
-  /////////////////////////////////////
-  /////////////////////////////////////
-  /////////////////////////////////////
-  /////////////////////////////////////
   // special change handlers
   const handleInitialSupplyChange = (newValue: string) => {
     const isValidIntegerString = /^\d*$/; // Allow numeric, empty string.
@@ -237,6 +138,7 @@ const LandingPage = () => {
   }  
 
   useEffect(() => {
+    let curValues: HomeState = getValues();
     // Forceful setting values for low level token_types
     if (token_type === TokenType.Basic) {
       let initial_supply = 1000000;
@@ -266,9 +168,9 @@ const LandingPage = () => {
     /////////////////////////////////////////////
     if (token_type === TokenType.Custom) {
       let initial_supply = 1000000000;
-      let buyPercent = values?.buyPercent < 5 ? values?.buyPercent : 5;
-      let sellPercent = values?.sellPercent < 5 ? values?.sellPercent : 5;
-      let transferPercent = values?.transferPercent < 5 ? values?.transferPercent : 5;
+      let buyPercent = curValues?.buyPercent < 5 ? curValues?.buyPercent : 5;
+      let sellPercent = curValues?.sellPercent < 5 ? curValues?.sellPercent : 5;
+      let transferPercent = curValues?.transferPercent < 5 ? curValues?.transferPercent : 5;
       reset({
         ...defaultValues,
         token_type: TokenType.Custom,
@@ -373,13 +275,9 @@ const LandingPage = () => {
 
             {/** BEGIN Transaction_card */}
             <TransactionCard
-              values={values}
               control={control}
               errors={errors}
               watch={watch}
-              handleChange={handleChange}
-              handleSelectChange={handleSelectChange}
-              handleCheckedChange={handleCheckedChange}
             />
             {/** END Transaction_card */}
 
