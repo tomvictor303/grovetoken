@@ -65,6 +65,8 @@ const OptionsCardSwitchPart = ({
               >
                 <IOSSwitch
                   {...field}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
                 />
                 <Typography className={"control-switch-title"}>
                   Conforms to ERC20 protocol
@@ -90,6 +92,8 @@ const OptionsCardSwitchPart = ({
               >
                 <IOSSwitch
                   {...field}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
                 />
                 <Typography className={"control-switch-title"}>
                   Verified on Etherscan
@@ -115,6 +119,8 @@ const OptionsCardSwitchPart = ({
               >
                 <IOSSwitch
                   {...field}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
                   disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>
@@ -141,6 +147,8 @@ const OptionsCardSwitchPart = ({
               >
                 <IOSSwitch
                   {...field}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
                   disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>Mintable</Typography>
@@ -164,6 +172,8 @@ const OptionsCardSwitchPart = ({
               >
                 <IOSSwitch
                   {...field}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
                   disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>Burnable</Typography>
@@ -187,6 +197,8 @@ const OptionsCardSwitchPart = ({
               >
                 <IOSSwitch
                   {...field}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
                   disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>Pausable</Typography>
@@ -210,6 +222,8 @@ const OptionsCardSwitchPart = ({
               >
                 <IOSSwitch
                   {...field}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
                   disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>
@@ -236,6 +250,8 @@ const OptionsCardSwitchPart = ({
               >
                 <IOSSwitch
                   {...field}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
                   disabled={token_type !== TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>
@@ -261,6 +277,8 @@ const OptionsCardSwitchPart = ({
               >
                 <IOSSwitch
                   {...field}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
                   disabled={token_type === TokenType.Basic}
                 />
                 <Typography className={"control-switch-title"}>Tax</Typography>

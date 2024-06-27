@@ -73,8 +73,8 @@ const LandingPage = () => {
     initial_supply: 0,
     maximum_supply: 10000000,
     //////////////////////
-    isConformedERC20: false,
-    isVerifiedOnEtherscan: false,
+    isConformedERC20: true,
+    isVerifiedOnEtherscan: true,
     isNoCopyrightLink: false,
     isMintable: false,
     isBurnable: false,
