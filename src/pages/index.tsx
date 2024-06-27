@@ -149,18 +149,7 @@ const LandingPage = () => {
         supply_type: "Fixed",
         initial_supply,
         maximum_supply: initial_supply,
-        access_type: 'Owner',
         isTax: false, // Basic is not able to use Tax
-        //////////////////////
-        buyPercent: 0,
-        sellPercent: 0,
-        transferPercent: 0,
-        //////////////////////
-        burnPercent: 0,
-        teamPercent: 0,
-        taxCurrency: "token",
-        //////////////////////
-        teamAddressList: [],
       });
     }
     /////////////////////////////////////////////
@@ -178,17 +167,10 @@ const LandingPage = () => {
         supply_type: "Fixed",
         initial_supply,
         maximum_supply: initial_supply,
-        access_type: 'Owner',
-        //////////////////////
+        //////////////
         buyPercent,
         sellPercent,
         transferPercent,
-        //////////////////////
-        burnPercent: 0,
-        teamPercent: 0,
-        taxCurrency: "token",
-        //////////////////////
-        teamAddressList: [],
       });
     }
   }, [token_type]);
