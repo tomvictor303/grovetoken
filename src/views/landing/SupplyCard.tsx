@@ -19,9 +19,11 @@ interface MyCardProps {
   control: Control<HomeState, any>;
   errors: FieldErrors<HomeState>;
   watch: UseFormWatch<HomeState>;
+  handleInitialSupplyChange: (newValue: string) => void;
+  handleMaximumSupplyChange: (newValue: string) => void;
 }
 
-const SupplyCard = ({ control, errors, watch }: MyCardProps) => {
+const SupplyCard = ({ control, errors, watch, handleInitialSupplyChange, handleMaximumSupplyChange }: MyCardProps) => {
   const theme = useTheme();
   const [network, token_type, supply_type, isTax] = watch(['network', 'token_type', 'supply_type', 'isTax']);
 
@@ -68,6 +70,10 @@ const SupplyCard = ({ control, errors, watch }: MyCardProps) => {
                 className={'control-element'}
                 {...field}
                 error={!!error}
+                onChange={(e)=>{
+                  field.onChange(e);
+                  handleInitialSupplyChange(e.target.value);
+                }}
                 placeholder=""
                 type="number"
                 inputProps={{
@@ -94,6 +100,10 @@ const SupplyCard = ({ control, errors, watch }: MyCardProps) => {
                 className={'control-element'}
                 {...field}
                 error={!!error}
+                onChange={(e)=>{
+                  field.onChange(e);
+                  handleMaximumSupplyChange(e.target.value);
+                }}
                 placeholder=""
                 type="number"
                 inputProps={{

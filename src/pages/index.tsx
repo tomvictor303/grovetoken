@@ -61,43 +61,49 @@ import { TokenType } from "src/utils/enums";
 const LandingPage = () => {
   const theme = useTheme();
   const block_spacing = 6;
+
+  const defaultValues: HomeState = {
+    network: getNetworkObject("GRV"),
+    token_type: 0,
+    token_name: "",
+    token_symbol: "",
+    token_decimals: 18,
+    //////////////////////
+    supply_type: "Fixed",
+    initial_supply: 0,
+    maximum_supply: 10000000,
+    //////////////////////
+    isConformedERC20: false,
+    isVerifiedOnEtherscan: false,
+    isNoCopyrightLink: false,
+    isMintable: false,
+    isBurnable: false,
+    isPausable: false,
+    isRecoverable: false,
+    isAntiWhale: false, 
+    isTax: false,
+    //////////////////////
+    buyPercent: 0,
+    sellPercent: 0,
+    transferPercent: 0,
+    //////////////////////
+    burnPercent: 0,
+    teamPercent: 0,
+    taxCurrency: "token",
+    //////////////////////
+    teamAddressList: [],
+    //////////////////////
+    swap_router: 'uniswap_router_v2',
+    access_type: 'Owner',
+    //////////////////////
+    isAgreedTerms: false,
+  };
   // react-hook-form
-  const { control, handleSubmit, watch, formState: { errors } } = useForm<HomeState>({
-    defaultValues: {
-      network: getNetworkObject("GRV"),
-      token_type: 0,
-      token_name: "",
-      token_symbol: "",
-      token_decimals: 18,
-      //////////////////////
-      supply_type: "Fixed",
-      initial_supply: 0,
-      maximum_supply: 10000000,
-      //////////////////////
-      isConformedERC20: false,
-      isVerifiedOnEtherscan: false,
-      isNoCopyrightLink: false,
-      isMintable: false,
-      isBurnable: false,
-      isPausable: false,
-      isRecoverable: false,
-      isAntiWhale: false, 
-      isTax: false,
-      //////////////////////
-      buyPercent: 0,
-      sellPercent: 0,
-      transferPercent: 0,
-      //////////////////////
-      burnPercent: 0,
-      teamPercent: 0,
-      taxCurrency: "token",
-      //////////////////////
-      teamAddressList: [],
-      //////////////////////
-      swap_router: 'uniswap_router_v2',
-      access_type: 'Owner',
-    }
+  const { control, handleSubmit, watch, setValue, reset, formState: { errors } } = useForm<HomeState>({
+    defaultValues
   });
+
+  const [ network, token_type ] = watch(['network', 'token_type']);
 
   // ** States
   const [values, setValues] = useState<HomeState>({
@@ -208,12 +214,11 @@ const LandingPage = () => {
     const new_initial_supply: number = parseInt(newValue, 10);
     /////////////////
     if ( values?.supply_type === 'Fixed' || values?.supply_type === 'Unlimited' ) {
-      setValues({ ...values, initial_supply: new_initial_supply, maximum_supply: new_initial_supply })
+      setValue('maximum_supply', new_initial_supply, { shouldValidate: true });
     } else {
       if ( new_initial_supply > values?.maximum_supply ) {
-        setValues({ ...values, initial_supply: new_initial_supply, maximum_supply: new_initial_supply })
+        setValue('maximum_supply', new_initial_supply, { shouldValidate: true });
       } else {
-        setValues({ ...values, initial_supply: new_initial_supply })
       }
     }
   }
@@ -226,18 +231,18 @@ const LandingPage = () => {
     const new_maximum_supply: number = parseInt(newValue, 10);
     /////////////////    
     if ( new_maximum_supply < values?.initial_supply ) {
-      setValues({ ...values, initial_supply: new_maximum_supply, maximum_supply: new_maximum_supply })
+      setValue('initial_supply', new_maximum_supply, { shouldValidate: true });
     } else {
-      setValues({ ...values, maximum_supply: new_maximum_supply })
     }
-  }
+  }  
 
   useEffect(() => {
     // Forceful setting values for low level token_types
-    if (values?.token_type === TokenType.Basic) {
+    if (token_type === TokenType.Basic) {
       let initial_supply = 1000000;
-      setValues({
-        ...values,
+      reset({
+        ...defaultValues,
+        token_type: TokenType.Basic,
         token_decimals: 18,
         supply_type: "Fixed",
         initial_supply,
@@ -259,13 +264,14 @@ const LandingPage = () => {
     /////////////////////////////////////////////
     /////////////////////////////////////////////
     /////////////////////////////////////////////
-    if (values?.token_type === TokenType.Custom) {
+    if (token_type === TokenType.Custom) {
       let initial_supply = 1000000000;
       let buyPercent = values?.buyPercent < 5 ? values?.buyPercent : 5;
       let sellPercent = values?.sellPercent < 5 ? values?.sellPercent : 5;
       let transferPercent = values?.transferPercent < 5 ? values?.transferPercent : 5;
-      setValues({
-        ...values,
+      reset({
+        ...defaultValues,
+        token_type: TokenType.Custom,
         token_decimals: 18,
         supply_type: "Fixed",
         initial_supply,
@@ -283,14 +289,12 @@ const LandingPage = () => {
         teamAddressList: [],
       });
     }
-  }, [values?.token_type]);
+  }, [token_type]);
   // end special change handlers
 
   const onSubmit = (data: any) => {
     console.log(data);
   };
-
-  const [ network ] = watch(['network']);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -338,6 +342,8 @@ const LandingPage = () => {
               control={control}
               errors={errors}
               watch={watch}
+              handleInitialSupplyChange={handleInitialSupplyChange}
+              handleMaximumSupplyChange={handleMaximumSupplyChange}
             />
             {/** END Supply_card */}
           </Stack>
