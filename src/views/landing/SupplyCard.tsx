@@ -1,5 +1,5 @@
 import { CustomCard, CustomCardContent, CustomCardHeader, CustomFormControl } from 'src/views/custom/CustomCard';
-import { 
+import {
   MonitorShimmer as MonitorShimmerIcon,
   TruckOutline as TruckOutlineIcon,
   Tune as TuneIcon,
@@ -16,18 +16,14 @@ import { TokenType } from 'src/utils/enums';
 import { Control, Controller, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
 
 interface MyCardProps {
-  values: HomeState;
   control: Control<HomeState, any>;
   errors: FieldErrors<HomeState>;
   watch: UseFormWatch<HomeState>;
-  handleChange: (prop: keyof HomeState) => (event: ChangeEvent<HTMLInputElement>) => void
-  handleSelectChange: (prop: keyof HomeState) => (event: SelectChangeEvent<any>) => void
-  handleCheckedChange: (prop: keyof HomeState) => (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const SupplyCard = ({ values, control, errors, watch, handleChange, handleSelectChange, handleCheckedChange}: MyCardProps) => {
+const SupplyCard = ({ control, errors, watch }: MyCardProps) => {
   const theme = useTheme();
-  const [ network, token_type, supply_type, isTax ] = watch(['network', 'token_type', 'supply_type', 'isTax']);
+  const [network, token_type, supply_type, isTax] = watch(['network', 'token_type', 'supply_type', 'isTax']);
 
   return <>
     <CustomCard>
@@ -44,11 +40,11 @@ const SupplyCard = ({ values, control, errors, watch, handleChange, handleSelect
           render={({ field, fieldState: { error } }) => (
             <CustomFormControl fullWidth>
               <Typography className={'control-title'} variant='caption'>SUPPLY TYPE*</Typography>
-              <Select                
+              <Select
                 {...field}
-                className={'control-element'}                
+                className={'control-element'}
                 displayEmpty
-                disabled={token_type===TokenType.Basic}           
+                disabled={token_type === TokenType.Basic}
               >
                 {/* <MenuItem value="">
                   <em>None</em>
@@ -61,40 +57,58 @@ const SupplyCard = ({ values, control, errors, watch, handleChange, handleSelect
             </CustomFormControl>
           )}
         />
+        <Controller
+          name="initial_supply"
+          control={control}
+          rules={{ required: 'Initial Supply is required' }}
+          render={({ field, fieldState: { error } }) => (
+            <CustomFormControl fullWidth>
+              <Typography className={'control-title'} variant='caption'>INITIAL SUPPLY</Typography>
+              <TextField
+                className={'control-element'}
+                {...field}
+                error={!!error}
+                placeholder=""
+                type="number"
+                inputProps={{
+                  min: 0,
+                  pattern: "\\d*",
+                }}
+                disabled={token_type === TokenType.Basic}
+              />
+              <FormHelperText className={'control-help'}>The number of coins minted during the creation of the contract</FormHelperText>
+              {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
+            </CustomFormControl>
+          )}
+        />
 
-        <CustomFormControl fullWidth>
-          <Typography className={'control-title'} variant='caption'>INITIAL SUPPLY</Typography>
-          <TextField 
-            className={'control-element'}
-            value={values.initial_supply}
-            onChange={handleChange('initial_supply')}
-            placeholder=""
-            type="number"
-            inputProps={{
-              min: 0,
-              pattern: "\\d*",
-            }}
-            disabled={token_type===TokenType.Basic}
-          />
-          <FormHelperText className={'control-help'}>The number of coins minted during the creation of the contract</FormHelperText>
-        </CustomFormControl>
+        <Controller
+          name="maximum_supply"
+          control={control}
+          rules={{ required: 'Maximum Supply is required' }}
+          render={({ field, fieldState: { error } }) => (
+            <CustomFormControl fullWidth
+              sx={{ display: supply_type === 'Unlimited' ? 'none' : undefined }}>
+              <Typography className={'control-title'} variant='caption'>MAXIMUM SUPPLY*</Typography>
+              <TextField
+                className={'control-element'}
+                {...field}
+                error={!!error}
+                placeholder=""
+                type="number"
+                inputProps={{
+                  pattern: "\\d*",
+                }}
+                disabled={supply_type === 'Fixed'}
+              />
+              <FormHelperText className={'control-help'}>The maximum number of coins you can mint from the contract</FormHelperText>
+              {error && (<Typography variant={'caption'} color={'error'}>{error.message}</Typography>)}
+            </CustomFormControl>
+          )}
+        />
 
-        <CustomFormControl fullWidth 
-            sx={{ display: supply_type==='Unlimited'?'none':undefined }}>
-          <Typography className={'control-title'} variant='caption'>MAXIMUM SUPPLY*</Typography>
-          <TextField 
-            className={'control-element'}
-            value={values.maximum_supply}
-            onChange={handleChange('maximum_supply')}
-            placeholder=""
-            type="number"
-            inputProps={{
-              pattern: "\\d*",
-            }}
-            disabled={supply_type==='Fixed'}
-          />
-          <FormHelperText className={'control-help'}>The maximum number of coins you can mint from the contract</FormHelperText>
-        </CustomFormControl>
+
+
       </CustomCardContent>
     </CustomCard>
   </>

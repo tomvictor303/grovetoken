@@ -335,13 +335,9 @@ const LandingPage = () => {
 
             {/** BEGIN Supply_card */}
             <SupplyCard
-              values={values}
               control={control}
               errors={errors}
               watch={watch}
-              handleChange={handleChange}
-              handleSelectChange={handleSelectChange}
-              handleCheckedChange={handleCheckedChange}
             />
             {/** END Supply_card */}
           </Stack>
@@ -351,16 +347,9 @@ const LandingPage = () => {
           <Stack spacing={block_spacing}>
             {/** BEGIN Options_card */}
             <OptionsCard
-              values={values}
               control={control}
               errors={errors}
               watch={watch}
-              handleChange={handleChange}
-              handleSelectChange={handleSelectChange}
-              handleCheckedChange={handleCheckedChange}
-              handleTAChange={handleTAChange}
-              addNewTeamAddress={addNewTeamAddress}
-              removeTeamAddress={removeTeamAddress}
             />
             {/** END Options_card */}
           </Stack>
@@ -368,17 +357,6 @@ const LandingPage = () => {
 
         <Grid item xs={12} md={4}>
           <Stack spacing={block_spacing}>
-            {/** BEGIN Network_card */}
-            {/* <CustomCard>
-              <CustomCardContent>
-                <CustomCardHeader>
-                  <LanIcon className={'cardheader-icon'} />
-                  <Typography className={'cardheader-title'} variant='h4'>Network</Typography>
-                </CustomCardHeader>
-              </CustomCardContent>
-            </CustomCard> */}
-            {/** END Network_card */}
-
             {/** BEGIN Agreement_card */}
             <AgreementCard
               control={control}
