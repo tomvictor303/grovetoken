@@ -33,6 +33,17 @@ declare global {
     address: string
   }
 
+  type Contracts = {
+    BaseToken: string;
+    CustomToken: string;
+    RewardToken: string;
+    FeeReceiver: string;
+    Distributor: string;
+    DistributorGenerator: string;
+    TaxReceiverGenerator: string;
+    TokenGenerator: string;
+  }
+
   type Network = {
     id: string;
     name: string;
@@ -44,6 +55,7 @@ declare global {
     commission_fee?: CommissionFee;
     scan_name: string;
     routers?: Router[];
+    contracts?: Contracts;
   }
 
   type TeamAddress = {
