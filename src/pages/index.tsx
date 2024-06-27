@@ -149,7 +149,16 @@ const LandingPage = () => {
         supply_type: "Fixed",
         initial_supply,
         maximum_supply: initial_supply,
+        //////////////
         isTax: false, // Basic is not able to use Tax
+        buyPercent: 0,
+        sellPercent: 0,
+        transferPercent: 0,
+        burnPercent: 0,
+        teamPercent: 0,
+        teamAddressList: [],
+        taxCurrency: defaultValues.taxCurrency,
+        access_type: defaultValues.access_type,
       });
     }
     /////////////////////////////////////////////
@@ -171,6 +180,8 @@ const LandingPage = () => {
         buyPercent,
         sellPercent,
         transferPercent,
+        taxCurrency: defaultValues.taxCurrency,
+        access_type: defaultValues.access_type,
       });
     }
   }, [token_type]);
