@@ -31,7 +31,7 @@ const networks: Network[] = [
         address: "0x3711020351da65a99eb9a821Bb7706E193C9aaa0"
       },
     ],
-    contracts: {      
+    contracts: {
       BaseToken: "0x8a1C79ff7733a4F2c57A197372E8371649F0e388",
       CustomToken: "0xcA34c18f596ED252EadF939e618b128038CAfe17",
       RewardToken: "0x56d1500a0338C7a730b2078Ea8E2D49D77aC19ee",
@@ -245,6 +245,7 @@ const networks: Network[] = [
     currency: 'AVAX',
     icon: 'https://cryptologos.cc/logos/avalanche-avax-logo.png',
     mainnet: {
+      name: "Avalanche C-Chain",
       chainId: 43114,
       rpc: 'https://api.avax.network/ext/bc/C/rpc',
       explorer: 'https://cchain.explorer.avax.network/'
@@ -274,6 +275,7 @@ const networks: Network[] = [
     currency: 'FTM',
     icon: 'https://cryptologos.cc/logos/fantom-ftm-logo.png',
     mainnet: {
+      name: "Fantom Opera",
       chainId: 250,
       rpc: 'https://rpc.ftm.tools/',
       explorer: 'https://ftmscan.com/'
@@ -303,8 +305,9 @@ const networks: Network[] = [
     currency: 'ETH',
     icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/24091.png',
     mainnet: {
+      name: "zkSync Mainnet",
       chainId: 324,
-      rpc: 'https://zksync2-mainnet.zksync.io',
+      rpc: 'https://mainnet.era.zksync.io',
       explorer: 'https://explorer.zksync.io/'
     },
     testnet: {
@@ -355,6 +358,7 @@ const networks: Network[] = [
     currency: 'ETH',
     icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/11840.png',
     mainnet: {
+      name: "OP Mainnet",
       chainId: 10,
       rpc: 'https://mainnet.optimism.io',
       explorer: 'https://optimistic.etherscan.io/'
@@ -395,15 +399,16 @@ const networks: Network[] = [
     scan_name: "Bobascan"
   },
   {
-    id: 'TOMO',
-    name: 'TomoChain',
-    short_name: 'TOMO',
-    currency: 'TOMO',
+    id: 'VIC',
+    name: 'Viction (formerly Tomo)',
+    short_name: 'VIC',
+    currency: 'VIC',
     icon: 'https://cryptologos.cc/logos/tomochain-tomo-logo.png',
     mainnet: {
+      name: "Viction",
       chainId: 88,
-      rpc: 'https://rpc.tomochain.com',
-      explorer: 'https://scan.tomochain.com/'
+      rpc: 'https://rpc.viction.xyz',
+      explorer: 'https://www.vicscan.xyz/'
     },
     testnet: {
       chainId: 89,
@@ -421,7 +426,7 @@ const networks: Network[] = [
     id: 'GNO',
     name: 'Gnosis',
     short_name: 'GNO',
-    currency: 'GNO',
+    currency: 'XDAI',
     icon: 'https://cryptologos.cc/logos/gnosis-gno-logo.png',
     mainnet: {
       chainId: 100,
@@ -447,9 +452,10 @@ const networks: Network[] = [
     currency: 'CRO',
     icon: 'https://cryptologos.cc/logos/cronos-cro-logo.png',
     mainnet: {
+      name: "Cronos Mainnet",
       chainId: 25,
-      rpc: 'https://evm-cronos.crypto.org/',
-      explorer: 'https://cronoscan.com/'
+      rpc: 'https://evm.cronos.org',
+      explorer: 'https://explorer.cronos.org/'
     },
     testnet: {
       chainId: 338,
