@@ -40,8 +40,8 @@ for (let i = 1; i < networks.length; i++) {
 
 // Metadata
 const metadata = {
-  name: 'Asked App',
-  description: 'Consultation platform between clients and experts',
+  name: 'Grove Token Launch',
+  description: 'Launch your custom token on various blockchain networks.',
   url: 'https://web3modal.com',
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
