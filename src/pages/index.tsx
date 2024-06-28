@@ -154,6 +154,11 @@ const LandingPage = () => {
         maximum_supply: initial_supply,
         //////////////        
         isNoCopyrightLink: true,
+        isMintable: false,
+        isBurnable: false,
+        isPausable: false,
+        isRecoverable: false,
+        isAntiWhale: false,
         //////////////
         isTax: false, // Basic is not able to use Tax
         buyPercent: 0,
