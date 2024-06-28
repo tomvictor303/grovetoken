@@ -131,6 +131,7 @@ const OptionsCardSwitchPart = ({
                   {...field}
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
+                  disabled={token_type < TokenType.Advance}
                 />
                 <Typography className={"control-switch-title"}>
                   No copyright link

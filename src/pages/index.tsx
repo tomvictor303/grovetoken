@@ -64,7 +64,7 @@ const LandingPage = () => {
 
   const defaultValues: HomeState = {
     network: getNetworkObject("GRV"),
-    token_type: 0,
+    token_type: TokenType.Basic,
     token_name: "",
     token_symbol: "",
     token_decimals: 18,
@@ -75,7 +75,7 @@ const LandingPage = () => {
     //////////////////////
     isConformedERC20: true,
     isVerifiedOnEtherscan: true,
-    isNoCopyrightLink: false,
+    isNoCopyrightLink: true,
     isMintable: false,
     isBurnable: false,
     isPausable: false,
@@ -152,6 +152,8 @@ const LandingPage = () => {
         supply_type: "Fixed",
         initial_supply,
         maximum_supply: initial_supply,
+        //////////////        
+        isNoCopyrightLink: true,
         //////////////
         isTax: false, // Basic is not able to use Tax
         buyPercent: 0,
@@ -179,6 +181,8 @@ const LandingPage = () => {
         supply_type: "Fixed",
         initial_supply,
         maximum_supply: initial_supply,
+        //////////////        
+        isNoCopyrightLink: true,
         //////////////
         buyPercent,
         sellPercent,
