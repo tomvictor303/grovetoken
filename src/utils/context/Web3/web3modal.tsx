@@ -38,6 +38,14 @@ for (let i = 1; i < networks.length; i++) {
   })
 }
 
+const chainImages = {
+  770077: 'https://assets-global.website-files.com/62b03f7c4e77803f83b758a2/62b0c510ac78ba061da94401_newgrove-01_edited.png',
+  109: 'https://cryptologos.cc/logos/shiba-inu-shib-logo.png',
+  288: 'https://s2.coinmarketcap.com/static/img/coins/64x64/14556.png',
+  88: 'https://cryptologos.cc/logos/tomochain-tomo-logo.png',
+  25: 'https://cryptologos.cc/logos/cronos-cro-logo.png',
+};
+
 // Metadata
 const metadata = {
   name: 'Grove Token Launch',
@@ -63,7 +71,8 @@ const createWeb3ModalInstance = (): Web3Modal => {
     chains,
     projectId,
     enableAnalytics: true,
-    enableOnramp: true
+    enableOnramp: true,
+    chainImages,
   });
 };
 
