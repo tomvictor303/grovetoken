@@ -16,9 +16,9 @@ const networks: Network[] = [
       explorer: 'https://testnet.grvscan.io/'
     },
     commission_fee: {
-      basic: 10000,
-      custom: 35000,
-      advance: 150000
+      basic: 4400,
+      custom: 17600,
+      advance: 44000
     },
     scan_name: "GRVscan",
     routers: [
