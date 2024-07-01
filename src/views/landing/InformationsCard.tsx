@@ -50,12 +50,12 @@ const InformationsCard = ({ control, errors, watch }: MyCardProps) => {
                 </MenuItem> */}
                 <MenuItem value={0}>Basic</MenuItem>
                 <MenuItem value={1}>Custom</MenuItem>
-                <MenuItem value={2}>Advance</MenuItem>
+                <MenuItem value={2}>Premium</MenuItem>
               </Select>
               <FormHelperText className={'control-help'}>
                 {field.value === TokenType.Basic && ("Basic Type configuration has limited options.")}
                 {field.value === TokenType.Custom && ("Custom Type configuration has selective options.")}
-                {field.value === TokenType.Advance && ("Advance Type configuration with industry best features.")}
+                {field.value === TokenType.Advance && ("Premium Type configuration with industry best features.")}
               </FormHelperText>
             </CustomFormControl>
           )}
