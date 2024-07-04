@@ -57,6 +57,10 @@ import TransactionCard from "src/views/landing/TransactionCard";
 import NetworkCard from "src/views/landing/NetworkCard";
 import { getNetworkObject } from "src/utils/networks";
 import { TokenType } from "src/utils/enums";
+import { useWeb3 } from "src/utils/context/Web3/web3Context";
+import { useAppDispatch } from "src/store/hooks";
+import { hideBackdrop, showBackdrop } from "src/store/slices/backdrop.slice";
+import { hideSnackBar, showSnackBar } from "src/store/slices/snackbar.slice";
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -108,6 +112,7 @@ const LandingPage = () => {
   });
   const [network, token_type, supply_type, initial_supply, maximum_supply] = watch(['network', 'token_type', 'supply_type', 'initial_supply', 'maximum_supply']);
 
+  const dispatch = useAppDispatch();
   // ** States
   // special change handlers
   const handleInitialSupplyChange = (newValue: string) => {
@@ -204,8 +209,31 @@ const LandingPage = () => {
     setValue('swap_router', router_name, { shouldValidate: true });
   }, [network]);
 
-  const onSubmit = (data: any) => {
+  const { web3_generate_token } = useWeb3();
+
+  const onSubmit = async (data: HomeState) => {
     console.log(data);
+
+    dispatch(hideSnackBar(null));
+    try {
+      await web3_generate_token(
+        data.network,
+        data.token_name,
+        data.token_symbol,
+        data.token_decimals,
+        data.initial_supply,
+        data.isMintable,
+        data.isBurnable,
+        data.token_type
+      );
+      dispatch(hideBackdrop(null));
+      return dispatch(showSnackBar({ type: 'success', message: `Token creation successed` }));
+    } catch (error: any) {
+      console.log(error);
+      dispatch(hideBackdrop(null));
+      return dispatch(showSnackBar({ type: 'error', message: `${error.message || error.toString()}` }));
+    }
+
   };
 
   return (
