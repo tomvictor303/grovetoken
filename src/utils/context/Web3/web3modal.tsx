@@ -64,7 +64,7 @@ const ethersConfig = defaultConfig({
   defaultChainId: 1,
 })
 
-const createWeb3ModalInstance = (): Web3Modal => { 
+const createWeb3ModalInstance = (): Web3Modal => {
   // Create Web3Modal instance
   return createWeb3Modal({
     ethersConfig,
