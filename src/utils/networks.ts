@@ -32,14 +32,14 @@ const networks: Network[] = [
       },
     ],
     contracts: {
-      BaseToken: "0x8a1C79ff7733a4F2c57A197372E8371649F0e388",
-      CustomToken: "0xcA34c18f596ED252EadF939e618b128038CAfe17",
-      RewardToken: "0x56d1500a0338C7a730b2078Ea8E2D49D77aC19ee",
-      FeeReceiver: "0xfa13b5E2bF78ECB033Da210150793f22b5f875E1",
-      Distributor: "0x409340Ac4Ce9f6946759409bd3A6105Ae30e9CCd",
-      DistributorGenerator: "0x2d2D40f80891b5Cc4143Cf3eF24092bC540756E5",
-      TaxReceiverGenerator: "0xc7393ce49bbFAEE830c7DdA0a75c3Db40F5ED3af",
-      TokenGenerator: "0xca9cd9C52B9D59d06136a757a34e75c6BaD8dEB8",
+      BaseToken: "0xdC0f7B8a90424c54F16e22752ed62f38Ddc3De5C",
+      CustomToken: "0xA0eEE45a6edaAd46D0F216493924Da4576650234",
+      RewardToken: "0xc9aA60Af90480FbD26fD3508E81F5134Dcb25747",
+      FeeReceiver: "0x19E0335A5d0Fc232Ed943f3092a02079f4853A71",
+      Distributor: "0x5230d7af196e0AE3FA6712E05B9c060e051f5A24",
+      DistributorGenerator: "0x7BBD7856CBa83C63126848042b0415cC7Fc56B65",
+      TaxReceiverGenerator: "0xD75E24cd3F691f665EF0Ab1fd23dFBA49933Dd25",
+      TokenGenerator: "0xEBb85B8334Bf430374fD24EBD96A8a6dC74F28A5",
     },
   },
   {
@@ -60,7 +60,7 @@ const networks: Network[] = [
     },
     testnet: {
       chainId: 97,
-      rpc: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+      rpc: 'https://bsc-testnet.public.blastapi.io',
       explorer: 'https://testnet.bscscan.com/'
     },
     scan_name: "Bscscan",
@@ -73,7 +73,17 @@ const networks: Network[] = [
         name: "Uniswap V3",
         address: "0x13f4EA83D0bd40E75C8222255bc855a974568Dd4"
       }
-    ]
+    ],
+    contracts: {
+      BaseToken: "0xdC0f7B8a90424c54F16e22752ed62f38Ddc3De5C",
+      CustomToken: "0xA0eEE45a6edaAd46D0F216493924Da4576650234",
+      RewardToken: "0xc9aA60Af90480FbD26fD3508E81F5134Dcb25747",
+      FeeReceiver: "0x19E0335A5d0Fc232Ed943f3092a02079f4853A71",
+      Distributor: "0x5230d7af196e0AE3FA6712E05B9c060e051f5A24",
+      DistributorGenerator: "0x7BBD7856CBa83C63126848042b0415cC7Fc56B65",
+      TaxReceiverGenerator: "0xD75E24cd3F691f665EF0Ab1fd23dFBA49933Dd25",
+      TokenGenerator: "0xEBb85B8334Bf430374fD24EBD96A8a6dC74F28A5",
+    },
   },
   {
     id: 'ETH',

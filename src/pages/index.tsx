@@ -30,6 +30,10 @@ import {
   Tooltip,
   Typography
 } from "@mui/material";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import {
   MonitorShimmer as MonitorShimmerIcon,
   TruckOutline as TruckOutlineIcon,
@@ -62,12 +66,18 @@ import { useAppDispatch } from "src/store/hooks";
 import { hideBackdrop, showBackdrop } from "src/store/slices/backdrop.slice";
 import { hideSnackBar, showSnackBar } from "src/store/slices/snackbar.slice";
 
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 const LandingPage = () => {
   const theme = useTheme();
   const block_spacing = 6;
 
+  const [open, setOpen] = useState(false);
+  const [clipboardText, setClipboardText] = useState('');
+  const [copied, setCopied] = useState(false);
+
   const defaultValues: HomeState = {
-    network: getNetworkObject("GRV"),
+    network: getNetworkObject("GRV") || null,
     token_type: TokenType.Basic,
     token_name: "",
     token_symbol: "",
@@ -98,6 +108,7 @@ const LandingPage = () => {
     teamAddressList: [],
     //////////////////////
     swap_router: 'uniswap_router_v2',
+    swap_router_address: "",
     access_type: 'Owner',
     //////////////////////
     isAgreedTerms: false,
@@ -211,12 +222,27 @@ const LandingPage = () => {
 
   const { web3_generate_token } = useWeb3();
 
+  const getRouterAddress = (network: Network | null | undefined, routerName: string): string => {
+    if (!network) return '';
+    const router = network?.routers?.length ? network.routers.find(router => router.name === routerName) : ""
+    return router ? router.address : '';
+  };
+
+  useEffect(() => {
+    const routerAddress = getRouterAddress(network, getValues('swap_router'));
+    setValue('swap_router_address', routerAddress, { shouldValidate: true });
+  }, [network, watch('swap_router')]);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const onSubmit = async (data: HomeState) => {
     console.log(data);
 
     dispatch(hideSnackBar(null));
     try {
-      await web3_generate_token(
+      const tokens = await web3_generate_token(
         data.network,
         data.token_name,
         data.token_symbol,
@@ -224,10 +250,20 @@ const LandingPage = () => {
         data.initial_supply,
         data.isMintable,
         data.isBurnable,
-        data.token_type
+        data.token_type,
+        data.buyPercent,
+        data.sellPercent,
+        data.transferPercent,
+        false,
+        0,
+        0,
+        data.swap_router_address
       );
+      setClipboardText(tokens[0]);
+      setOpen(true);
       dispatch(hideBackdrop(null));
-      return dispatch(showSnackBar({ type: 'success', message: `Token creation successed` }));
+      // return dispatch(showSnackBar({ type: 'success', message: tokens[0] }));
+      return;
     } catch (error: any) {
       console.log(error);
       dispatch(hideBackdrop(null));
@@ -237,102 +273,125 @@ const LandingPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={block_spacing}>
-        <Grid item xs={12}>
-          <Box textAlign={"center"} py={15}>
-            <Typography
-              variant="h2"
-              mb={4}
-              style={{ color: theme.palette.customColors.semiwhite }}
-            >
-              Create your Token on{" "}
-              <span style={{ color: theme.palette.success.main }}>
-                {network?.name ?? "?"}
-              </span>
-            </Typography>
-            <Typography variant="h5">
-              Create and deploy your smart contract in minutes!
-            </Typography>
-            <Typography variant="h5">
-              No coding or login required | verified on chain instantly | advance
-              features and options
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Stack spacing={block_spacing}>
-            {/** BEGIN Network_card */}
-            <NetworkCard
-              control={control}
-              errors={errors}
-              watch={watch}
-            />
-            {/** END Network_card */}
-            {/** BEGIN Informations_card */}
-            <InformationsCard
-              control={control}
-              errors={errors}
-              watch={watch}
-            />
-            {/** END Informations_card */}
-
-            {/** BEGIN Supply_card */}
-            <SupplyCard
-              control={control}
-              errors={errors}
-              watch={watch}
-              handleInitialSupplyChange={handleInitialSupplyChange}
-              handleMaximumSupplyChange={handleMaximumSupplyChange}
-            />
-            {/** END Supply_card */}
-          </Stack>
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-          <Stack spacing={block_spacing}>
-            {/** BEGIN Options_card */}
-            <OptionsCard
-              control={control}
-              errors={errors}
-              watch={watch}
-              fields={fields}
-              append={append}
-              remove={remove}
-            />
-            {/** END Options_card */}
-          </Stack>
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-          <Stack spacing={block_spacing}>
-            {/** BEGIN Agreement_card */}
-            <AgreementCard
-              control={control}
-              errors={errors}
-              watch={watch}
-            />
-            {/** END Agreement_card */}
-
-            {/** BEGIN Transaction_card */}
-            <TransactionCard
-              control={control}
-              errors={errors}
-              watch={watch}
-            />
-            {/** END Transaction_card */}
-
-            {/** BEGIN confirm_button */}
-            <Box>
-              <Button type="submit" variant="contained" fullWidth color="success">
-                Confirm
-              </Button>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Grid container spacing={block_spacing}>
+          <Grid item xs={12}>
+            <Box textAlign={"center"} py={15}>
+              <Typography
+                variant="h2"
+                mb={4}
+                style={{ color: theme.palette.customColors.semiwhite }}
+              >
+                Create your Token on{" "}
+                <span style={{ color: theme.palette.success.main }}>
+                  {network?.name ?? "?"}
+                </span>
+              </Typography>
+              <Typography variant="h5">
+                Create and deploy your smart contract in minutes!
+              </Typography>
+              <Typography variant="h5">
+                No coding or login required | verified on chain instantly | advance
+                features and options
+              </Typography>
             </Box>
-            {/** END confirm_button */}
-          </Stack>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Stack spacing={block_spacing}>
+              {/** BEGIN Network_card */}
+              <NetworkCard
+                control={control}
+                errors={errors}
+                watch={watch}
+              />
+              {/** END Network_card */}
+              {/** BEGIN Informations_card */}
+              <InformationsCard
+                control={control}
+                errors={errors}
+                watch={watch}
+              />
+              {/** END Informations_card */}
+
+              {/** BEGIN Supply_card */}
+              <SupplyCard
+                control={control}
+                errors={errors}
+                watch={watch}
+                handleInitialSupplyChange={handleInitialSupplyChange}
+                handleMaximumSupplyChange={handleMaximumSupplyChange}
+              />
+              {/** END Supply_card */}
+            </Stack>
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <Stack spacing={block_spacing}>
+              {/** BEGIN Options_card */}
+              <OptionsCard
+                control={control}
+                errors={errors}
+                watch={watch}
+                fields={fields}
+                append={append}
+                remove={remove}
+              />
+              {/** END Options_card */}
+            </Stack>
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <Stack spacing={block_spacing}>
+              {/** BEGIN Agreement_card */}
+              <AgreementCard
+                control={control}
+                errors={errors}
+                watch={watch}
+              />
+              {/** END Agreement_card */}
+
+              {/** BEGIN Transaction_card */}
+              <TransactionCard
+                control={control}
+                errors={errors}
+                watch={watch}
+              />
+              {/** END Transaction_card */}
+
+              {/** BEGIN confirm_button */}
+              <Box>
+                <Button type="submit" variant="contained" fullWidth color="success">
+                  Confirm
+                </Button>
+              </Box>
+              {/** END confirm_button */}
+            </Stack>
+          </Grid>
         </Grid>
-      </Grid>
-    </form>
+      </form>
+
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Token Created Successfully</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">Your token address:</Typography>
+          <Box mt={2}>
+            <Typography variant="body2" component="pre">{clipboardText}</Typography>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <CopyToClipboard text={clipboardText} onCopy={() => setCopied(true)}>
+            <Button variant="contained" color="primary">
+              {copied ? 'Copied' : 'Copy to Clipboard'}
+            </Button>
+          </CopyToClipboard>
+          <Button onClick={handleClose} color="secondary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+
   );
 };
 

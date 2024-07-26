@@ -28,6 +28,14 @@ chains.push({
   explorerUrl: networks[0]?.testnet?.explorer,
 })
 
+chains.push({
+  name: networks[1].name + ' Testnet',
+  currency: networks[1].currency,
+  rpcUrl: networks[1]?.testnet?.rpc,
+  chainId: networks[1]?.testnet?.chainId,
+  explorerUrl: networks[1]?.testnet?.explorer,
+})
+
 for (let i = 1; i < networks.length; i++) {
   chains.push({
     name: networks[i].mainnet.name ?? networks[i].name,
