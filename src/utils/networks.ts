@@ -60,7 +60,7 @@ const networks: Network[] = [
     },
     testnet: {
       chainId: 97,
-      rpc: 'https://bsc-testnet.public.blastapi.io',
+      rpc: 'https://data-seed-prebsc-1-s1.binance.org:8545',
       explorer: 'https://testnet.bscscan.com/'
     },
     scan_name: "Bscscan",
