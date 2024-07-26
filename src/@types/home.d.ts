@@ -32,6 +32,7 @@ declare global {
     teamAddressList: Array<TeamAddress>,
     //////////////////////
     swap_router: string,
+    swap_router_address: string,
     access_type: "Owner" | "Roles",
     //////////////////////
     isAgreedTerms: boolean,

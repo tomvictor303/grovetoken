@@ -24,6 +24,7 @@ export const Web3Provider = ({ children }: any) => {
   const dispatch = useAppDispatch();
 
   const [web3ModalInstance, setWeb3ModalInstance] = useState<Web3Modal | null>(null);
+  const [generatedTokens, setGeneratedTokens] = useState<string[]>([]);
   const { walletProvider } = useWeb3ModalProvider()
 
   // Please reference documenation from here.
@@ -47,6 +48,8 @@ export const Web3Provider = ({ children }: any) => {
     return; // Nothing to do now.
   }
 
+
+
   const web3_generate_token = async (
     network: Network,
     name: string,
@@ -55,8 +58,15 @@ export const Web3Provider = ({ children }: any) => {
     totalSupply: number,
     mintable: boolean,
     burnable: boolean,
-    tokenType: number
-  ): Promise<void> => {
+    tokenType: number,
+    buyPercent: number,
+    sellPercent: number,
+    transferPercent: number,
+    sellLimitEnabled: boolean,
+    MaxSellLimit: number,
+    MaxSellLimitDuration: number,
+    swap_router_address: string,
+  ): Promise<string[]> => {
     if (!address || !walletProvider || !isConnected) {
       throw new Error(`Wallet is not connected`);
     }
@@ -77,18 +87,34 @@ export const Web3Provider = ({ children }: any) => {
       [name, symbol, decimals, amountBigInt, mintable, burnable, address]
     );
     const extraPayload = abiCoder.encode(
-      ["string"],
-      [""]
+      ["uint256", "uint256", "uint256", "bool", "uint256", "uint256"],
+      [buyPercent, sellPercent, transferPercent, sellLimitEnabled, MaxSellLimit, MaxSellLimitDuration]
+    );
+
+    const generatedAssetPayloads = abiCoder.encode(
+      ["address", "address", "address[]", "uint256[]", "address[]"],
+      [address, swap_router_address, [], [], []]
     );
 
     try {
-      const transaction = await mainContract.generate(initPayload, extraPayload, tokenType, [], {
-        value: ethers.parseEther("1.0")
+      let value = ethers.parseEther("1")
+      if (tokenType === 1) {
+        value = ethers.parseEther("2")
+      }
+      const transaction = await mainContract.generate(initPayload, extraPayload, tokenType, [generatedAssetPayloads], {
+        value
       });
       dispatch(showBackdrop({ message: `Token creation is in progress. Please wait ...` }));
       const receipt = await transaction.wait(); // Wait for transaction to be mined
 
       console.log('Transaction receipt:', receipt);
+
+      const generated_tokens = await mainContract.getAllGeneratedTokens()
+      console.log(generated_tokens);
+      const getTokensGeneratedForUser = await mainContract.getTokensGeneratedForUser(address)
+      const tokens = await mainContract.getTokensGeneratedForUser(address);
+      console.log(getTokensGeneratedForUser[0]);
+      return tokens
     } catch (error: any) {
       console.log(error)
       if (error?.action === "estimateGas" && error?.reason) {
@@ -103,6 +129,7 @@ export const Web3Provider = ({ children }: any) => {
       throw error;
     }
   }
+
 
   return (
     <Web3Context.Provider value={{ web3ModalInstance, web3_generate_token }}>
