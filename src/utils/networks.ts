@@ -60,7 +60,7 @@ const networks: Network[] = [
     },
     testnet: {
       chainId: 97,
-      rpc: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
+      rpc: 'https://bsc-testnet-rpc.publicnode.com/',
       explorer: 'https://testnet.bscscan.com/'
     },
     scan_name: "Bscscan",

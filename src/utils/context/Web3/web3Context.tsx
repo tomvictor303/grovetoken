@@ -73,6 +73,7 @@ export const Web3Provider = ({ children }: any) => {
     if (!network?.contracts) {
       throw new Error(`The contract address is not defined on this network.`);
     }
+
     const provider = new BrowserProvider(walletProvider)
     const signer = await provider.getSigner()
 
@@ -92,10 +93,9 @@ export const Web3Provider = ({ children }: any) => {
     );
 
     const generatedAssetPayloads = abiCoder.encode(
-      ["address", "address", "address[]", "uint256[]", "address[]"],
-      [address, swap_router_address, [], [], []]
+      ["address", "address[]", "uint256[]", "address[]"],
+      [swap_router_address, [], [], []]
     );
-
     try {
       let value = ethers.parseEther("1")
       if (tokenType === 1) {
@@ -108,6 +108,7 @@ export const Web3Provider = ({ children }: any) => {
       const receipt = await transaction.wait(); // Wait for transaction to be mined
 
       console.log('Transaction receipt:', receipt);
+
 
       const generated_tokens = await mainContract.getAllGeneratedTokens()
       console.log(generated_tokens);
